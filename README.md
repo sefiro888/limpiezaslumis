@@ -16,6 +16,14 @@ Para cambiar un texto, edita `content.mjs` y vuelve a ejecutar el build. No edit
 
 Incluye: banner superior en movimiento, banda animada de servicios, oferta «50 % en la 5ª limpieza» con tarjeta de sellos, reserva rápida en 3 pasos que prepara un mensaje de WhatsApp (no envía ni guarda datos), reseñas reales de Google (portada y cada servicio), comparador antes/después, barra de acciones en móvil y datos estructurados para Google.
 
+## Logo y colores (versión 7)
+
+- Logo nuevo extraído de `Limpiezas_Lumis_logo.pdf` (una imagen de 1182 × 1330 px, sin vectores):
+  `logo-horizontal.png` (cabecera, menú móvil, tarjeta de sellos), `logo-lumis.png` (pie y transición entre páginas), `favicon-48.png`, `icon-192.png`, `icon-512.png` y `apple-touch-icon.png`.
+- Paleta tomada del logo: petróleo `#0B5566` (`--navy`), turquesa `#12B2D2` (`--brand`), botones y enlaces `#0A7F9B` (`--blue`, contraste 4,6 con blanco).
+- `node scripts/retint.mjs` lleva cualquier azul de las hojas de estilo al matiz del logo; útil si se añaden colores nuevos.
+- Para imprimir en grande (rótulos, furgoneta) hay que pedir el logo original en vector (SVG, AI o EPS).
+
 ## Pendiente de revisar con Lumis
 
 - Textos de cada servicio y condiciones de la oferta (contenido de demostración).

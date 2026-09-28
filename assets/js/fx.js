@@ -166,18 +166,18 @@
     make(initial) {
       const [r0, r1] = this.o.r;
       const r = rand(r0, r1);
-      return { x: rand(0, this.w), y: initial ? rand(0, this.h) : this.h + r + rand(0, 60), r, vy: rand(...this.o.speed) * (1.2 - r / (r1 * 1.6)), ph: rand(0, TAU), wob: rand(.4, 1.2), h: rand(185, 230), a: 0, ta: rand(.55, 1) };
+      return { x: rand(0, this.w), y: initial ? rand(0, this.h) : this.h + r + rand(0, 60), r, vy: rand(...this.o.speed) * (1.2 - r / (r1 * 1.6)), ph: rand(0, TAU), wob: rand(.4, 1.2), h: rand(180, 200), a: 0, ta: rand(.55, 1) };
     }
     burst(x, y, n = 9) {
       for (let i = 0; i < n; i++) {
         const ang = rand(0, TAU), sp = rand(40, 140);
-        this.items.push({ x, y, r: rand(2.5, 7), vx: Math.cos(ang) * sp, vy: 0, vyUp: Math.sin(ang) * sp - 40, ph: rand(0, TAU), wob: 0, h: rand(185, 260), a: 1, ta: 1, life: rand(.8, 1.4), burst: true });
+        this.items.push({ x, y, r: rand(2.5, 7), vx: Math.cos(ang) * sp, vy: 0, vyUp: Math.sin(ang) * sp - 40, ph: rand(0, TAU), wob: 0, h: rand(178, 205), a: 1, ta: 1, life: rand(.8, 1.4), burst: true });
       }
       for (let i = 0; i < 5; i++) this.spark(x + rand(-10, 10), y + rand(-10, 10), rand(5, 9));
     }
     spark(x, y, s = rand(3, 7)) {
       if (this.sparks.length > 70) return;
-      this.sparks.push({ x, y, s, rot: rand(0, TAU), vr: rand(-2, 2), vy: rand(-18, -4), vx: rand(-10, 10), a: 1, life: rand(.6, 1.1), t: 0, h: rand(190, 215), l: rand(55, 72) });
+      this.sparks.push({ x, y, s, rot: rand(0, TAU), vr: rand(-2, 2), vy: rand(-18, -4), vx: rand(-10, 10), a: 1, life: rand(.6, 1.1), t: 0, h: rand(182, 198), l: rand(55, 72) });
     }
     step(dt, scrollDelta) {
       const { ctx, w, h } = this;
@@ -236,7 +236,7 @@
   for (let i = 0; i < (small ? 5 : 8); i++) {
     const b = document.createElement('i');
     const size = rand(10, small ? 22 : 30);
-    b.style.cssText = `--s:${size.toFixed(0)}px;--x:${rand(2, 96).toFixed(1)}vw;--dur:${rand(16, 30).toFixed(1)}s;--delay:${(-rand(0, 30)).toFixed(1)}s;--sway:${rand(-40, 40).toFixed(0)}px;--h:${rand(190, 250).toFixed(0)}`;
+    b.style.cssText = `--s:${size.toFixed(0)}px;--x:${rand(2, 96).toFixed(1)}vw;--dur:${rand(16, 30).toFixed(1)}s;--delay:${(-rand(0, 30)).toFixed(1)}s;--sway:${rand(-40, 40).toFixed(0)}px;--h:${rand(180, 205).toFixed(0)}`;
     air.append(b);
   }
   document.body.append(air);

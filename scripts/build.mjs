@@ -96,7 +96,7 @@ function header(current) {
   const isSvc = !!bySlug[current];
   return `<header class="hdr" data-header>
 <div class="hdr-in">
-<a class="logo" href="index.html" aria-label="${B.name}, inicio"><img src="assets/images/logo.png" alt="${B.name}" width="2100" height="749"></a>
+<a class="logo" href="index.html" aria-label="${B.name}, inicio"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="${B.name}"></a>
 <nav class="nav" aria-label="Principal">
 <a href="index.html"${cur(current, 'index')}>Inicio</a>
 <div class="has-mega"><button type="button" class="nav-drop${isSvc ? ' is-cur' : ''}" aria-expanded="false" aria-controls="mega">Servicios ${icon('chevron')}</button>
@@ -117,7 +117,7 @@ function mobileNav(current, msg) {
   const extras = { oferta: '<b class="mn-badge">−50%</b>', opiniones: '<b class="mn-stars">★ 5</b>' };
   return `<div class="mnav" id="mnav" aria-label="Menú" aria-hidden="true" inert>
 <div class="mnav-bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-<div class="mnav-top"><a class="mnav-logo" href="index.html"><img src="assets/images/logo.png" alt="${B.name}" width="2100" height="749"></a><button type="button" class="mnav-close" aria-label="Cerrar menú">${icon('close')}</button></div>
+<div class="mnav-top"><a class="mnav-logo" href="index.html"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="${B.name}"></a><button type="button" class="mnav-close" aria-label="Cerrar menú">${icon('close')}</button></div>
 <nav class="mnav-links" aria-label="Menú móvil">
 <a href="index.html" style="--i:0"${cur(current, 'index')}><span>Inicio</span>${icon('arrow')}</a>
 <details class="mnav-svc" style="--i:1"${bySlug[current] ? ' open' : ''}><summary><span>Servicios <small>16</small></span>${icon('chevron')}</summary>
@@ -143,7 +143,7 @@ function footer(msg) {
 </div></section>
 <footer class="ftr">
 <div class="ftr-grid">
-<div class="ftr-brand"><img src="assets/images/logo.png" alt="${B.name}" width="2100" height="749" loading="lazy"><p>Servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas con productos y técnicas de alta calidad.</p><a class="ftr-social" href="${B.instagram}" target="_blank" rel="noopener">${icon('insta')} ${B.instagramHandle}</a></div>
+<div class="ftr-brand"><img src="assets/images/logo-lumis.png" width="480" height="561" alt="${B.name}" loading="lazy"><p>Servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas con productos y técnicas de alta calidad.</p><a class="ftr-social" href="${B.instagram}" target="_blank" rel="noopener">${icon('insta')} ${B.instagramHandle}</a></div>
 <div class="ftr-col ftr-svc"><h3>Servicios</h3><ul>${services.map(s => `<li><a href="${s.slug}.html">${s.label}</a></li>`).join('')}</ul></div>
 <div class="ftr-col"><h3>Lumis</h3><ul>${PAGES.map(([k, l]) => `<li><a href="${k}.html">${l}</a></li>`).join('')}</ul></div>
 <div class="ftr-col ftr-contact"><h3>Contacto</h3>
@@ -199,14 +199,17 @@ const page = ({ title, desc, bodyClass, current, main, msg }) => `<!doctype html
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0a2a66">
+<meta name="theme-color" content="#0b5566">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
-<link rel="icon" href="assets/images/logo.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/images/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+<meta property="og:image" content="https://sefiro888.github.io/limpiezaslumis/assets/images/logo-lumis.png">
 <link rel="preload" href="assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="assets/css/lumis.css?v=${V}">
 <link rel="stylesheet" href="assets/css/pages.css?v=${V}">
@@ -215,7 +218,7 @@ const page = ({ title, desc, bodyClass, current, main, msg }) => `<!doctype html
 ${current === 'index' || current === 'contacto' ? jsonLd() : ''}
 </head>
 <body class="${bodyClass}" id="top"${bySlug[current] ? ` data-service="${current}"` : ''}>
-<div class="fx-veil" aria-hidden="true"><img src="assets/images/logo.png" alt="" width="2100" height="749"></div>
+<div class="fx-veil" aria-hidden="true"><img src="assets/images/logo-lumis.png" width="480" height="561" alt=""></div>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 ${announce()}
 ${header(current)}
@@ -234,7 +237,7 @@ ${bookingDialog()}
 const faqList = items => `<div class="faq">${items.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>${esc(a)}</p></div></details>`).join('')}</div>`;
 
 const stampCard = (compact = false) => `<div class="stamp-card${compact ? ' compact' : ''}" data-stamps>
-<div class="stamp-top"><img src="assets/images/logo.png" alt="" width="2100" height="749" loading="lazy"><span>Tarjeta cliente</span></div>
+<div class="stamp-top"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="" loading="lazy"><span>Tarjeta cliente</span></div>
 <ol class="stamps">${[1, 2, 3, 4].map(n => `<li><span>${n}ª</span>${icon('check')}</li>`).join('')}<li class="stamp-gold"><span>5ª</span><b>50%</b></li></ol>
 <p>Cada limpieza suma. <b>La quinta, a mitad de precio.</b></p>
 </div>`;
