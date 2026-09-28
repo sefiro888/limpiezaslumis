@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildBlueTheme } from './theme-azul.mjs';
 import {
   business as B, groups, services, pillars, generalFaq, reviews, reviewsUrl,
   method, quoteChecklist, commitments, tools, serviceModes, offerFaq, loveThemes,
@@ -10,7 +11,7 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] || root);
-const V = '6';
+const V = '7';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -211,9 +212,10 @@ const page = ({ title, desc, bodyClass, current, main, msg }) => `<!doctype html
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 <meta property="og:image" content="https://sefiro888.github.io/limpiezaslumis/assets/images/logo-lumis.png">
 <link rel="preload" href="assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="assets/css/lumis.css?v=${V}">
-<link rel="stylesheet" href="assets/css/pages.css?v=${V}">
-<link rel="stylesheet" href="assets/css/fx.css?v=${V}">
+<link rel="stylesheet" id="css-lumis" href="assets/css/lumis.css?v=${V}">
+<link rel="stylesheet" id="css-pages" href="assets/css/pages.css?v=${V}">
+<link rel="stylesheet" id="css-fx" href="assets/css/fx.css?v=${V}">
+<script>(function(){var t="turquesa";try{var q=new URLSearchParams(location.search).get("tema");if(q==="azul"||q==="turquesa")localStorage.setItem("lumis-tema",q);t=localStorage.getItem("lumis-tema")||t}catch(e){}if(t==="azul"){document.documentElement.dataset.theme="azul";["lumis","pages","fx"].forEach(function(n){document.getElementById("css-"+n).href="assets/css/azul/"+n+".css?v=${V}"});var m=document.querySelector("meta[name=theme-color]");if(m)m.content="#0a2a66"}})();</script>
 <script>try{if(sessionStorage.getItem('fx-nav')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx-enter');sessionStorage.removeItem('fx-nav')}catch(e){}</script>
 ${current === 'index' || current === 'contacto' ? jsonLd() : ''}
 </head>
@@ -228,6 +230,7 @@ ${main}
 </main>
 ${footer(msg)}
 ${bookingDialog()}
+<div class="theme-pick" role="group" aria-label="Elegir el color de la web"><span>Color</span><button type="button" data-theme-set="turquesa" aria-pressed="true" title="Turquesa, como el logo"><i class="sw" style="background:linear-gradient(135deg,#0b5566 45%,#12b2d2 55%)"></i>Turquesa</button><button type="button" data-theme-set="azul" aria-pressed="false" title="Azul, como el marco del logo"><i class="sw" style="background:linear-gradient(135deg,#0a2a66 45%,#0195f6 55%)"></i>Azul</button></div>
 <script src="assets/js/lumis.js?v=${V}" defer></script>
 <script src="assets/js/fx.js?v=${V}" defer></script>
 </body>
@@ -752,4 +755,5 @@ write('oferta.html', offerPage());
 write('opiniones.html', reviewsPage());
 write('como-trabajamos.html', methodPage());
 write('contacto.html', contactPage());
+buildBlueTheme();
 console.log(`Generadas ${services.length + 5} páginas en ${OUT}`);

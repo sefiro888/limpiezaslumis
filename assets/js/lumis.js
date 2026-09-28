@@ -194,6 +194,22 @@
     if (d.open) $$('details', list).forEach(o => { if (o !== d) o.open = false; });
   })));
 
+  /* Selector de color: cambia entre la paleta turquesa y la azul sin recargar */
+  const themeBtns = $$('[data-theme-set]');
+  const applyTheme = t => {
+    const azul = t === 'azul';
+    ['lumis', 'pages', 'fx'].forEach(n => {
+      const l = document.getElementById('css-' + n);
+      if (l) l.href = l.href.replace(/assets\/css\/(azul\/)?/, azul ? 'assets/css/azul/' : 'assets/css/');
+    });
+    if (azul) document.documentElement.dataset.theme = 'azul'; else delete document.documentElement.dataset.theme;
+    $('meta[name=theme-color]')?.setAttribute('content', azul ? '#0a2a66' : '#0b5566');
+    themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.themeSet === t));
+    try { localStorage.setItem('lumis-tema', t); } catch (_) {}
+  };
+  themeBtns.forEach(b => b.addEventListener('click', () => applyTheme(b.dataset.themeSet)));
+  themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.themeSet === (document.documentElement.dataset.theme === 'azul' ? 'azul' : 'turquesa')));
+
   /* Año del pie */
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 

@@ -24,6 +24,13 @@ Incluye: banner superior en movimiento, banda animada de servicios, oferta «50 
 - `node scripts/retint.mjs` lleva cualquier azul de las hojas de estilo al matiz del logo; útil si se añaden colores nuevos.
 - Para imprimir en grande (rótulos, furgoneta) hay que pedir el logo original en vector (SVG, AI o EPS).
 
+### Dos paletas para elegir (temporal)
+
+- **Turquesa** (por defecto): los colores del logo. Hojas en `assets/css/`.
+- **Azul**: los azules originales de la web + el azul del marco del logo (`#0195F6`). Hojas en `assets/css/azul/`, generadas automáticamente por `scripts/theme-azul.mjs` al ejecutar el build. No se editan a mano.
+- Selector «Color» abajo a la izquierda; la elección se guarda en el navegador. Enlaces directos: `?tema=turquesa` y `?tema=azul`.
+- Cuando el cliente elija: borrar el bloque `theme-pick` de `build.mjs` y, si gana el azul, copiar `assets/css/azul/*` sobre `assets/css/` (arreglando la ruta de las fuentes) o dejar `azul` como valor por defecto en el script del `<head>`.
+
 ## Pendiente de revisar con Lumis
 
 - Textos de cada servicio y condiciones de la oferta (contenido de demostración).
