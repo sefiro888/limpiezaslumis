@@ -1,0 +1,130 @@
+[
+  {
+    "slug": "cristales",
+    "label": "Cristales",
+    "title": "Limpieza de cristales",
+    "img": "cristales",
+    "category": "exterior",
+    "line": "Que entre toda la luz."
+  },
+  {
+    "slug": "toldos",
+    "label": "Toldos",
+    "title": "Limpieza de toldos",
+    "img": "toldos",
+    "category": "exterior",
+    "line": "Vuelve a mirar hacia fuera."
+  },
+  {
+    "slug": "garajes",
+    "label": "Garajes",
+    "title": "Limpieza de garajes",
+    "img": "garajes",
+    "category": "profesional",
+    "line": "Cuidado desde la entrada."
+  },
+  {
+    "slug": "terrazas",
+    "label": "Terrazas",
+    "title": "Limpieza de terrazas",
+    "img": "terrazas",
+    "category": "exterior",
+    "line": "Tu rincón al aire libre."
+  },
+  {
+    "slug": "pisos-viviendas",
+    "label": "Pisos y viviendas",
+    "title": "Limpieza de pisos y viviendas",
+    "img": "viviendas",
+    "category": "hogar",
+    "line": "Qué gusto estar en casa."
+  },
+  {
+    "slug": "limpieza-general",
+    "label": "Limpieza general",
+    "title": "Limpieza general",
+    "img": "general",
+    "category": "hogar",
+    "line": "Una nueva sensación de orden."
+  },
+  {
+    "slug": "interiores",
+    "label": "Interiores",
+    "title": "Limpieza integral de interiores",
+    "img": "interiores",
+    "category": "hogar",
+    "line": "Cuidar el conjunto importa."
+  },
+  {
+    "slug": "desinfeccion-interiores",
+    "label": "Desinfección",
+    "title": "Desinfección de interiores",
+    "img": "desinfeccion",
+    "category": "hogar",
+    "line": "Hablemos de lo que necesitas."
+  },
+  {
+    "slug": "oficinas",
+    "label": "Oficinas",
+    "title": "Limpieza de oficinas",
+    "img": "oficinas",
+    "category": "profesional",
+    "line": "Un buen lugar para trabajar."
+  },
+  {
+    "slug": "gimnasios",
+    "label": "Gimnasios",
+    "title": "Limpieza de gimnasios",
+    "img": "gimnasios",
+    "category": "profesional",
+    "line": "Espacios que invitan a moverse."
+  },
+  {
+    "slug": "comunidades",
+    "label": "Comunidades",
+    "title": "Limpieza de comunidades",
+    "img": "comunidades",
+    "category": "profesional",
+    "line": "Lo compartido también es tuyo."
+  },
+  {
+    "slug": "naves",
+    "label": "Naves",
+    "title": "Limpieza de naves",
+    "img": "naves",
+    "category": "profesional",
+    "line": "Atención a cada espacio."
+  },
+  {
+    "slug": "pulido-suelos",
+    "label": "Pulido de suelos",
+    "title": "Pulido de suelos",
+    "img": "pulido",
+    "category": "superficies",
+    "line": "Otra mirada a tus suelos."
+  },
+  {
+    "slug": "abrillantado-suelos",
+    "label": "Abrillantado",
+    "title": "Abrillantado de suelos",
+    "img": "abrillantado",
+    "category": "superficies",
+    "line": "La luz también está bajo tus pies."
+  },
+  {
+    "slug": "tapicerias",
+    "label": "Tapicerías",
+    "title": "Limpieza de tapicerías",
+    "img": "tapicerias",
+    "category": "superficies",
+    "line": "Cuéntanos cómo es tu tejido."
+  },
+  {
+    "slug": "sofas",
+    "label": "Sofás",
+    "title": "Limpieza de sofás",
+    "img": "sofas",
+    "category": "superficies",
+    "line": "Tu sitio favorito merece cuidado."
+  }
+]

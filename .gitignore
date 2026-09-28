@@ -1,0 +1,4 @@
+scripts/.qa/
+node_modules/
+.claude/
+*.log

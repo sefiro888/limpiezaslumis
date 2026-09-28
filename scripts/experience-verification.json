@@ -1,0 +1,8 @@
+{
+  "pages": 17,
+  "css": "parsed",
+  "galleries": "open, next, previous, close and focus restoration passed",
+  "carousel": "selection, arrow keys, Home, autoplay, pause and reduced motion passed",
+  "consultation": "four categories, 16 services, availability note and encoded message passed",
+  "limitation": "Isolated DOM checks; no rendered browser validation."
+}
