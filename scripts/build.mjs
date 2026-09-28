@@ -76,6 +76,11 @@ ${inner}
 ${wave('wave-bottom')}
 </div>`;
 
+// Dirección pública de la web (cambiar aquí si se pasa a un dominio propio).
+const SITE = 'https://sefiro888.github.io/limpiezaslumis/';
+const pageUrl = key => SITE + (key === 'index' ? '' : key + '.html');
+const ogImage = key => `${SITE}assets/images/og/og-${key === 'index' ? 'home' : key}.jpg?v=${V}`;
+
 const PAGES = [['index', 'Inicio'], ['oferta', 'Oferta'], ['opiniones', 'Opiniones'], ['como-trabajamos', 'Cómo trabajamos'], ['contacto', 'Contacto']];
 const cur = (current, key) => current === key ? ' aria-current="page"' : '';
 
@@ -203,14 +208,26 @@ const page = ({ title, desc, bodyClass, current, main, msg }) => `<!doctype html
 <meta name="theme-color" content="#0b5566">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
+<link rel="canonical" href="${pageUrl(current)}">
+<meta property="og:site_name" content="${B.name}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
+<meta property="og:url" content="${pageUrl(current)}">
+<meta property="og:image" content="${ogImage(current)}">
+<meta property="og:image:secure_url" content="${ogImage(current)}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${B.name}: ${esc(title.split(' | ')[0].replace(B.name + ' · ', ''))}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:image" content="${ogImage(current)}">
 <link rel="icon" type="image/png" sizes="48x48" href="assets/images/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-<meta property="og:image" content="https://sefiro888.github.io/limpiezaslumis/assets/images/logo-lumis.png">
 <link rel="preload" href="assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" id="css-lumis" href="assets/css/lumis.css?v=${V}">
 <link rel="stylesheet" id="css-pages" href="assets/css/pages.css?v=${V}">
