@@ -49,3 +49,4 @@ Incluye: banner superior en movimiento, cinta animada de servicios, reserva ráp
 - Eliminada la oferta «50 % en la 5ª limpieza» (era una promoción de apertura): sección de portada, página `oferta.html`, tarjetas y textos.
 - Eliminados los servicios de tapicerías y sofás.
 - Límite de altura: hasta unos 3 metros (10 pies). Indicado en limpieza de cristales (cabecera, qué incluye, método y preguntas), en la pregunta general y en la lista para presupuesto. Eliminadas las frases que sugerían trabajos en altura.
+- Nuevos servicios: limpieza de fachadas y grafitis (`fachadas.html`, a pie de calle, hasta 3 m) y limpieza de persianas (`persianas.html`). **Fotos provisionales**: usan `comunidades.jpg` y `viviendas.jpg` hasta tener fotos reales.
