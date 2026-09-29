@@ -328,7 +328,7 @@ ${stage(`<section class="hero">
 <svg class="seal-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100 100m-70 0a70 70 0 1 1 140 0a70 70 0 1 1-140 0"/></defs><text><textPath href="#ring">RESERVA RÁPIDA · SIN COMPROMISO · RESERVA RÁPIDA · SIN COMPROMISO ·</textPath></text></svg>
 <span class="seal-text">Agenda<br>hoy<br>mismo</span>
 </button>
-<a class="float-card fc-offer" href="opiniones.html"><span class="fc-big">★ 5</span><span><b>Opiniones reales</b><small>Clientes encantados en Google</small></span></a>
+<a class="float-card fc-offer fc-zone" href="contacto.html"><span class="fc-big">${icon('pin')}</span><span><b>${B.city} y alrededores</b><small>Comunidades, empresas y hogares</small></span></a>
 <div class="float-card fc-list"><p>Servicios destacados</p><ul>${featured.map(s => `<li>${icon('check')}${s.label}</li>`).join('')}</ul></div>
 </div>
 </section>

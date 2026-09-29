@@ -414,3 +414,17 @@ html,body{overflow-x:clip}
 .action-social p{margin:0 0 10px;font-size:14px;font-weight:700;color:#bcd9e2}
 .c-card-social .social{margin-top:14px}
 .c-card b{overflow-wrap:normal;word-break:normal}
+
+/* Portada: el sello ya no pisa la tarjeta de servicios destacados (ahora tiene 5 líneas) */
+@media (min-width:641px){.hero .seal{top:47%;left:13%}}
+.fc-zone .fc-big{display:grid;place-items:center;width:52px;height:52px;padding:0}
+.fc-zone .fc-big .i{width:26px;height:26px}
+@media (min-width:981px) and (max-width:1180px){
+  .hero .fc-list{padding:12px 16px;font-size:13px}
+  .hero .fc-list ul{gap:3px}
+  .hero .seal{top:52%;left:11%;width:130px}
+  .hero .fc-offer{bottom:6%}
+}
+@media (min-width:641px) and (max-width:1180px){.hero .fc-offer{bottom:-2%;right:-2%}}
+@media (min-width:981px) and (max-width:1180px){.hero .seal{top:48%}}
+@media (min-width:641px) and (max-width:980px){.hero .seal{top:44%;left:10%}}
