@@ -28,14 +28,14 @@ export const services = [
     card: 'Ventanas, ventanales, cerramientos y mamparas sin marcas, con marcos y guías incluidos.',
     tags: ['Ventanas', 'Cerramientos', 'Escaparates'],
     lead: 'Cristales transparentes por dentro y por fuera, con marcos, guías y juntas limpios. Es uno de nuestros servicios estrella: el que más se nota nada más abrir la persiana.',
-    facts: ['Interior y exterior', 'Marcos y guías', 'Viviendas y negocios'],
+    facts: ['Interior y exterior', 'Marcos y guías', 'Hasta 3 m de altura'],
     intro: [
       'Un cristal limpio cambia por completo una estancia: entra más luz, los colores se ven como son y las vistas vuelven a ser protagonistas. El polvo urbano, la lluvia, la contaminación y la cal dejan una película que, con el tiempo, apaga cualquier espacio.',
       'En Lumis trabajamos cada hoja de cristal con productos específicos y herramientas profesionales —pértigas telescópicas, raquetas, mojadores y paños de microfibra— para que el acabado sea uniforme y sin cercos. Y no nos quedamos en el vidrio: limpiamos también marcos, guías de correderas y alféizares, que es donde se acumula la suciedad que vuelve a manchar.',
-      'Atendemos pisos, cerramientos de terraza, galerías acristaladas, locales comerciales, escaparates y oficinas en Zaragoza. Antes de empezar revisamos contigo el acceso a cada ventana para decidir la forma más segura de trabajar.',
+      'Atendemos pisos, cerramientos de terraza, galerías acristaladas, locales comerciales, escaparates y oficinas en Zaragoza. Antes de empezar revisamos contigo el acceso a cada ventana para decidir la forma más segura de trabajar. Trabajamos hasta unos 3 metros de altura: por encima de esa altura no realizamos el servicio.',
     ],
     includes: [
-      'Limpieza del cristal por ambas caras cuando el acceso es seguro',
+      'Limpieza del cristal por ambas caras, hasta 3 metros de altura y con acceso seguro',
       'Marcos de aluminio, PVC o madera con el producto adecuado',
       'Guías y carriles de ventanas correderas, aspirados y repasados',
       'Alféizares, vierteaguas y repisas interiores',
@@ -51,7 +51,7 @@ export const services = [
       ['Mudanzas y fin de obra', 'Cristales con restos de silicona, pintura o polvo de obra antes de entrar a vivir.'],
     ],
     steps: [
-      ['Revisión del acceso', 'Valoramos cada ventana y cerramiento para elegir cómo trabajar de forma segura.'],
+      ['Revisión del acceso', 'Valoramos cada ventana y cerramiento, comprobamos que está a menos de 3 metros de altura y elegimos cómo trabajar de forma segura.'],
       ['Protección y preparación', 'Retiramos lo imprescindible del alféizar y protegemos el suelo de la zona.'],
       ['Limpieza en profundidad', 'Mojador y producto específico, raqueta profesional y repaso de marcos y guías.'],
       ['Acabado y repaso final', 'Secado a contraluz para asegurar que no quedan marcas ni cercos.'],
@@ -67,7 +67,8 @@ export const services = [
       ['Guías despejadas', 'Aspirar las guías de vez en cuando hace que las correderas sigan deslizando bien.'],
     ],
     faq: [
-      ['¿Limpiáis los cristales por fuera?', 'Sí, siempre que el acceso sea seguro: desde el interior, desde la terraza o con pértiga. Si una ventana no es accesible, te lo diremos antes de empezar.'],
+      ['¿Limpiáis los cristales por fuera?', 'Sí, siempre que el acceso sea seguro: desde el interior, desde la terraza o con escalera o pértiga. Si una ventana no es accesible, te lo diremos antes de empezar.'],
+      ['¿Hasta qué altura trabajáis?', 'Hasta unos 3 metros de altura. Por encima de esa altura no realizamos el trabajo: si tus ventanas o tu cristalera son más altas, te lo diremos al ver las fotos, antes de darte presupuesto.'],
       ['¿Qué incluye exactamente el servicio?', 'Cristal por ambas caras, marcos, guías y alféizares. Si quieres añadir mamparas, persianas o cerramientos, lo indicamos en el presupuesto.'],
       ['¿Necesito estar en casa?', 'Lo ideal es que alguien nos abra y nos indique las zonas prioritarias. Luego puedes seguir con tu día.'],
       ['¿Cuánto tiempo tardáis?', 'Depende del número de ventanas y del acceso. Con unas fotos te damos una estimación antes de agendar.'],
@@ -807,7 +808,7 @@ export const quoteChecklist = [
   'Tipo de espacio: vivienda, local, comunidad, nave…',
   'Medidas aproximadas o número de ventanas',
   'Unas fotos del estado y de los accesos',
-  'Si hay zonas en altura o de difícil acceso',
+  'Altura de ventanas y cristaleras (trabajamos hasta unos 3 metros)',
   'Qué días u horarios te vienen mejor',
 ];
 export const commitments = [
@@ -819,7 +820,7 @@ export const commitments = [
   ['heart', 'Revisión contigo', 'No nos vamos hasta que el resultado te convence.'],
 ];
 export const tools = [
-  ['Pértigas telescópicas', 'Para cristales en altura y cerramientos de difícil acceso, trabajando con seguridad.'],
+  ['Pértigas telescópicas', 'Para llegar a cristales altos y cerramientos de difícil acceso, siempre dentro de nuestro límite de 3 metros.'],
   ['Raquetas y mojadores', 'Acabado uniforme y sin marcas en ventanas, mamparas y escaparates.'],
   ['Microfibra profesional', 'Atrapa el polvo y la grasa sin rayar ni dejar pelusa.'],
   ['Maquinaria rotativa', 'Para pulir y abrillantar mármol, terrazo y piedra natural.'],
@@ -840,6 +841,7 @@ export const loveThemes = [
 
 export const generalFaq = [
   ['¿En qué zonas trabajáis?', 'Trabajamos en Zaragoza y alrededores. Si tienes dudas sobre tu zona, escríbenos y te lo confirmamos.'],
+  ['¿Hasta qué altura trabajáis?', 'Trabajamos hasta unos 3 metros de altura, desde el suelo, una escalera o una terraza. Por encima de esa altura no realizamos el trabajo; si tienes dudas, envíanos una foto y te lo confirmamos.'],
   ['¿El presupuesto tiene coste?', 'No. El presupuesto es gratuito y sin compromiso. Con unas fotos y las medidas aproximadas solemos poder dártelo rápido.'],
   ['¿Puedo agendar para hoy mismo?', 'Puedes pedir tu cita hoy mismo desde la web o por WhatsApp. Te confirmamos el primer hueco disponible.'],
   ['¿Lleváis vuestros productos y herramientas?', 'Sí, llevamos productos y útiles profesionales. Si prefieres que usemos algún producto concreto, dínoslo.'],

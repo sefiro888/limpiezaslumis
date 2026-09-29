@@ -355,8 +355,8 @@ ${wave('wave-top', 'var(--bg)')}
 <canvas class="stage-canvas" aria-hidden="true"></canvas>
 <div class="wrap action-grid">
 <div class="action-copy reveal"><span class="eyebrow on-dark">${icon('camera')} Lumis en acción</span><h2>Así trabajamos, <em>de verdad.</em></h2>
-<p class="lead">Sin fotos de catálogo: esto es un trabajo real de Lumis. Cristaleras en altura, escalera, raqueta y paciencia hasta que no queda ni una marca.</p>
-<ul class="action-list"><li>${icon('shield')}Trabajo en altura con seguridad</li><li>${icon('check')}Cristal, marcos y perfiles incluidos</li><li>${icon('spark')}Revisamos el resultado antes de irnos</li></ul>
+<p class="lead">Sin fotos de catálogo: esto es un trabajo real de Lumis. Cristaleras, escalera, raqueta y paciencia hasta que no queda ni una marca.</p>
+<ul class="action-list"><li>${icon('shield')}Trabajo seguro, hasta 3 m de altura</li><li>${icon('check')}Cristal, marcos y perfiles incluidos</li><li>${icon('spark')}Revisamos el resultado antes de irnos</li></ul>
 <div class="hero-cta">${btnBook('Quiero este resultado', 'cristales')}<a class="btn btn-ghost" href="cristales.html">${icon('arrow')}<span>Limpieza de cristales</span></a></div></div>
 <div class="action-phones reveal">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis frente a una cristalera', label: 'Anuncio Lumis', cls: 'phone-back' })}${phoneVideo({ name: 'lumis-trabajo', alt: 'Operario de Lumis limpiando la cristalera de la fachada de un restaurante', label: 'Trabajo real', cls: 'phone-front' })}</div>
 </div>
