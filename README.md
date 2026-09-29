@@ -1,12 +1,12 @@
 # Limpiezas Lumis — web
 
-Sitio estático: `index.html`, 16 páginas de servicio y 4 páginas propias (`oferta.html`, `opiniones.html`, `como-trabajamos.html`, `contacto.html`). Estilos: `lumis.css` (base), `pages.css` (cabecera, menú móvil y páginas) y `fx.css` (efectos). No necesita dependencias para publicarse (GitHub Pages, Netlify o cualquier hosting).
+Sitio estático: `index.html`, 14 páginas de servicio y 3 páginas propias (`opiniones.html`, `como-trabajamos.html`, `contacto.html`). Estilos: `lumis.css` (base), `pages.css` (cabecera, menú móvil y páginas) y `fx.css` (efectos). Paleta única: turquesa del logo.
 
 ## Versión 4 (actual)
 
 Todas las páginas se generan desde un único origen:
 
-- `scripts/content.mjs` — **todo el texto**: datos de contacto, servicios (qué incluye, método, frecuencia, consejos, FAQ…), oferta y reseñas.
+- `scripts/content.mjs` — **todo el texto**: datos de contacto, servicios (qué incluye, método, frecuencia, consejos, FAQ…) y reseñas.
 - `scripts/build.mjs` — plantillas HTML. Regenerar con `node scripts/build.mjs`.
 - `assets/css/lumis.css` y `assets/js/lumis.js` — estilos e interacciones.
 - `assets/css/fx.css` y `assets/js/fx.js` — capa de efectos: burbujas en canvas, destellos, reflejos de cristal, olas, inclinación 3D, botones magnéticos y transición entre páginas. Se desactiva sola si el usuario tiene activado «reducir movimiento». Para quitarla, borra las dos líneas que la cargan en `build.mjs`.
@@ -14,7 +14,7 @@ Todas las páginas se generan desde un único origen:
 
 Para cambiar un texto, edita `content.mjs` y vuelve a ejecutar el build. No edites los `.html` a mano: se sobrescriben.
 
-Incluye: banner superior en movimiento, banda animada de servicios, oferta «50 % en la 5ª limpieza» con tarjeta de sellos, reserva rápida en 3 pasos que prepara un mensaje de WhatsApp (no envía ni guarda datos), reseñas reales de Google (portada y cada servicio), comparador antes/después, barra de acciones en móvil y datos estructurados para Google.
+Incluye: banner superior en movimiento, cinta animada de servicios, reserva rápida en 3 pasos que prepara un mensaje de WhatsApp (no envía ni guarda datos), reseñas reales de Google (portada y cada servicio), comparador antes/después, barra de acciones en móvil y datos estructurados para Google.
 
 ## Logo y colores (versión 7)
 
@@ -24,17 +24,10 @@ Incluye: banner superior en movimiento, banda animada de servicios, oferta «50 
 - `node scripts/retint.mjs` lleva cualquier azul de las hojas de estilo al matiz del logo; útil si se añaden colores nuevos.
 - Para imprimir en grande (rótulos, furgoneta) hay que pedir el logo original en vector (SVG, AI o EPS).
 
-### Dos paletas para elegir (temporal)
-
-- **Turquesa** (por defecto): los colores del logo. Hojas en `assets/css/`.
-- **Azul**: los azules originales de la web + el azul del marco del logo (`#0195F6`). Hojas en `assets/css/azul/`, generadas automáticamente por `scripts/theme-azul.mjs` al ejecutar el build. No se editan a mano.
-- Selector «Color» abajo a la izquierda; la elección se guarda en el navegador. Enlaces directos: `?tema=turquesa` y `?tema=azul`.
-- Cuando el cliente elija: borrar el bloque `theme-pick` de `build.mjs` y, si gana el azul, copiar `assets/css/azul/*` sobre `assets/css/` (arreglando la ruta de las fuentes) o dejar `azul` como valor por defecto en el script del `<head>`.
 
 ## Pendiente de revisar con Lumis
 
-- Textos de cada servicio y condiciones de la oferta (contenido de demostración).
-- Tapicerías y sofás: confirmar que se ofrecen (las páginas indican «sujeto a disponibilidad»).
+- Textos de cada servicio (contenido de demostración).
 - `reviewsUrl` en `content.mjs` apunta a una búsqueda en Google Maps: sustituir por el enlace directo a la ficha de Google.
 - Las reseñas están copiadas literalmente de Google; no editarlas.
 - Las fotografías son ejemplos ilustrativos generados; sustituir por fotos reales de trabajos.
@@ -49,3 +42,9 @@ Incluye: banner superior en movimiento, banda animada de servicios, oferta «50 
 - Originales en `videos-originales/` (excluidos de Git). Versiones web en `assets/video/`: `lumis-trabajo.mp4` (8 s, trabajo real recortado sin filtros ni transiciones del montaje original) y `lumis-anuncio.mp4` (8 s), con su imagen de espera `.jpg`.
 - Se muestran en marco de móvil: portada (sección «Lumis en acción»), limpieza de cristales («Qué incluye») y contacto. Solo se cargan al llegar a ellos, sin sonido, en bucle y con botón de pausa.
 - Para añadir un vídeo a otro servicio: poner `video: 'nombre'` en su ficha de `scripts/content.mjs`.
+
+## Cambios acordados con el cliente (29/09/2026)
+
+- Paleta definitiva: turquesa. Eliminados el selector de color y la paleta azul.
+- Eliminada la oferta «50 % en la 5ª limpieza» (era una promoción de apertura): sección de portada, página `oferta.html`, tarjetas y textos.
+- Eliminados los servicios de tapicerías y sofás.

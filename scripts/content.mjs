@@ -18,7 +18,7 @@ export const groups = [
   { id: 'hogar', label: 'Tu hogar', img: 'viviendas', line: 'Pequeños detalles, grandes sensaciones.' },
   { id: 'exterior', label: 'Exteriores y cristal', img: 'terrazas', line: 'Más luz. Más ganas de disfrutar.' },
   { id: 'profesional', label: 'Empresas y comunidades', img: 'oficinas', line: 'El cuidado también habla de ti.' },
-  { id: 'superficies', label: 'Suelos y tejidos', img: 'pulido', line: 'Cada material tiene su historia.' },
+  { id: 'superficies', label: 'Suelos', img: 'pulido', line: 'Cada material tiene su historia.' },
 ];
 
 export const services = [
@@ -71,7 +71,7 @@ export const services = [
       ['¿Qué incluye exactamente el servicio?', 'Cristal por ambas caras, marcos, guías y alféizares. Si quieres añadir mamparas, persianas o cerramientos, lo indicamos en el presupuesto.'],
       ['¿Necesito estar en casa?', 'Lo ideal es que alguien nos abra y nos indique las zonas prioritarias. Luego puedes seguir con tu día.'],
       ['¿Cuánto tiempo tardáis?', 'Depende del número de ventanas y del acceso. Con unas fotos te damos una estimación antes de agendar.'],
-      ['¿Hacéis limpiezas periódicas?', 'Sí. Puedes programar limpiezas mensuales o trimestrales y, además, disfrutar del 50 % de descuento en tu 5ª limpieza.'],
+      ['¿Hacéis limpiezas periódicas?', 'Sí. Puedes programar limpiezas mensuales o trimestrales para tener los cristales siempre a punto sin tener que acordarte.'],
     ],
     related: ['toldos', 'terrazas', 'oficinas'],
   },
@@ -126,7 +126,7 @@ export const services = [
       ['¿Limpiáis toldos de locales comerciales?', 'Sí, toldos de fachada, terrazas de hostelería y marquesinas de lona.'],
       ['¿Qué necesito para pedir presupuesto?', 'Las medidas aproximadas del toldo, si es accesible desde terraza o desde la calle y un par de fotos.'],
     ],
-    related: ['terrazas', 'cristales', 'tapicerias'],
+    related: ['terrazas', 'cristales', 'limpieza-general'],
   },
   {
     slug: 'garajes', label: 'Garajes', title: 'Limpieza de garajes', img: 'garajes', category: 'profesional', compare: 'garajes', featured: true,
@@ -283,7 +283,7 @@ export const services = [
       ['¿Puedo tener siempre al mismo equipo?', 'En las limpiezas periódicas intentamos mantener a las mismas personas para que conozcan tu casa.'],
       ['¿Hacéis limpiezas de mudanza?', 'Sí, tanto de entrada como de salida, incluyendo interior de armarios, cocina y electrodomésticos.'],
       ['¿Qué pasa si quiero cambiar el día?', 'Avísanos con antelación por WhatsApp y buscamos otro hueco.'],
-      ['¿Aplicáis la oferta de la 5ª limpieza?', 'Sí: en las limpiezas periódicas, tu 5ª limpieza tiene un 50 % de descuento. Consulta las condiciones al reservar.'],
+      ['¿Hacéis limpiezas periódicas?', 'Sí: semanales, quincenales o mensuales, adaptadas a tu ritmo y siempre con el mismo orden de trabajo para que el resultado sea homogéneo.'],
     ],
     related: ['limpieza-general', 'cristales', 'abrillantado-suelos'],
   },
@@ -391,7 +391,7 @@ export const services = [
       ['¿Se puede hacer con muebles?', 'Sí, limpiamos alrededor, encima y debajo de los muebles que se pueden mover con seguridad.'],
       ['¿Hacéis presupuesto cerrado?', 'Sí. Con los metros, el estado y algunas fotos te damos un presupuesto sin compromiso.'],
     ],
-    related: ['pisos-viviendas', 'desinfeccion-interiores', 'sofas'],
+    related: ['pisos-viviendas', 'desinfeccion-interiores', 'limpieza-general'],
   },
   {
     slug: 'desinfeccion-interiores', label: 'Desinfección', title: 'Desinfección de interiores', img: 'desinfeccion', category: 'hogar',
@@ -764,112 +764,6 @@ export const services = [
     ],
     related: ['pulido-suelos', 'pisos-viviendas', 'comunidades'],
   },
-  {
-    slug: 'tapicerias', label: 'Tapicerías', title: 'Limpieza de tapicerías', img: 'tapicerias', category: 'superficies', review: true,
-    line: 'Cuéntanos cómo es tu tejido.',
-    card: 'Sillas, butacas, cabeceros y asientos: limpieza adaptada a cada tejido.',
-    tags: ['Sillas', 'Butacas', 'Cabeceros'],
-    lead: 'Limpieza de sillas, butacas, cabeceros y asientos tapizados con el método adecuado a cada tejido. Consulta la disponibilidad de este servicio.',
-    facts: ['Según el tejido', 'Hogar y hostelería', 'Consulta disponibilidad'],
-    intro: [
-      'Las tapicerías acumulan polvo, ácaros, manchas y olores sin que nos demos cuenta. Una limpieza adecuada recupera el color, mejora el tacto y hace el ambiente más agradable.',
-      'Lo más importante es conocer el tejido: no es lo mismo una tela de algodón que un terciopelo, una microfibra o una piel sintética. Por eso siempre revisamos la etiqueta y hacemos una prueba en una zona poco visible antes de tratar toda la pieza.',
-      'Atendemos sillas de comedor, butacas, cabeceros, bancos y asientos de hostelería. Este servicio está sujeto a disponibilidad: escríbenos con fotos y lo valoramos contigo.',
-    ],
-    includes: [
-      'Revisión del tejido y de la etiqueta de cuidado',
-      'Prueba de color en una zona poco visible',
-      'Aspirado profundo de polvo y partículas',
-      'Tratamiento de manchas localizadas',
-      'Limpieza general con el método adecuado al tejido',
-      'Extracción de humedad para acelerar el secado',
-      'Neutralización de olores',
-      'Recomendaciones de secado y mantenimiento',
-    ],
-    ideal: [
-      ['Sillas de comedor', 'Las que más sufren las manchas del día a día.'],
-      ['Butacas y sillones', 'Piezas favoritas que merecen un cuidado especial.'],
-      ['Cabeceros tapizados', 'Acumulan polvo y marcas sin que lo notemos.'],
-      ['Hostelería', 'Asientos de restaurantes, cafeterías y hoteles.'],
-    ],
-    steps: [
-      ['Fotos y tejido', 'Nos envías fotos de la pieza y de la etiqueta si la tiene.'],
-      ['Prueba previa', 'Comprobamos cómo responde el tejido en una zona oculta.'],
-      ['Limpieza', 'Aspirado, tratamiento de manchas y limpieza general.'],
-      ['Secado', 'Extraemos la humedad y te indicamos el tiempo de secado.'],
-    ],
-    frequency: [
-      ['Anual', 'Mantenimiento en hogares con uso normal.'],
-      ['Semestral', 'Con niños, mascotas o uso intensivo.'],
-      ['Puntual', 'Una mancha concreta o antes de una ocasión especial.'],
-    ],
-    tips: [
-      ['Actúa rápido', 'Absorbe una mancha fresca con papel, sin frotar, para que no penetre.'],
-      ['Aspira a menudo', 'Un aspirado semanal evita que el polvo se incruste en las fibras.'],
-      ['Evita el sol directo', 'La luz solar continua decolora muchos tejidos.'],
-    ],
-    faq: [
-      ['¿Qué tejidos podéis limpiar?', 'Depende del tejido y su etiqueta. Envíanos fotos y te decimos si podemos tratarlo y cómo.'],
-      ['¿Salen todas las manchas?', 'Muchas mejoran mucho, pero algunas antiguas o de tinta pueden no desaparecer del todo. Te lo diremos antes.'],
-      ['¿Cuánto tarda en secar?', 'Normalmente unas horas, según el tejido, la ventilación y la temperatura.'],
-      ['¿Está disponible siempre?', 'Este servicio está sujeto a disponibilidad. Consúltanos y te confirmamos fecha.'],
-      ['¿Lo hacéis a domicilio?', 'Sí, la limpieza se realiza en tu casa o local.'],
-    ],
-    related: ['sofas', 'interiores', 'toldos'],
-  },
-  {
-    slug: 'sofas', label: 'Sofás', title: 'Limpieza de sofás', img: 'sofas', category: 'superficies', review: true,
-    line: 'Tu sitio favorito merece cuidado.',
-    card: 'Sofás y chaise longues más limpios, frescos y agradables, con el método de cada tejido.',
-    tags: ['Tela', 'Manchas', 'Olores'],
-    lead: 'Tu sofá recoge el día a día de toda la casa. Lo limpiamos a domicilio, según su tejido, para recuperar color, frescura y comodidad. Consulta la disponibilidad.',
-    facts: ['A domicilio', 'Manchas y olores', 'Consulta disponibilidad'],
-    intro: [
-      'El sofá es el mueble más usado de la casa: comidas, siestas, niños, mascotas y muchas tardes de series. Todo deja huella en forma de manchas, zonas apagadas y olores.',
-      'Revisamos el tejido y las etiquetas de cuidado, hacemos una prueba en una zona oculta y aplicamos el método adecuado: aspirado profundo, tratamiento de manchas, limpieza general y extracción de humedad para acelerar el secado.',
-      'Limpiamos sofás de tela, chaise longues, sofás cama y cojines. Este servicio está sujeto a disponibilidad: escríbenos con fotos del sofá y de las manchas y lo valoramos contigo.',
-    ],
-    includes: [
-      'Revisión del tejido y prueba previa',
-      'Aspirado profundo, incluidos huecos y costuras',
-      'Tratamiento de manchas localizadas',
-      'Limpieza general de asientos, respaldos y brazos',
-      'Cojines y desenfundables según indicaciones',
-      'Extracción de humedad para un secado más rápido',
-      'Neutralización de olores de uso y mascotas',
-      'Consejos de secado y mantenimiento',
-    ],
-    ideal: [
-      ['Hogares con niños', 'Manchas de comida, bebidas y rotuladores del día a día.'],
-      ['Casas con mascotas', 'Pelo, olores y marcas de patas.'],
-      ['Pisos de alquiler', 'Sofás listos entre un inquilino y otro.'],
-      ['Antes de una visita', 'Tu salón a punto para recibir.'],
-    ],
-    steps: [
-      ['Fotos y etiqueta', 'Nos envías fotos del sofá, las manchas y la etiqueta.'],
-      ['Prueba de tejido', 'Comprobamos la reacción del tejido en una zona oculta.'],
-      ['Limpieza completa', 'Aspirado, manchas y limpieza general de todas las piezas.'],
-      ['Secado', 'Extracción de humedad y recomendaciones de ventilación.'],
-    ],
-    frequency: [
-      ['Anual', 'Mantenimiento habitual en cualquier hogar.'],
-      ['Semestral', 'Con niños pequeños o mascotas.'],
-      ['Puntual', 'Una mancha, una mudanza o un cambio de inquilino.'],
-    ],
-    tips: [
-      ['Mantas lavables', 'Una manta sobre el sofá protege las zonas de más uso.'],
-      ['Gira los cojines', 'Darles la vuelta de vez en cuando reparte el desgaste.'],
-      ['No frotes las manchas', 'Absorbe con papel y actúa cuanto antes.'],
-    ],
-    faq: [
-      ['¿Limpiáis sofás de piel?', 'Depende del tipo de piel y su acabado. Envíanos fotos y te decimos si podemos tratarlo.'],
-      ['¿Cuánto tarda en secarse?', 'Unas horas normalmente, según el tejido y la ventilación de la estancia.'],
-      ['¿Se van los olores de mascotas?', 'Mejoran mucho con una limpieza profunda y la neutralización de olores.'],
-      ['¿Está disponible siempre?', 'Este servicio está sujeto a disponibilidad. Consúltanos y te confirmamos.'],
-      ['¿Qué información necesitáis?', 'Tipo de sofá, número de plazas, fotos de las manchas y de la etiqueta del tejido.'],
-    ],
-    related: ['tapicerias', 'pisos-viviendas', 'interiores'],
-  },
 ];
 
 export const pillars = [
@@ -900,13 +794,13 @@ export const reviews = [
   { name: 'Pepita Luna', rating: 4, tags: ['pisos-viviendas'], text: 'Buen profesional,.. puntual y detallista contentos con el trabajo de limpieza de piso...muy recomendable' },
 ];
 
-// ---------- Páginas: Cómo trabajamos, Oferta, Opiniones y Contacto ----------
+// ---------- Páginas: Cómo trabajamos, Opiniones y Contacto ----------
 export const method = [
   ['calendar', 'Nos contactas', 'Reserva desde la web en un minuto, escríbenos por WhatsApp o llámanos. Nos cuentas qué quieres limpiar, dónde está y cuándo te vendría bien.'],
   ['camera', 'Vemos tu espacio', 'Con unas fotos y las medidas aproximadas entendemos el estado, los materiales y los accesos. Si hace falta, lo vemos en persona antes de presupuestar.'],
   ['plan', 'Presupuesto claro', 'Te enviamos una propuesta con lo que incluye el servicio, cómo lo haremos y el precio. Sin compromiso y sin letra pequeña: tú decides.'],
   ['spark', 'El día de la limpieza', 'Llegamos a la hora acordada, protegemos lo que hay alrededor y trabajamos con productos y herramientas adecuados a cada superficie.'],
-  ['check', 'Revisión y seguimiento', 'Repasamos el resultado contigo antes de irnos. Si quieres, programamos las siguientes limpiezas y empiezas a sumar para tu 50 % en la quinta.'],
+  ['check', 'Revisión y seguimiento', 'Repasamos el resultado contigo antes de irnos. Si quieres, programamos las siguientes limpiezas para que tu espacio esté siempre a punto.'],
 ];
 export const quoteChecklist = [
   'Ubicación o barrio en Zaragoza',
@@ -934,14 +828,8 @@ export const tools = [
 ];
 export const serviceModes = [
   ['Puntual', 'Una limpieza cuando la necesitas: una mudanza, fin de obra, cambio de estación o una visita especial.', 'limpieza-general'],
-  ['Periódica', 'Semanal, quincenal, mensual o trimestral. Tu espacio siempre a punto y tu 5ª limpieza al 50 %.', 'pisos-viviendas'],
+  ['Periódica', 'Semanal, quincenal, mensual o trimestral. Tu espacio siempre a punto sin tener que pensar en ello.', 'pisos-viviendas'],
   ['Empresas y comunidades', 'Planes de mantenimiento para oficinas, gimnasios, naves, garajes y comunidades de vecinos.', 'oficinas'],
-];
-export const offerFaq = [
-  ['¿Cómo funciona exactamente?', 'Cada limpieza que haces con Lumis suma. Cuando llegas a la quinta, tiene un 50 % de descuento. Te explicamos todos los detalles al reservar.'],
-  ['¿A qué servicios se aplica?', 'Pregúntanos por tu caso concreto al reservar: cuéntanos qué servicios quieres hacer y te confirmamos cómo aplicar la oferta.'],
-  ['¿Tengo que hacer algo para llevar la cuenta?', 'Solo reservar con nosotros. Cuando pidas tu cita, recuérdanos cuántas limpiezas llevas y lo comprobamos contigo.'],
-  ['¿Puedo combinar la oferta con limpiezas periódicas?', 'Sí, es precisamente la forma más fácil de llegar antes a tu quinta limpieza.'],
 ];
 export const loveThemes = [
   ['clock', 'Puntualidad', 'la puntualidad es prioridad en todo y ha sido de 10', 'Herminia Chevez Pastrana'],
@@ -952,7 +840,6 @@ export const loveThemes = [
 
 export const generalFaq = [
   ['¿En qué zonas trabajáis?', 'Trabajamos en Zaragoza y alrededores. Si tienes dudas sobre tu zona, escríbenos y te lo confirmamos.'],
-  ['¿Cómo funciona la oferta del 50 %?', 'En tus limpiezas con Lumis, la 5ª limpieza tiene un 50 % de descuento. Te explicamos las condiciones al reservar.'],
   ['¿El presupuesto tiene coste?', 'No. El presupuesto es gratuito y sin compromiso. Con unas fotos y las medidas aproximadas solemos poder dártelo rápido.'],
   ['¿Puedo agendar para hoy mismo?', 'Puedes pedir tu cita hoy mismo desde la web o por WhatsApp. Te confirmamos el primer hueco disponible.'],
   ['¿Lleváis vuestros productos y herramientas?', 'Sí, llevamos productos y útiles profesionales. Si prefieres que usemos algún producto concreto, dínoslo.'],

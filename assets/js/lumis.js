@@ -57,14 +57,6 @@
   }, { threshold: .12, rootMargin: '0px 0px -40px' }) : null;
   $$('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
-  /* Tarjeta de sellos: se van marcando al verla */
-  $$('[data-stamps]').forEach(card => {
-    const items = $$('.stamps li', card);
-    const fill = () => items.forEach((li, i) => setTimeout(() => li.classList.add('done'), reduce ? 0 : 350 + i * 380));
-    if (!io) return fill();
-    new IntersectionObserver((en, o) => { if (en[0].isIntersecting) { fill(); o.disconnect(); } }, { threshold: .5 }).observe(card);
-  });
-
   /* Parallax suave en el hero */
   const par = $$('[data-parallax]');
   if (par.length && !reduce && matchMedia('(hover: hover)').matches) {
@@ -166,29 +158,6 @@
     $$('.rv-masonry .rv').forEach(rv => { const show = f === 'all' || rv.dataset.kind === f; rv.classList.toggle('hide', !show); if (show) rv.classList.add('in'); });
   }));
 
-  /* Calculadora de la oferta: ¿cuándo llega mi 5ª limpieza? */
-  const calc = $('[data-calc]');
-  if (calc) {
-    const chipsC = $$('.chip', calc), dots = $$('.calc-line li', calc), out = $('.calc-out', calc);
-    const fmt = d => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
-    const run = days => {
-      const now = new Date();
-      dots.forEach((li, i) => {
-        const d = new Date(now); d.setDate(d.getDate() + days * i);
-        $('small', li).textContent = i === 0 ? 'Hoy' : fmt(d);
-        li.classList.remove('on', 'pop');
-        setTimeout(() => { li.classList.add('on'); if (i === 4) li.classList.add('pop'); }, reduce ? 0 : i * 160);
-      });
-      const fifth = new Date(now); fifth.setDate(fifth.getDate() + days * 4);
-      out.innerHTML = `Si empiezas hoy, tu <b>5ª limpieza al 50 %</b> llegaría hacia el <b>${fifth.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</b>.`;
-    };
-    chipsC.forEach(c => c.addEventListener('click', () => {
-      chipsC.forEach(x => { x.classList.toggle('on', x === c); x.setAttribute('aria-pressed', x === c); });
-      run(+c.dataset.days);
-    }));
-    run(+($('.chip.on', calc)?.dataset.days || 30));
-  }
-
   /* FAQ: solo una abierta a la vez */
   $$('.faq').forEach(list => $$('details', list).forEach(d => d.addEventListener('toggle', () => {
     if (d.open) $$('details', list).forEach(o => { if (o !== d) o.open = false; });
@@ -205,22 +174,6 @@
     if (!io) return;
     new IntersectionObserver(en => { if (en[0].isIntersecting) { if (!userPaused) play(); } else v.pause(); }, { threshold: .35 }).observe(box);
   });
-
-  /* Selector de color: cambia entre la paleta turquesa y la azul sin recargar */
-  const themeBtns = $$('[data-theme-set]');
-  const applyTheme = t => {
-    const azul = t === 'azul';
-    ['lumis', 'pages', 'fx'].forEach(n => {
-      const l = document.getElementById('css-' + n);
-      if (l) l.href = l.href.replace(/assets\/css\/(azul\/)?/, azul ? 'assets/css/azul/' : 'assets/css/');
-    });
-    if (azul) document.documentElement.dataset.theme = 'azul'; else delete document.documentElement.dataset.theme;
-    $('meta[name=theme-color]')?.setAttribute('content', azul ? '#0a2a66' : '#0b5566');
-    themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.themeSet === t));
-    try { localStorage.setItem('lumis-tema', t); } catch (_) {}
-  };
-  themeBtns.forEach(b => b.addEventListener('click', () => applyTheme(b.dataset.themeSet)));
-  themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.themeSet === (document.documentElement.dataset.theme === 'azul' ? 'azul' : 'turquesa')));
 
   /* Año del pie */
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });

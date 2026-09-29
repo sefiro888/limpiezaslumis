@@ -144,8 +144,8 @@ em{position:relative}
 
 /* Burbujas de navegación (CSS puro, compuestas en GPU) */
 .fx-air i{position:absolute;left:var(--x);bottom:calc(var(--s) * -2);width:var(--s);height:var(--s);border-radius:50%;
-  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 8%,transparent 16%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.08) 55%,hsla(calc(var(--h) + var(--hue-shift,0)),90%,65%,.35) 78%,hsla(calc(var(--h) + 60 + var(--hue-shift,0)),90%,70%,.55) 92%,transparent 100%);
-  box-shadow:inset 0 0 0 1px hsla(calc(var(--h) + var(--hue-shift,0)),80%,60%,.25);opacity:.7;will-change:transform;animation:air var(--dur) linear var(--delay) infinite}
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 8%,transparent 16%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.08) 55%,hsla(var(--h),90%,65%,.35) 78%,hsla(calc(var(--h) + 60),90%,70%,.55) 92%,transparent 100%);
+  box-shadow:inset 0 0 0 1px hsla(var(--h),80%,60%,.25);opacity:.7;will-change:transform;animation:air var(--dur) linear var(--delay) infinite}
 @keyframes air{0%{transform:translate3d(0,0,0);opacity:0}8%{opacity:.75}50%{transform:translate3d(var(--sway),-55vh,0)}92%{opacity:.6}100%{transform:translate3d(0,-112vh,0);opacity:0}}
 .fx-spark{position:absolute;width:14px;height:14px;color:var(--sky);filter:drop-shadow(0 0 4px rgba(92,215,239,.9))}
 .fx-spark svg{width:100%;height:100%;fill:currentColor}

@@ -3,10 +3,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildBlueTheme } from './theme-azul.mjs';
 import {
   business as B, groups, services, pillars, generalFaq, reviews, reviewsUrl,
-  method, quoteChecklist, commitments, tools, serviceModes, offerFaq, loveThemes,
+  method, quoteChecklist, commitments, tools, serviceModes, loveThemes,
 } from './content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -81,12 +80,11 @@ const SITE = 'https://sefiro888.github.io/limpiezaslumis/';
 const pageUrl = key => SITE + (key === 'index' ? '' : key + '.html');
 const ogImage = key => `${SITE}assets/images/og/og-${key === 'index' ? 'home' : key}.jpg?v=${V}`;
 
-const PAGES = [['index', 'Inicio'], ['oferta', 'Oferta'], ['opiniones', 'Opiniones'], ['como-trabajamos', 'Cómo trabajamos'], ['contacto', 'Contacto']];
+const PAGES = [['index', 'Inicio'], ['opiniones', 'Opiniones'], ['como-trabajamos', 'Cómo trabajamos'], ['contacto', 'Contacto']];
 const cur = (current, key) => current === key ? ' aria-current="page"' : '';
 
 // ---------- Piezas comunes ----------
 const tickerItems = [
-  ['tag', '<b>50% DTO</b> en tu 5ª limpieza'],
   ['calendar', 'Agenda hoy mismo'],
   ['star', '<b>★★★★★</b> Opiniones reales en Google'],
   ['spark', 'Cristales · Toldos · Garajes'],
@@ -106,7 +104,7 @@ function header(current) {
 <nav class="nav" aria-label="Principal">
 <a href="index.html"${cur(current, 'index')}>Inicio</a>
 <div class="has-mega"><button type="button" class="nav-drop${isSvc ? ' is-cur' : ''}" aria-expanded="false" aria-controls="mega">Servicios ${icon('chevron')}</button>
-<div class="mega" id="mega"><div class="mega-grid">${mega}</div><div class="mega-foot"><span>${icon('tag')} <b>50% de descuento</b> en tu 5ª limpieza</span><a href="index.html#servicios">Ver los 16 servicios ${icon('arrow')}</a></div></div></div>
+<div class="mega" id="mega"><div class="mega-grid">${mega}</div><div class="mega-foot"><span>${icon('check')} Presupuesto <b>gratis y sin compromiso</b></span><a href="index.html#servicios">Ver los ${services.length} servicios ${icon('arrow')}</a></div></div></div>
 ${PAGES.slice(1).map(([k, l]) => `<a href="${k}.html"${cur(current, k)}>${l}</a>`).join('\n')}
 </nav>
 <div class="hdr-actions">
@@ -120,13 +118,13 @@ ${btnBook('Agendar', isSvc ? current : '', 'btn btn-primary btn-sm hdr-book')}
 }
 
 function mobileNav(current, msg) {
-  const extras = { oferta: '<b class="mn-badge">−50%</b>', opiniones: '<b class="mn-stars">★ 5</b>' };
+  const extras = { opiniones: '<b class="mn-stars">★ 5</b>' };
   return `<div class="mnav" id="mnav" aria-label="Menú" aria-hidden="true" inert>
 <div class="mnav-bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 <div class="mnav-top"><a class="mnav-logo" href="index.html"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="${B.name}"></a><button type="button" class="mnav-close" aria-label="Cerrar menú">${icon('close')}</button></div>
 <nav class="mnav-links" aria-label="Menú móvil">
 <a href="index.html" style="--i:0"${cur(current, 'index')}><span>Inicio</span>${icon('arrow')}</a>
-<details class="mnav-svc" style="--i:1"${bySlug[current] ? ' open' : ''}><summary><span>Servicios <small>16</small></span>${icon('chevron')}</summary>
+<details class="mnav-svc" style="--i:1"${bySlug[current] ? ' open' : ''}><summary><span>Servicios <small>${services.length}</small></span>${icon('chevron')}</summary>
 <div class="mnav-groups">${groups.map(g => `<div><p>${icon(groupIcon[g.id])}${g.label}</p><ul>${services.filter(s => s.category === g.id).map(s => `<li><a href="${s.slug}.html"${cur(current, s.slug)}>${s.label}</a></li>`).join('')}</ul></div>`).join('')}</div>
 </details>
 ${PAGES.slice(1).map(([k, l], i) => `<a href="${k}.html" style="--i:${i + 2}"${cur(current, k)}><span>${l}</span>${extras[k] || ''}${icon('arrow')}</a>`).join('\n')}
@@ -174,7 +172,7 @@ function bookingDialog() {
 <fieldset class="book-step" data-step="1"><legend>¿Qué necesitas limpiar?</legend>
 <div class="quick-services">${services.filter(s => s.featured).map(s => `<button type="button" class="qs" data-pick="${s.slug}">${img(s.img, '', { sizes: '120px' })}<span>${s.label}</span></button>`).join('')}</div>
 <label class="field"><span>O elige entre todos los servicios</span><select name="service" required>${opts}</select></label>
-<p class="book-offer">${icon('tag')} Recuerda: <b>50% de descuento en tu 5ª limpieza.</b></p>
+<p class="book-offer">${icon('check')} Presupuesto <b>gratis y sin compromiso</b>.</p>
 </fieldset>
 <fieldset class="book-step" data-step="2" hidden><legend>¿Cuándo te viene bien?</legend>
 <div class="chips" role="group" aria-label="Fecha rápida"><button type="button" class="chip" data-when="hoy">Hoy mismo</button><button type="button" class="chip" data-when="manana">Mañana</button><button type="button" class="chip" data-when="semana">Esta semana</button><button type="button" class="chip" data-when="flexible">Sin prisa</button></div>
@@ -232,7 +230,6 @@ const page = ({ title, desc, bodyClass, current, main, msg }) => `<!doctype html
 <link rel="stylesheet" id="css-lumis" href="assets/css/lumis.css?v=${V}">
 <link rel="stylesheet" id="css-pages" href="assets/css/pages.css?v=${V}">
 <link rel="stylesheet" id="css-fx" href="assets/css/fx.css?v=${V}">
-<script>(function(){var t="turquesa";try{var q=new URLSearchParams(location.search).get("tema");if(q==="azul"||q==="turquesa")localStorage.setItem("lumis-tema",q);t=localStorage.getItem("lumis-tema")||t}catch(e){}if(t==="azul"){document.documentElement.dataset.theme="azul";["lumis","pages","fx"].forEach(function(n){document.getElementById("css-"+n).href="assets/css/azul/"+n+".css?v=${V}"});var m=document.querySelector("meta[name=theme-color]");if(m)m.content="#0a2a66"}})();</script>
 <script>try{if(sessionStorage.getItem('fx-nav')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx-enter');sessionStorage.removeItem('fx-nav')}catch(e){}</script>
 ${current === 'index' || current === 'contacto' ? jsonLd() : ''}
 </head>
@@ -247,7 +244,6 @@ ${main}
 </main>
 ${footer(msg)}
 ${bookingDialog()}
-<div class="theme-pick" role="group" aria-label="Elegir el color de la web"><span>Color</span><button type="button" data-theme-set="turquesa" aria-pressed="true" title="Turquesa, como el logo"><i class="sw" style="background:linear-gradient(135deg,#0b5566 45%,#12b2d2 55%)"></i>Turquesa</button><button type="button" data-theme-set="azul" aria-pressed="false" title="Azul, como el marco del logo"><i class="sw" style="background:linear-gradient(135deg,#0a2a66 45%,#0195f6 55%)"></i>Azul</button></div>
 <script src="assets/js/lumis.js?v=${V}" defer></script>
 <script src="assets/js/fx.js?v=${V}" defer></script>
 </body>
@@ -255,12 +251,6 @@ ${bookingDialog()}
 `;
 
 const faqList = items => `<div class="faq">${items.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>${esc(a)}</p></div></details>`).join('')}</div>`;
-
-const stampCard = (compact = false) => `<div class="stamp-card${compact ? ' compact' : ''}" data-stamps>
-<div class="stamp-top"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="" loading="lazy"><span>Tarjeta cliente</span></div>
-<ol class="stamps">${[1, 2, 3, 4].map(n => `<li><span>${n}ª</span>${icon('check')}</li>`).join('')}<li class="stamp-gold"><span>5ª</span><b>50%</b></li></ol>
-<p>Cada limpieza suma. <b>La quinta, a mitad de precio.</b></p>
-</div>`;
 
 const compareBlock = (pair, label) => `<div class="cmp" data-compare style="--pos:50%">
 <img src="assets/images/${pair}-despues.jpg" alt="${esc(label)}: después (ejemplo ilustrativo)" width="1536" height="1024" loading="lazy">
@@ -331,7 +321,7 @@ ${stage(`<section class="hero">
 <svg class="seal-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100 100m-70 0a70 70 0 1 1 140 0a70 70 0 1 1-140 0"/></defs><text><textPath href="#ring">RESERVA RÁPIDA · SIN COMPROMISO · RESERVA RÁPIDA · SIN COMPROMISO ·</textPath></text></svg>
 <span class="seal-text">Agenda<br>hoy<br>mismo</span>
 </button>
-<a class="float-card fc-offer" href="oferta.html"><span class="fc-big">50%</span><span><b>DTO en tu 5ª limpieza</b><small>Programa cliente Lumis</small></span></a>
+<a class="float-card fc-offer" href="opiniones.html"><span class="fc-big">★ 5</span><span><b>Opiniones reales</b><small>Clientes encantados en Google</small></span></a>
 <div class="float-card fc-list"><p>Nuestros servicios estrella</p><ul>${featured.map(s => `<li>${icon('check')}${s.title}</li>`).join('')}</ul></div>
 </div>
 </section>
@@ -343,7 +333,7 @@ ${strip()}
 <div class="wrap intro-grid">
 <div class="reveal"><span class="eyebrow">${icon('spark')} Hola, somos Lumis</span><h2>Limpieza profesional con <em>trato cercano.</em></h2></div>
 <div class="intro-text reveal"><p class="big">Somos un servicio integral de limpieza en ${B.city}. Cuidamos viviendas, comunidades, negocios y naves con el mismo objetivo: que al entrar se note la diferencia.</p><p>Empezamos siempre escuchándote. Cada espacio tiene sus materiales, sus accesos y sus prioridades, y por eso preparamos cada trabajo a medida. Tú hablas directamente con nosotros y recibes un presupuesto claro y sin compromiso.</p>
-<div class="stats"><div><b data-count>16</b><span>servicios especializados</span></div><div><b>★ 5</b><span>la valoración que más nos dan en Google</span></div><div><b>5ª</b><span>limpieza con un 50 % de descuento</span></div></div>
+<div class="stats"><div><b data-count>${services.length}</b><span>servicios especializados</span></div><div><b>★ 5</b><span>la valoración que más nos dan en Google</span></div><div><b data-count>3</b><span>especialidades estrella: cristales, toldos y garajes</span></div></div>
 <a class="link" href="como-trabajamos.html">Conoce cómo trabajamos ${icon('arrow')}</a></div>
 </div>
 </section>
@@ -379,21 +369,6 @@ ${wave('wave-bottom', '#fff')}
 <div class="rv-feature reveal">${icon('quote', 'rv-q')}<blockquote>${esc(hl.text)}</blockquote><div class="rv-feature-foot">${stars(hl.rating)}<span><b>${esc(hl.name)}</b> · Cliente en Valdespartera, ${B.city}</span></div></div>
 </div>
 <div class="rv-marquee" aria-label="Reseñas de clientes">${rvRow(rest.slice(0, half))}${rvRow(rest.slice(half), true)}</div>
-</section>
-
-<section class="sec offer" id="oferta">
-${wave('wave-top', 'var(--ice)')}
-<canvas class="stage-canvas" aria-hidden="true"></canvas>
-<div class="wrap offer-grid">
-<div class="offer-copy reveal"><span class="eyebrow on-dark">${icon('tag')} Oferta cliente Lumis</span>
-<h2>¡Nosotros lo limpiamos <em>por ti!</em></h2>
-<p class="offer-lead">Queremos premiar a quien confía en nosotros. Por eso, <b>tu 5ª limpieza tiene un 50 % de descuento.</b> Cuantas más veces cuentes con Lumis, más ahorras.</p>
-<ol class="offer-steps"><li><b>1</b><span><strong>Reserva tu limpieza</strong> de cristales, toldos, garajes o cualquiera de nuestros servicios.</span></li><li><b>2</b><span><strong>Suma cada visita</strong> en tu tarjeta de cliente Lumis.</span></li><li><b>3</b><span><strong>En la quinta, pagas la mitad.</strong> Te lo recordamos al reservar.</span></li></ol>
-<div class="offer-cta">${btnBook('Empezar a sumar', '', 'btn btn-light')}<a class="link link-light" href="oferta.html">Cómo funciona ${icon('arrow')}</a></div>
-</div>
-<div class="offer-visual reveal"><div class="offer-badge"><span>50%</span><small>DTO</small></div>${stampCard()}<div class="offer-badge offer-badge-2"><small>en la</small><span>5ª</span><small>limpieza</small></div></div>
-</div>
-${wave('wave-bottom', '#fff')}
 </section>
 
 <section class="sec catalog" id="servicios">
@@ -439,7 +414,7 @@ ${stepsBlock(method.slice(0, 4).map(([i, t, d]) => [t, d, i]))}
 </section>`;
   return page({
     title: `${B.name} · Limpieza de cristales, toldos y garajes en ${B.city}`,
-    desc: `${B.name}: servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas. 50% de descuento en tu 5ª limpieza. Agenda hoy mismo.`,
+    desc: `${B.name}: servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas. Presupuesto sin compromiso. Agenda hoy mismo.`,
     bodyClass: 'is-home', current: 'index', main,
   });
 }
@@ -474,7 +449,7 @@ function servicePage(s) {
 <div class="hero-cta">${btnBook('Agendar esta limpieza', s.slug)}<a class="btn btn-ghost" href="${wa(msg)}" target="_blank" rel="noopener">${icon('wa')}<span>Presupuesto por WhatsApp</span></a></div>
 ${s.review ? `<p class="svc-review">${icon('clock')} Servicio sujeto a disponibilidad. Escríbenos con fotos y te confirmamos.</p>` : ''}
 </div>
-<a class="float-card fc-offer svc-cover-offer" href="oferta.html"><span class="fc-big">50%</span><span><b>DTO en tu 5ª limpieza</b><small>Programa cliente Lumis</small></span></a>
+<a class="float-card fc-offer svc-cover-offer" href="#opiniones"><span class="fc-big">★ 5</span><span><b>Opiniones reales</b><small>Clientes encantados en Google</small></span></a>
 </div>
 <a class="scroll-cue" href="#servicio" aria-label="Ver el servicio"><span></span></a>
 </section>
@@ -485,7 +460,7 @@ ${s.review ? `<p class="svc-review">${icon('clock')} Servicio sujeto a disponibi
 <div class="kpi reveal"><b data-count>${s.includes.length}</b><span>puntos incluidos en el servicio</span></div>
 <div class="kpi reveal" style="--d:80ms"><b data-count>${s.steps.length}</b><span>pasos de un método probado</span></div>
 <div class="kpi reveal" style="--d:160ms"><b>0 €</b><span>presupuesto, sin compromiso</span></div>
-<div class="kpi kpi-hl reveal" style="--d:240ms"><b data-count>50<small>%</small></b><span>de descuento en tu 5ª limpieza</span></div>
+<div class="kpi kpi-hl reveal" style="--d:240ms"><b>★ 5</b><span>la valoración que más nos dan en Google</span></div>
 </div>
 ${wave('wave-bottom')}
 </section>
@@ -533,16 +508,9 @@ ${stepsBlock(s.steps)}
 
 <section class="sec freq" id="frecuencia">
 <div class="wrap">
-<div class="sec-head reveal"><div><span class="eyebrow">${icon('calendar')} Frecuencia recomendada</span><h2>¿Cada cuánto <em>conviene?</em></h2></div><p>Elige el ritmo que mejor encaja con tu espacio. Con las limpiezas periódicas llegas antes a tu 50 % de descuento.</p></div>
+<div class="sec-head reveal"><div><span class="eyebrow">${icon('calendar')} Frecuencia recomendada</span><h2>¿Cada cuánto <em>conviene?</em></h2></div><p>Elige el ritmo que mejor encaja con tu espacio.</p></div>
 <div class="plans">${s.frequency.map(([t, d], i) => `<article class="plan${i === 1 ? ' hl' : ''} reveal" style="--d:${i * 90}ms"><span class="plan-ico">${icon(['calendar', 'clock', 'spark'][i])}</span><h3>${esc(t)}</h3><p>${esc(d)}</p>${btnBook('Agendar', s.slug, i === 1 ? 'btn btn-primary btn-sm' : 'btn btn-soft btn-sm')}</article>`).join('')}</div>
 <div class="tips-row">${s.tips.map(([t, d], i) => `<div class="tip reveal" style="--d:${i * 80}ms"><span class="tip-ico">${icon('bulb')}</span><div><h3>${esc(t)}</h3><p>${esc(d)}</p></div></div>`).join('')}</div>
-</div>
-</section>
-
-<section class="offer-strip">
-<div class="wrap offer-strip-in reveal">
-<div class="offer-strip-copy"><span class="eyebrow on-dark">${icon('tag')} Oferta cliente Lumis</span><h2>Tu 5ª limpieza, <em>al 50%.</em></h2><p>Programa tus limpiezas de ${s.label.toLowerCase()} o combina servicios: cada visita suma en tu tarjeta de cliente y la quinta te sale a mitad de precio.</p><div class="offer-cta">${btnBook('Agendar y empezar a sumar', s.slug, 'btn btn-light')}<a class="link link-light" href="oferta.html">Cómo funciona ${icon('arrow')}</a></div></div>
-${stampCard(true)}
 </div>
 </section>
 
@@ -575,67 +543,9 @@ ${s.compare ? `<section class="sec results" id="antes-despues">
 </section>`;
   return page({
     title: `${s.title} en ${B.city} | ${B.name}`,
-    desc: `${s.title} en ${B.city} con ${B.name}. ${s.lead} Presupuesto sin compromiso y 50% de descuento en tu 5ª limpieza.`,
+    desc: `${s.title} en ${B.city} con ${B.name}. ${s.lead} Presupuesto sin compromiso.`,
     bodyClass: 'is-service', current: s.slug, main, msg,
   });
-}
-
-// ---------- Oferta ----------
-function offerPage() {
-  const main = `
-${pageHero({
-    crumb: 'Oferta', eyebrow: `${icon('tag')} Oferta cliente Lumis`,
-    title: '¡Nosotros lo limpiamos <em>por ti!</em>',
-    lead: 'Premiamos a quienes confían en nosotros: <b>tu 5ª limpieza tiene un 50 % de descuento.</b> Cristales, toldos, garajes, tu casa o tu negocio: cada visita suma.',
-    ctas: `${btnBook('Empezar a sumar')}<a class="btn btn-ghost" href="#calcula">${icon('calendar')}<span>¿Cuándo llega mi 50 %?</span></a>`,
-    visual: `<div class="offer-visual offer-visual-hero"><div class="offer-badge"><span>50%</span><small>DTO</small></div>${stampCard()}<div class="offer-badge offer-badge-2"><small>en la</small><span>5ª</span><small>limpieza</small></div></div>`,
-  })}
-
-<section class="sec how">
-<div class="wrap">
-<div class="sec-head reveal"><div><span class="eyebrow">${icon('spark')} Cómo funciona</span><h2>Tres pasos, <em>cero complicaciones.</em></h2></div><p>No hay cupones ni formularios: tú reservas y nosotros llevamos la cuenta contigo.</p></div>
-<div class="how-grid">${[
-    ['calendar', 'Reserva tu limpieza', 'Pide tu cita desde la web, por WhatsApp o por teléfono, para cualquiera de nuestros servicios.'],
-    ['check', 'Cada visita suma', 'Cada limpieza que hacemos contigo es un sello más en tu tarjeta de cliente Lumis.'],
-    ['tag', 'La quinta, a mitad de precio', 'Cuando llegues a tu 5ª limpieza, se aplica el 50 % de descuento. Te lo recordamos al reservar.'],
-  ].map(([ic, t, d], i) => `<article class="how-card reveal" style="--d:${i * 90}ms"><span class="how-n">${i + 1}</span><span class="how-ico">${icon(ic)}</span><h3>${t}</h3><p>${d}</p></article>`).join('')}</div>
-</div>
-</section>
-
-<section class="sec calc" id="calcula">
-<div class="wrap calc-grid">
-<div class="reveal"><span class="eyebrow">${icon('calendar')} Calcula tu fecha</span><h2>¿Cuándo llega <em>tu 50 %?</em></h2><p class="lead">Elige cada cuánto quieres limpiar y te decimos, aproximadamente, cuándo tendrías tu quinta limpieza si empiezas hoy.</p></div>
-<div class="calc-card reveal" data-calc>
-<div class="chips" role="group" aria-label="Frecuencia">${[['7', 'Semanal'], ['14', 'Quincenal'], ['30', 'Mensual'], ['91', 'Trimestral']].map(([d, l], i) => `<button type="button" class="chip${i === 2 ? ' on' : ''}" data-days="${d}" aria-pressed="${i === 2}">${l}</button>`).join('')}</div>
-<ol class="calc-line" aria-hidden="true">${[1, 2, 3, 4, 5].map(n => `<li${n === 5 ? ' class="gold"' : ''}><span>${n}ª</span><small></small></li>`).join('')}</ol>
-<p class="calc-out" aria-live="polite"></p>
-${btnBook('Reservar mi primera limpieza', '', 'btn btn-primary btn-block')}
-<p class="note">Cálculo orientativo. Las fechas reales dependen de tu calendario de limpiezas.</p>
-</div>
-</div>
-</section>
-
-<section class="sec catalog">
-<div class="wrap">
-<div class="sec-head reveal"><div><span class="eyebrow">${icon('layers')} Suma con cualquier servicio</span><h2>Elige por dónde <em>empezar.</em></h2></div><p>Pregúntanos cómo aplicar la oferta a tu caso concreto al reservar.</p></div>
-<div class="svc-chips reveal">${services.map(s => `<button type="button" class="svc-chip" data-book data-service="${s.slug}">${img(s.img, '', { sizes: '48px' })}<span>${s.label}</span>${icon('calendar')}</button>`).join('')}</div>
-</div>
-</section>
-
-<section class="sec reviews reviews-svc">
-<div class="wrap">
-<div class="sec-head reveal"><div><span class="eyebrow">${icon('star')} Clientes que repiten</span><h2>Por algo <em>vuelven.</em></h2></div><a class="link" href="opiniones.html">Ver todas las opiniones ${icon('arrow')}</a></div>
-<div class="rv-grid">${reviews.filter(r => /volver|regular|seguramente|Muy pronto/i.test(r.text)).concat(reviews).filter((r, i, a) => a.indexOf(r) === i).slice(0, 3).map((r, i) => reviewCard(r, 'rv reveal', `--d:${i * 90}ms`)).join('')}</div>
-</div>
-</section>
-
-<section class="sec faq-sec">
-<div class="wrap faq-grid">
-<div class="reveal"><span class="eyebrow">${icon('plan')} Preguntas sobre la oferta</span><h2>Todo <em>claro.</em></h2><p class="lead">Si tienes cualquier duda sobre cómo aplicar el descuento, pregúntanos al reservar.</p>${btnBook('Consultar por la oferta', '', 'btn btn-soft')}</div>
-<div class="reveal">${faqList(offerFaq)}</div>
-</div>
-</section>`;
-  return page({ title: `Oferta: 50% en tu 5ª limpieza | ${B.name}`, desc: `Con ${B.name}, tu 5ª limpieza tiene un 50% de descuento. Cristales, toldos, garajes, viviendas y empresas en ${B.city}.`, bodyClass: 'is-page', current: 'oferta', main });
 }
 
 // ---------- Opiniones ----------
@@ -788,9 +698,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const write = (name, html) => fs.writeFileSync(path.join(OUT, name), html);
 write('index.html', home());
 for (const s of services) write(`${s.slug}.html`, servicePage(s));
-write('oferta.html', offerPage());
 write('opiniones.html', reviewsPage());
 write('como-trabajamos.html', methodPage());
 write('contacto.html', contactPage());
-buildBlueTheme();
-console.log(`Generadas ${services.length + 5} páginas en ${OUT}`);
+console.log(`Generadas ${services.length + 4} páginas en ${OUT}`);

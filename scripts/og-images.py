@@ -103,14 +103,16 @@ def pill(canvas, x, y, text, f, bg, fg, padx=22, h=52):
     ImageDraw.Draw(canvas).text((x + padx, y + h / 2), text, font=f, fill=fg, anchor='lm')
     return x + w
 
-def offer_badge(canvas, x, y):
+def google_badge(canvas, x, y):
+    """Sello de opiniones reales en Google (5 estrellas dibujadas)."""
     d = ImageDraw.Draw(canvas)
-    wmax = max(d.textlength('DTO en tu 5ª limpieza', font=font(20, 800)), d.textlength('Programa cliente Lumis', font=font(16, 500)))
-    d.rounded_rectangle((x, y, x + 132 + wmax + 22, y + 70), 22, fill=(255, 255, 255, 245))
-    d.rounded_rectangle((x + 10, y + 10, x + 118, y + 60), 14, fill=PETROL)
-    d.text((x + 64, y + 35), '50%', font=font(34, 800), fill='white', anchor='mm')
-    d.text((x + 132, y + 22), 'DTO en tu 5ª limpieza', font=font(20, 800), fill=PETROL, anchor='lm')
-    d.text((x + 132, y + 48), 'Programa cliente Lumis', font=font(16, 500), fill=(82, 112, 122), anchor='lm')
+    t1, t2 = 'Opiniones reales', 'Clientes encantados en Google'
+    w = 26 + 5 * 30 + 16 + max(d.textlength(t1, font=font(20, 800)), d.textlength(t2, font=font(16, 500))) + 22
+    d.rounded_rectangle((x, y, x + w, y + 70), 22, fill=(255, 255, 255, 245))
+    for i in range(5): star(d, x + 26 + i * 30, y + 35, 12, GOLD)
+    tx = x + 26 + 5 * 30 + 4
+    d.text((tx, y + 22), t1, font=font(20, 800), fill=PETROL, anchor='lm')
+    d.text((tx, y + 48), t2, font=font(16, 500), fill=(82, 112, 122), anchor='lm')
 
 def save(canvas, name):
     canvas.convert('RGB').save(OUT / name, 'JPEG', quality=84, optimize=True, progressive=True)
@@ -136,7 +138,7 @@ def home():
     px = x
     for t in ['Cristales', 'Toldos', 'Garajes']:
         px = pill(c, px, 330, t, font(22, 700), (255, 255, 255, 38), 'white', padx=20, h=48) + 10
-    offer_badge(c, x, 406)
+    google_badge(c, x, 406)
     d.text((x, 526), f"Agenda hoy mismo · {B['phone']}", font=font(28, 800), fill='white')
     sparkle(d, 1130, 90, 16, (255, 255, 255, 230)); sparkle(d, 1090, 140, 8, LIGHT); sparkle(d, 440, 560, 10, LIGHT)
     save(c, 'og-home.jpg')
@@ -166,13 +168,12 @@ def photo_card(name, photo, eyebrow, title, tagline, extra=None, stars=False):
         d.text((x, y), extra, font=font(22, 600), fill=(214, 236, 242))
     x = 60
     d.text((x, H - 70), f"Presupuesto sin compromiso · {B['phone']}", font=font(24, 800), fill='white')
-    offer_badge(c, W - 400, H - 100)
+    google_badge(c, W - 440, H - 100)
     save(c, f'og-{name}.jpg')
 
 home()
 for s in SERVICES:
     photo_card(s['slug'], s['img'], f"{B['city']} · Limpiezas Lumis", s['title'], s['line'], ' · '.join(s['facts']))
-photo_card('oferta', 'viviendas', 'Oferta cliente Lumis', 'Tu 5ª limpieza al 50%', '¡Nosotros lo limpiamos por ti!', 'Cada limpieza suma. La quinta, a mitad de precio.')
 photo_card('opiniones', 'cristales', 'Opiniones reales en Google', 'Lo que dicen nuestros clientes', 'Puntuales, cuidadosos y detallistas.', 'Viviendas, clínicas, restaurantes y gimnasios', stars=True)
 photo_card('como-trabajamos', 'general', 'Nuestro método', 'Así trabajamos en Lumis', 'Claro, puntual y sin sorpresas.', 'Presupuesto sin compromiso · Revisión final contigo')
 photo_card('contacto', 'terrazas', f"Contacto · {B['city']}", 'Hablemos de tu espacio', 'Llámanos o escríbenos por WhatsApp.', f"{B['phone']} · {B['landline']} · {B['email']}")

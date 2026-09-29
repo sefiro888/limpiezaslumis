@@ -82,7 +82,7 @@
 
   /* ---------- Inclinación 3D con reflejo ---------- */
   if (fine) {
-    $$('.feat, .cards .card, .rv-grid .rv, .pillar, .ideal-card, .step, .stamp-card, .plan, .how-card, .love-card, .tool, .c-card, .kpi, .tl-card').forEach(el => {
+    $('.feat, .cards .card, .rv-grid .rv, .pillar, .ideal-card, .step, .plan, .love-card, .tool, .c-card, .kpi, .tl-card').forEach(el => {
       el.classList.add('tilt');
       const glare = document.createElement('span'); glare.className = 'glare'; glare.setAttribute('aria-hidden', 'true');
       el.append(glare);
@@ -110,21 +110,20 @@
   }
 
   /* ---------- Motor de burbujas ---------- */
-  const HS = () => (root.dataset.theme === "azul" ? 24 : 0); // desplazamiento de tono para la paleta azul
   function drawBubble(ctx, b, dark) {
     const { x, y, r } = b, a = b.a;
     if (a <= 0.01 || r < .5) return;
     const g = ctx.createRadialGradient(x - r * .25, y - r * .3, r * .1, x, y, r);
     if (dark) {
       g.addColorStop(0, `rgba(255,255,255,${.04 * a})`);
-      g.addColorStop(.7, `hsla(${b.h + HS()},90%,80%,${.07 * a})`);
-      g.addColorStop(.9, `hsla(${b.h + 50 + HS()},100%,85%,${.32 * a})`);
+      g.addColorStop(.7, `hsla(${b.h},90%,80%,${.07 * a})`);
+      g.addColorStop(.9, `hsla(${b.h + 50},100%,85%,${.32 * a})`);
       g.addColorStop(1, `rgba(255,255,255,${.7 * a})`);
     } else {
       g.addColorStop(0, `rgba(255,255,255,${.1 * a})`);
-      g.addColorStop(.72, `hsla(${b.h + HS()},85%,70%,${.08 * a})`);
-      g.addColorStop(.9, `hsla(${b.h + 40 + HS()},90%,62%,${.3 * a})`);
-      g.addColorStop(1, `hsla(${b.h - 10 + HS()},85%,55%,${.55 * a})`);
+      g.addColorStop(.72, `hsla(${b.h},85%,70%,${.08 * a})`);
+      g.addColorStop(.9, `hsla(${b.h + 40},90%,62%,${.3 * a})`);
+      g.addColorStop(1, `hsla(${b.h - 10},85%,55%,${.55 * a})`);
     }
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
@@ -136,7 +135,7 @@
   function drawSpark(ctx, p) {
     const s = p.s * (0.4 + .6 * p.a), a = p.a;
     ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-    ctx.fillStyle = `hsla(${p.h + HS()},95%,${p.l}%,${a})`;
+    ctx.fillStyle = `hsla(${p.h},95%,${p.l}%,${a})`;
     ctx.beginPath();
     ctx.moveTo(0, -s); ctx.quadraticCurveTo(s * .15, -s * .15, s, 0); ctx.quadraticCurveTo(s * .15, s * .15, 0, s);
     ctx.quadraticCurveTo(-s * .15, s * .15, -s, 0); ctx.quadraticCurveTo(-s * .15, -s * .15, 0, -s); ctx.fill();
