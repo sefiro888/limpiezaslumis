@@ -43,3 +43,9 @@ Incluye: banner superior en movimiento, banda animada de servicios, oferta «50 
 ## Archivos antiguos
 
 `assets/css/styles.css`, `assets/css/experience.css`, `assets/js/main.js`, `assets/js/experience.js`, `scripts/redesign.mjs` y `scripts/enhance.cjs` pertenecen a la versión 3 y ya no se usan. **No ejecutes `redesign.mjs` ni `enhance.cjs`**: romperían las páginas nuevas.
+
+## Vídeos
+
+- Originales en `videos-originales/` (excluidos de Git). Versiones web en `assets/video/`: `lumis-trabajo.mp4` (8 s, trabajo real recortado sin filtros ni transiciones del montaje original) y `lumis-anuncio.mp4` (8 s), con su imagen de espera `.jpg`.
+- Se muestran en marco de móvil: portada (sección «Lumis en acción»), limpieza de cristales («Qué incluye») y contacto. Solo se cargan al llegar a ellos, sin sonido, en bucle y con botón de pausa.
+- Para añadir un vídeo a otro servicio: poner `video: 'nombre'` en su ficha de `scripts/content.mjs`.

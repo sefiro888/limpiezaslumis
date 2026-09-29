@@ -194,6 +194,18 @@
     if (d.open) $$('details', list).forEach(o => { if (o !== d) o.open = false; });
   })));
 
+  /* Vídeos: se cargan y reproducen solo cuando están en pantalla, con botón de pausa */
+  $$('[data-video]').forEach(box => {
+    const v = $('video', box), btn = $('.phone-toggle', box);
+    let userPaused = reduce; // con «reducir movimiento» no arrancan solos
+    const sync = () => { const paused = v.paused; btn.setAttribute('aria-pressed', paused); btn.setAttribute('aria-label', paused ? 'Reproducir vídeo' : 'Pausar vídeo'); };
+    const play = () => { if (v.preload !== 'auto') { v.preload = 'auto'; v.load(); } v.play().catch(() => {}); };
+    btn.addEventListener('click', () => { if (v.paused) { userPaused = false; play(); } else { userPaused = true; v.pause(); } });
+    v.addEventListener('play', sync); v.addEventListener('pause', sync); sync();
+    if (!io) return;
+    new IntersectionObserver(en => { if (en[0].isIntersecting) { if (!userPaused) play(); } else v.pause(); }, { threshold: .35 }).observe(box);
+  });
+
   /* Selector de color: cambia entre la paleta turquesa y la azul sin recargar */
   const themeBtns = $$('[data-theme-set]');
   const applyTheme = t => {

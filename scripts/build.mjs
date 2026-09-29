@@ -275,6 +275,13 @@ const serviceCard = (s, extra = '') => `<a class="card reveal" href="${s.slug}.h
 <div class="card-body"><h3>${s.title}</h3><p>${esc(s.card)}</p><div class="card-foot"><span class="tags">${s.tags.map(t => `<i>${t}</i>`).join('')}</span><span class="card-go">${icon('up')}</span></div></div>
 </a>`;
 
+// Vídeo vertical dentro de un marco de móvil. Solo se carga y reproduce cuando está en pantalla.
+const phoneVideo = ({ name, label, alt, cls = '' }) => `<figure class="phone ${cls}" data-video>
+<video muted loop playsinline preload="none" poster="assets/video/${name}.jpg" aria-label="${esc(alt)}"><source src="assets/video/${name}.mp4" type="video/mp4"></video>
+<button type="button" class="phone-toggle" aria-label="Pausar vídeo" aria-pressed="false"><span class="ico-pause" aria-hidden="true"></span></button>
+${label ? `<figcaption class="phone-tag"><i></i>${label}</figcaption>` : ''}
+</figure>`;
+
 // Cinta de servicios en movimiento, discreta y elegante.
 const strip = () => {
   const row = services.map(s => `<a href="${s.slug}.html">${s.label}</a>${icon('spark')}`).join('');
@@ -351,6 +358,19 @@ ${strip()}
 <div class="feat-actions"><a class="link" href="${s.slug}.html">Ver servicio ${icon('arrow')}</a>${btnBook('Agendar', s.slug, 'btn btn-soft btn-sm')}</div></div>
 </article>`).join('')}</div>
 </div>
+</section>
+
+<section class="sec action" id="en-accion">
+${wave('wave-top', 'var(--bg)')}
+<canvas class="stage-canvas" aria-hidden="true"></canvas>
+<div class="wrap action-grid">
+<div class="action-copy reveal"><span class="eyebrow on-dark">${icon('camera')} Lumis en acción</span><h2>Así trabajamos, <em>de verdad.</em></h2>
+<p class="lead">Sin fotos de catálogo: esto es un trabajo real de Lumis. Cristaleras en altura, escalera, raqueta y paciencia hasta que no queda ni una marca.</p>
+<ul class="action-list"><li>${icon('shield')}Trabajo en altura con seguridad</li><li>${icon('check')}Cristal, marcos y perfiles incluidos</li><li>${icon('spark')}Revisamos el resultado antes de irnos</li></ul>
+<div class="hero-cta">${btnBook('Quiero este resultado', 'cristales')}<a class="btn btn-ghost" href="cristales.html">${icon('arrow')}<span>Limpieza de cristales</span></a></div></div>
+<div class="action-phones reveal">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis frente a una cristalera', label: 'Anuncio Lumis', cls: 'phone-back' })}${phoneVideo({ name: 'lumis-trabajo', alt: 'Operario de Lumis limpiando la cristalera de la fachada de un restaurante', label: 'Trabajo real', cls: 'phone-front' })}</div>
+</div>
+${wave('wave-bottom', '#fff')}
 </section>
 
 <section class="sec reviews" id="opiniones">
@@ -490,7 +510,7 @@ ${quote ? `<figure class="mini-rv">${stars(quote.rating)}<blockquote>“${esc(qu
 <div class="wrap includes-grid">
 <div class="includes-copy reveal"><span class="eyebrow">${icon('check')} Qué incluye</span><h2>Todo lo que <em>cuidamos.</em></h2><p class="lead">Esto es lo que incluye habitualmente nuestra ${s.title.toLowerCase()}. Adaptamos cada trabajo a tu espacio: si necesitas algo más, lo añadimos al presupuesto.</p>
 <ul class="checklist">${s.includes.map((t, i) => `<li style="--d:${i * 50}ms"><span class="cl-n">${String(i + 1).padStart(2, '0')}</span><span>${esc(t)}</span>${icon('check')}</li>`).join('')}</ul></div>
-<figure class="includes-media reveal">${img(s.img, `${s.title}, detalle (ejemplo ilustrativo)`, { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Productos y técnicas de alta calidad</figcaption></figure>
+${s.video ? `<div class="includes-video reveal">${phoneVideo({ name: s.video, alt: `${s.title}: trabajo real de Lumis`, label: 'Trabajo real de Lumis' })}</div>` : `<figure class="includes-media reveal">${img(s.img, `${s.title}, detalle (ejemplo ilustrativo)`, { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Productos y técnicas de alta calidad</figcaption></figure>`}
 </div>
 </section>
 
@@ -737,7 +757,7 @@ ${pageHero({
     title: 'Hablemos de <em>tu espacio.</em>',
     lead: 'Llámanos, escríbenos por WhatsApp o reserva tu cita en un minuto. Presupuesto sin compromiso en Zaragoza y alrededores.',
     ctas: `${btnBook('Agendar cita')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a>`,
-    visual: `<div class="map-card"><div class="map-rings" aria-hidden="true"><i></i><i></i><i></i></div><span class="map-pin">${icon('pin')}</span><p><b>${B.city}</b><small>y alrededores</small></p></div>`,
+    visual: `<div class="contact-phone">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis: pide tu presupuesto sin compromiso', label: 'Pide tu presupuesto' })}<div class="float-card fc-mini contact-zone">${icon('pin')}<span><b>${B.city}</b><small>y alrededores</small></span></div></div>`,
   })}
 
 <section class="sec contact-sec">

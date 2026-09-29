@@ -23,7 +23,7 @@ export const groups = [
 
 export const services = [
   {
-    slug: 'cristales', label: 'Cristales', title: 'Limpieza de cristales', img: 'cristales', category: 'exterior', compare: 'cristales', featured: true,
+    slug: 'cristales', label: 'Cristales', title: 'Limpieza de cristales', img: 'cristales', category: 'exterior', compare: 'cristales', featured: true, video: 'lumis-trabajo',
     line: 'Que entre toda la luz.',
     card: 'Ventanas, ventanales, cerramientos y mamparas sin marcas, con marcos y guías incluidos.',
     tags: ['Ventanas', 'Cerramientos', 'Escaparates'],

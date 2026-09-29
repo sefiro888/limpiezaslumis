@@ -343,3 +343,44 @@ html,body{overflow-x:clip}
 .theme-pick button[aria-pressed=true]{background:var(--ice-2)}
 .theme-pick .sw{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 @media (max-width:980px){.theme-pick{left:10px;bottom:86px;font-size:12px}.theme-pick>span{display:none}}
+
+/* Vídeos en marco de móvil */
+.phone{position:relative;margin:0;width:min(290px,72vw);aspect-ratio:540/1170;padding:9px;border-radius:46px;background:linear-gradient(145deg,#26343a,#0b1418 60%,#1b2a30);box-shadow:0 0 0 1.5px rgba(255,255,255,.14) inset,0 40px 80px -30px rgba(0,0,0,.65),0 0 70px rgba(79,205,230,.18)}
+.phone::before{content:'';position:absolute;top:18px;left:50%;translate:-50% 0;width:34%;height:22px;border-radius:14px;background:#0b1418;z-index:2}
+.phone video{display:block;width:100%;height:100%;object-fit:cover;border-radius:37px;background:#0b1418}
+.phone-toggle{position:absolute;right:20px;bottom:20px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(5,42,51,.6);display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.phone-toggle:hover{background:rgba(5,42,51,.85)}
+.phone-toggle .ico-pause{width:12px;height:14px;border-left:4px solid #fff;border-right:4px solid #fff}
+.phone-toggle[aria-pressed=true] .ico-pause{width:0;height:0;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent #fff;margin-left:3px}
+.phone-tag{position:absolute;left:50%;bottom:-18px;translate:-50% 0;z-index:3;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:9px 16px;border-radius:999px;background:#fff;color:var(--navy);font-size:13px;font-weight:800;box-shadow:var(--sh)}
+.phone-tag i{width:8px;height:8px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 0 rgba(229,72,77,.6);animation:pulse 2s infinite}
+
+/* Sección «Lumis en acción» */
+.action{position:relative;overflow:hidden;isolation:isolate;color:#cfe0f7;padding-top:calc(clamp(72px,9vw,128px) + 50px);padding-bottom:calc(clamp(72px,9vw,128px) + 60px);background:radial-gradient(60% 70% at 85% 30%,rgba(18,178,210,.35),transparent 60%),linear-gradient(160deg,#052a33,#0b5566 55%,#0a7690)}
+.action .stage-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.action .wrap{position:relative;z-index:1}
+.action h2{color:#fff}.action h2 em{color:var(--sky)}
+.action .lead{color:#bcd9e2;margin:18px 0 24px}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.action-list{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:12px}
+.action-list li{display:flex;align-items:center;gap:12px;font-weight:700;color:#fff}
+.action-list .i{width:36px;height:36px;padding:8px;border-radius:12px;background:rgba(255,255,255,.1);color:var(--sky)}
+.action-phones{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px}
+.action-phones .phone-front{rotate:-4deg;z-index:2}
+.action-phones .phone-back{position:absolute;width:min(230px,55vw);rotate:8deg;translate:62% 6%;opacity:.95;z-index:1}
+.includes-video{display:flex;justify-content:center;padding-bottom:26px}
+.contact-phone{position:relative;display:flex;justify-content:center;padding-bottom:24px}
+.contact-phone .phone{rotate:3deg}
+.contact-zone{left:-4%;right:auto;top:auto;bottom:22%}
+@media (max-width:980px){
+  .action-grid{grid-template-columns:1fr}
+  .action-phones{min-height:0;padding:10px 0 30px;justify-content:flex-start;padding-left:4%}
+  .action-phones .phone-back{translate:0 0;right:2%;width:min(190px,44vw)}
+  .contact-zone{left:0}
+}
+@media (max-width:640px){
+  .phone{border-radius:38px;padding:7px}
+  .phone video{border-radius:31px}
+  .action-phones .phone-front{width:min(250px,64vw)}
+  .action-phones .phone-back{width:min(160px,40vw)}
+}
