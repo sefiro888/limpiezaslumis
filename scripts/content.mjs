@@ -993,7 +993,9 @@ export const pillars = [
 
 // Reseñas reales de Google facilitadas por el cliente. Copiadas literalmente; no editar su contenido.
 // `tags` indica en qué páginas de servicio se muestran.
-export const reviewsUrl = 'https://share.google/y6DHE7UBpLFz16yQ7'; // ficha de Google de Limpiezas Lumis
+export const reviewsUrl = 'https://share.google/y6DHE7UBpLFz16yQ7'; // ficha de Google de Limpiezas Lumis (ver opiniones)
+// Enlace directo para escribir una reseña (Place ID ChIJXwrSYmsVWQ0RQTvncGR6ZM4, comprobado que corresponde a la ficha de Lumis).
+export const reviewWriteUrl = 'https://search.google.com/local/writereview?placeid=ChIJXwrSYmsVWQ0RQTvncGR6ZM4';
 export const reviews = [
   { name: 'Jaster66', rating: 5, tags: ['cristales', 'terrazas'], highlight: true, text: 'Tras 15 años en Valdespartera nadie había sabido limpiar los enormes cristales de mi terraza por ser de difícil acceso en el exterior. Lumis han sido los únicos que me los han dejado impecables, incluída la carpintería de aluminio y con un servicio puntual y cuidadoso. Mis vecinos ya han tomado nota. Gran trabajo y a un precio razonable.' },
   { name: 'Arevageor', rating: 5, tags: ['cristales', 'pisos-viviendas'], text: 'Un servicio impecable. Los cristales quedaron perfectos, brillantes y como nuevos. Me impresionó lo cuidadoso que fue con los suelos y todo el entorno, trabajando con una delicadeza y respeto que pocas veces se ve. Es muy puntual, profesional y muy amable. Da mucha tranquilidad contratar a una persona que se nota que cuida hasta el más mínimo detalle. ¡Muy recomendados!' },

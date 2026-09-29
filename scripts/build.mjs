@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  business as B, groups, services, destacados, pillars, generalFaq, reviews, reviewsUrl,
+  business as B, groups, services, destacados, pillars, generalFaq, reviews, reviewsUrl, reviewWriteUrl,
   method, quoteChecklist, commitments, tools, serviceModes, loveThemes,
 } from './content.mjs';
 
@@ -72,7 +72,7 @@ const reviewsFor = slug => {
 const socialLinks = (cls = '') => `<div class="social ${cls}"><a class="ig" href="${B.instagram}" target="_blank" rel="noopener" aria-label="Instagram de ${B.name} (${B.instagramHandle})">${icon('insta')}<span>Instagram</span></a><a class="tt" href="${B.tiktok}" target="_blank" rel="noopener" aria-label="TikTok de ${B.name} (${B.tiktokHandle})">${icon('tiktok')}<span>TikTok</span></a></div>`;
 
 // Recuadro para pedir reseñas en Google: se muestra tras las opiniones.
-const reviewAsk = () => `<div class="rv-ask reveal"><div class="rv-ask-stars" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<svg viewBox="0 0 24 24" style="--n:${i}"><path d="${paths.star.match(/d="([^"]+)"/)[1]}"/></svg>`).join('')}</div><div class="rv-ask-copy"><h3>¿Te ha gustado nuestro trabajo?</h3><p>Tu reseña en Google ayuda a que más vecinos de ${B.city} nos conozcan. Solo te lleva un minuto.</p></div><a class="btn btn-review" href="${reviewsUrl}" target="_blank" rel="noopener">${icon('star')}<span>Dejar mi reseña</span></a></div>`;
+const reviewAsk = () => `<div class="rv-ask reveal"><div class="rv-ask-stars" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<svg viewBox="0 0 24 24" style="--n:${i}"><path d="${paths.star.match(/d="([^"]+)"/)[1]}"/></svg>`).join('')}</div><div class="rv-ask-copy"><h3>¿Te ha gustado nuestro trabajo?</h3><p>Tu reseña en Google ayuda a que más vecinos de ${B.city} nos conozcan. Solo te lleva un minuto.</p></div><a class="btn btn-review" href="${reviewWriteUrl}" target="_blank" rel="noopener">${icon('star')}<span>Dejar mi reseña</span></a></div>`;
 
 const btnBook = (label = 'Agendar cita', slug = '', cls = 'btn btn-primary') =>
   `<button type="button" class="${cls}" data-book${slug ? ` data-service="${slug}"` : ''}>${icon('calendar')}<span>${label}</span></button>`;
@@ -601,8 +601,8 @@ ${pageHero({
 
 <section class="sec leave">
 <div class="wrap leave-in reveal">
-<div><span class="eyebrow on-dark">${icon('star')} ¿Ya eres cliente?</span><h2>Tu opinión <em>nos ayuda muchísimo.</em></h2><p>Si te ha gustado nuestro trabajo, dedica un minuto a dejarnos tu reseña en Google: abre nuestra ficha y pulsa «Escribir una reseña». Así más vecinos de ${B.city} pueden conocernos.</p></div>
-<a class="btn btn-light" href="${reviewsUrl}" target="_blank" rel="noopener">${icon('star')}<span>Dejar mi reseña en Google</span></a>
+<div><span class="eyebrow on-dark">${icon('star')} ¿Ya eres cliente?</span><h2>Tu opinión <em>nos ayuda muchísimo.</em></h2><p>Si te ha gustado nuestro trabajo, dedica un minuto a dejarnos tu reseña en Google: el botón abre directamente la ventana para puntuarnos. Así más vecinos de ${B.city} pueden conocernos.</p></div>
+<a class="btn btn-light" href="${reviewWriteUrl}" target="_blank" rel="noopener">${icon('star')}<span>Dejar mi reseña en Google</span></a>
 </div>
 </section>`;
   return page({ title: `Opiniones de clientes | ${B.name}`, desc: `Opiniones reales en Google de clientes de ${B.name} en ${B.city}: limpieza de cristales, toldos, viviendas, clínicas, restaurantes y gimnasios.`, bodyClass: 'is-page', current: 'opiniones', main });
