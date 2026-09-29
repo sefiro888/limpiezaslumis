@@ -48,6 +48,7 @@ const paths = {
   bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/>',
   tool: '<path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3Z"/><path d="M5 5l4 4"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h10"/>',
+  tiktok: '<path d="M14 3v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3c.4 2.7 2.4 4.7 5.2 5"/>',
 };
 const icon = (n, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[n] || paths.spark}</svg>`;
 const groupIcon = { hogar: 'home', exterior: 'sun', profesional: 'building', superficies: 'layers' };
@@ -64,6 +65,9 @@ const reviewsFor = slug => {
   const extra = reviews.filter(r => !own.includes(r) && r.rating === 5);
   return [...own, ...extra].slice(0, 3);
 };
+
+// Enlaces a Instagram y TikTok.
+const socialLinks = (cls = '') => `<div class="social ${cls}"><a href="${B.instagram}" target="_blank" rel="noopener" aria-label="Instagram de ${B.name} (${B.instagramHandle})">${icon('insta')}<span>Instagram</span></a><a href="${B.tiktok}" target="_blank" rel="noopener" aria-label="TikTok de ${B.name} (${B.tiktokHandle})">${icon('tiktok')}<span>TikTok</span></a></div>`;
 
 const btnBook = (label = 'Agendar cita', slug = '', cls = 'btn btn-primary') =>
   `<button type="button" class="${cls}" data-book${slug ? ` data-service="${slug}"` : ''}>${icon('calendar')}<span>${label}</span></button>`;
@@ -107,7 +111,7 @@ function header(current) {
 <nav class="nav" aria-label="Principal">
 <a href="index.html"${cur(current, 'index')}>Inicio</a>
 <div class="has-mega"><button type="button" class="nav-drop${isSvc ? ' is-cur' : ''}" aria-expanded="false" aria-controls="mega">Servicios ${icon('chevron')}</button>
-<div class="mega" id="mega"><div class="mega-grid">${mega}</div><div class="mega-foot"><span>${icon('check')} Presupuesto <b>gratis y sin compromiso</b></span><a href="index.html#servicios">Ver los ${services.length} servicios ${icon('arrow')}</a></div></div></div>
+<div class="mega" id="mega"><div class="mega-grid">${mega}</div><div class="mega-foot"><span>${icon('check')} Precios a consultar, <b>sin compromiso</b></span><a href="index.html#servicios">Ver los ${services.length} servicios ${icon('arrow')}</a></div></div></div>
 ${PAGES.slice(1).map(([k, l]) => `<a href="${k}.html"${cur(current, k)}>${l}</a>`).join('\n')}
 </nav>
 <div class="hdr-actions">
@@ -135,7 +139,8 @@ ${PAGES.slice(1).map(([k, l], i) => `<a href="${k}.html" style="--i:${i + 2}"${c
 <div class="mnav-foot" style="--i:7">
 ${btnBook('Agendar cita', bySlug[current] ? current : '', 'btn btn-light btn-block')}
 <div class="mnav-contact"><a href="${tel}">${icon('phone')} Llamar</a><a href="${wa(msg)}" target="_blank" rel="noopener">${icon('wa')} WhatsApp</a></div>
-<p>${icon('pin')} ${B.city} y alrededores · ${B.phone}</p>
+${socialLinks('social-mnav')}
+<p>${icon('pin')} ${B.city} y alrededores · Móvil ${B.phone} · Fijo ${B.landline}</p>
 </div>
 </div>`;
 }
@@ -150,7 +155,7 @@ function footer(msg) {
 </div></section>
 <footer class="ftr">
 <div class="ftr-grid">
-<div class="ftr-brand"><img src="assets/images/logo-lumis.png" width="480" height="561" alt="${B.name}" loading="lazy"><p>Servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas con productos y técnicas de alta calidad.</p><a class="ftr-social" href="${B.instagram}" target="_blank" rel="noopener">${icon('insta')} ${B.instagramHandle}</a></div>
+<div class="ftr-brand"><img src="assets/images/logo-lumis.png" width="480" height="561" alt="${B.name}" loading="lazy"><p>Servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas con productos y técnicas de alta calidad.</p>${socialLinks('social-ftr')}</div>
 <div class="ftr-col ftr-svc"><h3>Servicios</h3><ul>${services.map(s => `<li><a href="${s.slug}.html">${s.label}</a></li>`).join('')}</ul></div>
 <div class="ftr-col"><h3>Lumis</h3><ul>${PAGES.map(([k, l]) => `<li><a href="${k}.html">${l}</a></li>`).join('')}</ul></div>
 <div class="ftr-col ftr-contact"><h3>Contacto</h3>
@@ -175,7 +180,7 @@ function bookingDialog() {
 <fieldset class="book-step" data-step="1"><legend>¿Qué necesitas limpiar?</legend>
 <div class="quick-services">${featured.map(s => `<button type="button" class="qs" data-pick="${s.slug}">${img(s.img, '', { sizes: '120px' })}<span>${s.label}</span></button>`).join('')}</div>
 <label class="field"><span>O elige entre todos los servicios</span><select name="service" required>${opts}</select></label>
-<p class="book-offer">${icon('check')} Presupuesto <b>gratis y sin compromiso</b>.</p>
+<p class="book-offer">${icon('check')} Precio a consultar: lo hablamos contigo <b>sin compromiso</b>.</p>
 </fieldset>
 <fieldset class="book-step" data-step="2" hidden><legend>¿Cuándo te viene bien?</legend>
 <div class="chips" role="group" aria-label="Fecha rápida"><button type="button" class="chip" data-when="hoy">Hoy mismo</button><button type="button" class="chip" data-when="manana">Mañana</button><button type="button" class="chip" data-when="semana">Esta semana</button><button type="button" class="chip" data-when="flexible">Sin prisa</button></div>
@@ -197,7 +202,7 @@ function bookingDialog() {
 
 const jsonLd = () => `<script type="application/ld+json">${JSON.stringify({
   '@context': 'https://schema.org', '@type': 'HousekeepingService', name: B.name, telephone: B.phoneIntl, email: B.email,
-  areaServed: B.city, address: { '@type': 'PostalAddress', addressLocality: B.city, addressCountry: 'ES' }, sameAs: [B.instagram],
+  areaServed: B.city, address: { '@type': 'PostalAddress', addressLocality: B.city, addressCountry: 'ES' }, sameAs: [B.instagram, B.tiktok],
   makesOffer: services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.title } })),
 })}</script>`;
 
@@ -359,7 +364,8 @@ ${wave('wave-top', 'var(--bg)')}
 <div class="action-copy reveal"><span class="eyebrow on-dark">${icon('camera')} Lumis en acción</span><h2>Así trabajamos, <em>de verdad.</em></h2>
 <p class="lead">Sin fotos de catálogo: esto es un trabajo real de Lumis. Cristaleras, escalera, raqueta y paciencia hasta que no queda ni una marca.</p>
 <ul class="action-list"><li>${icon('shield')}Trabajo seguro, hasta 3 m de altura</li><li>${icon('check')}Cristal, marcos y perfiles incluidos</li><li>${icon('spark')}Revisamos el resultado antes de irnos</li></ul>
-<div class="hero-cta">${btnBook('Quiero este resultado', 'cristales')}<a class="btn btn-ghost" href="cristales.html">${icon('arrow')}<span>Limpieza de cristales</span></a></div></div>
+<div class="hero-cta">${btnBook('Quiero este resultado', 'cristales')}<a class="btn btn-ghost" href="cristales.html">${icon('arrow')}<span>Limpieza de cristales</span></a></div>
+<div class="action-social"><p>Más trabajos reales en nuestras redes</p>${socialLinks('social-dark')}</div></div>
 <div class="action-phones reveal">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis frente a una cristalera', label: 'Anuncio Lumis', cls: 'phone-back' })}${phoneVideo({ name: 'lumis-trabajo', alt: 'Operario de Lumis limpiando la cristalera de la fachada de un restaurante', label: 'Trabajo real', cls: 'phone-front' })}</div>
 </div>
 ${wave('wave-bottom', '#fff')}
@@ -461,7 +467,7 @@ ${s.review ? `<p class="svc-review">${icon('clock')} Servicio sujeto a disponibi
 <div class="kpis wrap">
 <div class="kpi reveal"><b data-count>${s.includes.length}</b><span>puntos incluidos en el servicio</span></div>
 <div class="kpi reveal" style="--d:80ms"><b data-count>${s.steps.length}</b><span>pasos de un método probado</span></div>
-<div class="kpi reveal" style="--d:160ms"><b>0 €</b><span>presupuesto, sin compromiso</span></div>
+<div class="kpi reveal" style="--d:160ms"><b>A medida</b><span>precio a consultar, sin compromiso</span></div>
 <div class="kpi kpi-hl reveal" style="--d:240ms"><b>★ 5</b><span>la valoración que más nos dan en Google</span></div>
 </div>
 ${wave('wave-bottom')}
@@ -477,7 +483,7 @@ ${quote ? `<figure class="mini-rv">${stars(quote.rating)}<blockquote>“${esc(qu
 <aside class="summary reveal"><h3>En resumen</h3><dl>
 <div><dt>${icon('user')} Ideal para</dt><dd>${s.ideal.map(x => x[0]).join(', ')}</dd></div>
 <div><dt>${icon('clock')} Frecuencia habitual</dt><dd>${s.frequency.map(x => x[0]).join(' · ')}</dd></div>
-<div><dt>${icon('plan')} Presupuesto</dt><dd>Gratuito y sin compromiso, con fotos o visita.</dd></div>
+<div><dt>${icon('plan')} Precio</dt><dd>A consultar: lo acordamos contigo según tu espacio, sin compromiso.</dd></div>
 <div><dt>${icon('pin')} Zona</dt><dd>${B.city} y alrededores</dd></div>
 </dl>${btnBook('Reservar cita', s.slug, 'btn btn-primary btn-block')}<a class="summary-tel" href="${tel}">o llama al <b>${B.phone}</b></a></aside>
 </div>
@@ -617,7 +623,7 @@ ${pageHero({
 <div class="includes-copy reveal"><span class="eyebrow">${icon('camera')} Para tu presupuesto</span><h2>Lo que nos ayuda <em>a darte precio.</em></h2><p class="lead">Con esta información podemos darte un presupuesto ajustado sin necesidad de visita en la mayoría de los casos.</p>
 <ul class="checklist">${quoteChecklist.map((t, i) => `<li style="--d:${i * 50}ms"><span class="cl-n">${String(i + 1).padStart(2, '0')}</span><span>${esc(t)}</span>${icon('check')}</li>`).join('')}</ul>
 <div class="hero-cta">${btnBook('Enviar mi consulta')}</div></div>
-<figure class="includes-media reveal">${img('interiores', 'Interior luminoso y limpio (ejemplo ilustrativo)', { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Presupuesto gratuito y sin compromiso</figcaption></figure>
+<figure class="includes-media reveal">${img('interiores', 'Interior luminoso y limpio (ejemplo ilustrativo)', { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Precio a consultar, sin compromiso</figcaption></figure>
 </div>
 </section>
 
@@ -661,7 +667,6 @@ function contactPage() {
     ['wa', 'WhatsApp', 'Escríbenos', wa(), 'Envíanos fotos y te respondemos con tu presupuesto.', true],
     ['phone', 'Teléfono fijo', B.landline, `tel:${B.landlineIntl}`, 'También puedes llamarnos a nuestro fijo.', false],
     ['mail', 'Email', B.email, `mailto:${B.email}`, 'Para consultas detalladas o empresas.', false],
-    ['insta', 'Instagram', B.instagramHandle, B.instagram, 'Mira nuestros trabajos y novedades.', true],
   ];
   const main = `
 ${pageHero({
@@ -674,7 +679,8 @@ ${pageHero({
 
 <section class="sec contact-sec">
 <div class="wrap">
-<div class="contact-grid">${cards.map(([ic, t, v, href, d, ext], i) => `<a class="c-card reveal" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''} style="--d:${i * 70}ms"><span class="c-ico">${icon(ic)}</span><span class="c-t">${t}</span><b>${esc(v)}</b><p>${d}</p><span class="card-go">${icon('up')}</span></a>`).join('')}
+<div class="contact-grid">${cards.map(([ic, t, v, href, d, ext], i) => `<a class="c-card reveal" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''} style="--d:${i * 70}ms"><span class="c-ico">${icon(ic)}</span><span class="c-t">${t}</span><b>${esc(v).replace('@', '<wbr>@')}</b><p>${d}</p><span class="card-go">${icon('up')}</span></a>`).join('')}
+<div class="c-card c-card-social reveal" style="--d:280ms"><span class="c-ico">${icon('insta')}</span><span class="c-t">Redes sociales</span><b>Síguenos</b><p>Trabajos reales, antes y después y novedades en ${B.instagramHandle} y ${B.tiktokHandle}.</p>${socialLinks('social-card')}</div>
 <div class="c-card c-card-book reveal" style="--d:350ms"><span class="c-ico">${icon('calendar')}</span><span class="c-t">Reserva rápida</span><b>En 3 pasos</b><p>Elige servicio, día y franja. Te llega un mensaje listo para enviar.</p>${btnBook('Reservar ahora', '', 'btn btn-light btn-sm')}</div>
 </div>
 </div>

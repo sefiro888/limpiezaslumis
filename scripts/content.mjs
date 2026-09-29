@@ -11,6 +11,8 @@ export const business = {
   email: 'lumis.arellano25@gmail.com',
   instagram: 'https://www.instagram.com/lumis.arellano25/',
   instagramHandle: '@lumis.arellano25',
+  tiktok: 'https://www.tiktok.com/@lumis2848',
+  tiktokHandle: '@lumis2848',
   city: 'Zaragoza',
 };
 
@@ -234,7 +236,7 @@ export const services = [
       ['¿Quitáis el verdín?', 'Sí, lo tratamos con productos específicos y cepillado. En zonas muy húmedas conviene repetir el mantenimiento.'],
       ['¿Limpiáis también el toldo y el cerramiento?', 'Sí, se pueden combinar en la misma visita. Indícalo al pedir cita y lo incluimos en el presupuesto.'],
       ['¿Necesito tener toma de agua?', 'Es muy recomendable disponer de un grifo en la terraza o cerca. Si no la hay, lo organizamos contigo.'],
-      ['¿Cuánto cuesta?', 'Depende de los metros, del estado y de los extras. Con unas fotos te damos un presupuesto sin compromiso.'],
+      ['¿Cuánto cuesta?', 'El precio es a consultar: depende de los metros, del estado y de los extras. Con unas fotos lo hablamos y acordamos el precio contigo, sin compromiso.'],
     ],
     related: ['toldos', 'cristales', 'limpieza-general'],
   },
@@ -1057,7 +1059,7 @@ export const loveThemes = [
 export const generalFaq = [
   ['¿En qué zonas trabajáis?', 'Trabajamos en Zaragoza y alrededores. Si tienes dudas sobre tu zona, escríbenos y te lo confirmamos.'],
   ['¿Hasta qué altura trabajáis?', 'Trabajamos hasta unos 3 metros de altura, desde el suelo, una escalera o una terraza. Por encima de esa altura no realizamos el trabajo; si tienes dudas, envíanos una foto y te lo confirmamos.'],
-  ['¿El presupuesto tiene coste?', 'No. El presupuesto es gratuito y sin compromiso. Con unas fotos y las medidas aproximadas solemos poder dártelo rápido.'],
+  ['¿Cuánto cuesta el servicio?', 'Todos nuestros precios son a consultar, porque cada espacio es distinto. Nos cuentas qué necesitas, vemos unas fotos o el espacio y acordamos contigo el precio antes de empezar, sin compromiso.'],
   ['¿Puedo agendar para hoy mismo?', 'Puedes pedir tu cita hoy mismo desde la web o por WhatsApp. Te confirmamos el primer hueco disponible.'],
   ['¿Lleváis vuestros productos y herramientas?', 'Sí, llevamos productos y útiles profesionales. Si prefieres que usemos algún producto concreto, dínoslo.'],
   ['¿Trabajáis con empresas y comunidades?', 'Sí: oficinas, gimnasios, naves, garajes y comunidades de vecinos con planes periódicos.'],

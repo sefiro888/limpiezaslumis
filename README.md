@@ -52,3 +52,5 @@ Incluye: banner superior en movimiento, cinta animada de servicios, reserva ráp
 - Nuevos servicios: limpieza de fachadas y grafitis (`fachadas.html`, a pie de calle, hasta 3 m) y limpieza de persianas (`persianas.html`). **Fotos provisionales**: usan `comunidades.jpg` y `viviendas.jpg` hasta tener fotos reales.
 - Servicios destacados (orden de la clienta, en `destacados` de content.mjs): comunidades, gimnasios, oficinas, colegios y clínicas dentales. Nuevos servicios: `colegios.html` y `clinicas-dentales.html`.
 - Fotos de fachadas, persianas, colegios y clínicas (principal + sala de espera en `clinicas-sala`) generadas por el cliente; comparadores antes/después en fachadas (grafiti) y persianas, también como pestañas en la portada.
+- Redes: Instagram (@lumis.arellano25) y TikTok (@lumis2848) en pie, menú móvil, sección «Lumis en acción», contacto y datos para Google. Datos en `business` de content.mjs.
+- Precios: todos «a consultar» (sin «gratis» ni «0 €» hasta que el cliente confirme si el presupuesto es gratuito).

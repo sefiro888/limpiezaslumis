@@ -400,3 +400,17 @@ html,body{overflow-x:clip}
   .quick-services .qs:last-child{grid-column:1/-1}
   .quick-services .qs:last-child img{aspect-ratio:16/6}
 }
+
+/* Redes sociales (Instagram y TikTok) */
+.social{display:flex;flex-wrap:wrap;gap:8px}
+.social a{display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 12px;border-radius:999px;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--navy);transition:transform .25s var(--ease),border-color .25s,background .25s,color .25s}
+.social a:hover{transform:translateY(-2px);border-color:var(--blue);color:var(--blue)}
+.social .i{width:18px;height:18px}
+.social-ftr a,.social-mnav a,.social-dark a{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#fff}
+.social-ftr a:hover,.social-mnav a:hover,.social-dark a:hover{background:rgba(255,255,255,.16);border-color:var(--sky);color:#fff}
+.social-ftr{margin-top:4px}
+.social-mnav{justify-content:center}
+.action-social{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.action-social p{margin:0 0 10px;font-size:14px;font-weight:700;color:#bcd9e2}
+.c-card-social .social{margin-top:14px}
+.c-card b{overflow-wrap:normal;word-break:normal}
