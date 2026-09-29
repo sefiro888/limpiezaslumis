@@ -239,7 +239,7 @@ export const services = [
     related: ['toldos', 'cristales', 'limpieza-general'],
   },
   {
-    slug: 'fachadas', label: 'Fachadas y grafitis', title: 'Limpieza de fachadas y grafitis', img: 'fachadas', category: 'exterior',
+    slug: 'fachadas', label: 'Fachadas y grafitis', title: 'Limpieza de fachadas y grafitis', img: 'fachadas', category: 'exterior', compare: 'fachadas',
     line: 'La cara de tu edificio, como nueva.',
     card: 'Grafitis, pintadas, carteles y suciedad en fachadas, portales y locales, hasta 3 metros de altura.',
     tags: ['Grafitis', 'Locales', 'Portales'],
@@ -345,7 +345,7 @@ export const services = [
     related: ['limpieza-general', 'cristales', 'abrillantado-suelos'],
   },
   {
-    slug: 'persianas', label: 'Persianas', title: 'Limpieza de persianas', img: 'persianas', category: 'hogar',
+    slug: 'persianas', label: 'Persianas', title: 'Limpieza de persianas', img: 'persianas', category: 'hogar', compare: 'persianas',
     line: 'Luz limpia, lama a lama.',
     card: 'Persianas enrollables, venecianas y mallorquinas limpias por ambas caras, con sus guías.',
     tags: ['Enrollables', 'Venecianas', 'Guías'],
@@ -822,7 +822,7 @@ export const services = [
     related: ['oficinas', 'desinfeccion-interiores', 'gimnasios'],
   },
   {
-    slug: 'clinicas-dentales', label: 'Clínicas dentales', title: 'Limpieza de clínicas dentales', img: 'clinicas', category: 'profesional',
+    slug: 'clinicas-dentales', label: 'Clínicas dentales', title: 'Limpieza de clínicas dentales', img: 'clinicas', img2: 'clinicas-sala', category: 'profesional',
     line: 'Confianza desde la sala de espera.',
     card: 'Sala de espera, recepción, gabinetes, aseos y zonas de personal, fuera del horario de consulta.',
     tags: ['Sala de espera', 'Gabinetes', 'Aseos'],

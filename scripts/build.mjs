@@ -300,7 +300,7 @@ const sealPath = () => {
 
 // ---------- Portada ----------
 function home() {
-  const pairs = [['cristales', 'Cristales'], ['toldos', 'Toldos'], ['garajes', 'Garajes'], ['terrazas', 'Terrazas'], ['suelos', 'Suelos'], ['interiores', 'Interiores']];
+  const pairs = [['fachadas', 'Grafitis'], ['cristales', 'Cristales'], ['persianas', 'Persianas'], ['toldos', 'Toldos'], ['garajes', 'Garajes'], ['terrazas', 'Terrazas'], ['suelos', 'Suelos'], ['interiores', 'Interiores']];
   const hl = reviews.find(x => x.highlight);
   const rest = reviews.filter(r => !r.highlight);
   const half = Math.ceil(rest.length / 2);
@@ -403,7 +403,7 @@ ${stepsBlock(method.slice(0, 4).map(([i, t, d]) => [t, d, i]))}
 <div class="results-copy reveal"><span class="eyebrow">${icon('sun')} Mira la diferencia</span><h2>El mismo espacio, <em>otra sensación.</em></h2><p>Desliza para comparar el antes y el después en distintos tipos de limpieza. Elige un servicio para cambiar la escena.</p>
 <div class="cmp-tabs" role="tablist" aria-label="Elegir comparativa">${pairs.map(([p, l], i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-pair="${p}" data-label="${l}">${l}</button>`).join('')}</div>
 <p class="note">Escenas ilustrativas creadas para esta web; no corresponden a trabajos concretos.</p></div>
-<div class="reveal">${compareBlock('cristales', 'Cristales')}<p class="cmp-help">${icon('arrow')} Arrastra, toca o usa las flechas del teclado</p></div>
+<div class="reveal">${compareBlock('fachadas', 'Grafitis')}<p class="cmp-help">${icon('arrow')} Arrastra, toca o usa las flechas del teclado</p></div>
 </div>
 </section>
 
@@ -487,7 +487,7 @@ ${quote ? `<figure class="mini-rv">${stars(quote.rating)}<blockquote>“${esc(qu
 <div class="wrap includes-grid">
 <div class="includes-copy reveal"><span class="eyebrow">${icon('check')} Qué incluye</span><h2>Todo lo que <em>cuidamos.</em></h2><p class="lead">Esto es lo que incluye habitualmente nuestra ${s.title.toLowerCase()}. Adaptamos cada trabajo a tu espacio: si necesitas algo más, lo añadimos al presupuesto.</p>
 <ul class="checklist">${s.includes.map((t, i) => `<li style="--d:${i * 50}ms"><span class="cl-n">${String(i + 1).padStart(2, '0')}</span><span>${esc(t)}</span>${icon('check')}</li>`).join('')}</ul></div>
-${s.video ? `<div class="includes-video reveal">${phoneVideo({ name: s.video, alt: `${s.title}: trabajo real de Lumis`, label: 'Trabajo real de Lumis' })}</div>` : `<figure class="includes-media reveal">${img(s.img, `${s.title}, detalle (ejemplo ilustrativo)`, { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Productos y técnicas de alta calidad</figcaption></figure>`}
+${s.video ? `<div class="includes-video reveal">${phoneVideo({ name: s.video, alt: `${s.title}: trabajo real de Lumis`, label: 'Trabajo real de Lumis' })}</div>` : `<figure class="includes-media reveal">${img(s.img2 || s.img, `${s.title}, detalle (ejemplo ilustrativo)`, { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Productos y técnicas de alta calidad</figcaption></figure>`}
 </div>
 </section>
 
