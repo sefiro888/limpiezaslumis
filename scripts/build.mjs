@@ -50,7 +50,9 @@ const paths = {
   menu: '<path d="M4 7h16M4 12h16M4 17h10"/>',
   tiktok: '<path d="M14 3v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3c.4 2.7 2.4 4.7 5.2 5"/>',
 };
-const icon = (n, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[n] || paths.spark}</svg>`;
+// Logotipo oficial de WhatsApp (glifo relleno), para que se reconozca al instante.
+const WA_GLYPH = '<path fill="currentColor" stroke="none" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.83 9.83 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41z"/>';
+const icon = (n, cls = '') => n === 'wa' ? `<svg class="i i-wa ${cls}" viewBox="0 0 24 24" aria-hidden="true">${WA_GLYPH}</svg>` : `<svg class="i ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[n] || paths.spark}</svg>`;
 const groupIcon = { hogar: 'home', exterior: 'sun', profesional: 'building', superficies: 'layers' };
 
 const wa = (msg = 'Hola Lumis, he visto vuestra web y me gustaría pedir un presupuesto sin compromiso.') => `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(msg)}`;
@@ -67,7 +69,7 @@ const reviewsFor = slug => {
 };
 
 // Enlaces a Instagram y TikTok.
-const socialLinks = (cls = '') => `<div class="social ${cls}"><a href="${B.instagram}" target="_blank" rel="noopener" aria-label="Instagram de ${B.name} (${B.instagramHandle})">${icon('insta')}<span>Instagram</span></a><a href="${B.tiktok}" target="_blank" rel="noopener" aria-label="TikTok de ${B.name} (${B.tiktokHandle})">${icon('tiktok')}<span>TikTok</span></a></div>`;
+const socialLinks = (cls = '') => `<div class="social ${cls}"><a class="ig" href="${B.instagram}" target="_blank" rel="noopener" aria-label="Instagram de ${B.name} (${B.instagramHandle})">${icon('insta')}<span>Instagram</span></a><a class="tt" href="${B.tiktok}" target="_blank" rel="noopener" aria-label="TikTok de ${B.name} (${B.tiktokHandle})">${icon('tiktok')}<span>TikTok</span></a></div>`;
 
 const btnBook = (label = 'Agendar cita', slug = '', cls = 'btn btn-primary') =>
   `<button type="button" class="${cls}" data-book${slug ? ` data-service="${slug}"` : ''}>${icon('calendar')}<span>${label}</span></button>`;
@@ -318,7 +320,8 @@ ${stage(`<section class="hero">
 <h1 class="hero-title"><span class="line">Deja tus</span> <span class="line">espacios</span> <span class="line"><em>relucientes.</em></span></h1>
 <p class="hero-lead">Limpieza profesional para <b>comunidades, oficinas, gimnasios, colegios y clínicas dentales</b> —y también para tu casa— con productos y técnicas de alta calidad.</p>
 <div class="hero-cta">${btnBook('Agendar hoy mismo')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a></div>
-<a class="hero-rating" href="opiniones.html">${stars(5)}<span><b>Clientes encantados en Google</b><small>Lee sus opiniones ${icon('arrow')}</small></span></a>
+<div class="hero-extras"><a class="hero-rating" href="opiniones.html">${stars(5)}<span><b>Clientes encantados en Google</b><small>Lee sus opiniones ${icon('arrow')}</small></span></a>
+<div class="hero-follow"><span>Síguenos</span>${socialLinks('social-round')}</div></div>
 </div>
 <div class="hero-visual">
 <figure class="orb orb-a" data-parallax="-0.03">${img('cristales', 'Profesional limpiando un cerramiento de cristal (ejemplo ilustrativo)', { eager: true, sizes: '(max-width: 760px) 80vw, 36vw' })}</figure>
@@ -374,6 +377,7 @@ ${wave('wave-bottom', '#fff')}
 <section class="sec reviews" id="opiniones">
 <div class="wrap">
 <div class="sec-head reveal"><div><span class="eyebrow">${icon('star')} Opiniones reales</span><h2>Lo que dicen <em>nuestros clientes.</em></h2></div><div class="rv-summary">${stars(5)}<p>Reseñas publicadas en Google por clientes de viviendas, clínicas, restaurantes y gimnasios de ${B.city}.</p><a class="link" href="opiniones.html">Ver todas las opiniones ${icon('arrow')}</a></div></div>
+<p class="rv-invite reveal">${icon('star')}<span>¿Ya has confiado en Lumis? <a href="${reviewsUrl}" target="_blank" rel="noopener">Déjanos tu reseña en Google</a>: nos ayuda muchísimo.</span></p>
 <div class="rv-feature reveal">${icon('quote', 'rv-q')}<blockquote>${esc(hl.text)}</blockquote><div class="rv-feature-foot">${stars(hl.rating)}<span><b>${esc(hl.name)}</b> · Cliente en Valdespartera, ${B.city}</span></div></div>
 </div>
 <div class="rv-marquee" aria-label="Reseñas de clientes">${rvRow(rest.slice(0, half))}${rvRow(rest.slice(half), true)}</div>
@@ -533,6 +537,7 @@ ${s.compare ? `<section class="sec results" id="antes-despues">
 <div class="wrap">
 <div class="sec-head reveal"><div><span class="eyebrow">${icon('star')} Opiniones reales en Google</span><h2>${ownReviews.length ? `Clientes que ya confiaron <em>en nosotros.</em>` : `Lo que dicen <em>nuestros clientes.</em>`}</h2></div><a class="link" href="opiniones.html">Ver todas las opiniones ${icon('arrow')}</a></div>
 <div class="rv-grid">${reviewsFor(s.slug).map((r, i) => reviewCard(r, 'rv reveal', `--d:${i * 90}ms`)).join('')}</div>
+<p class="rv-invite reveal">${icon('star')}<span>¿Ya has confiado en Lumis? <a href="${reviewsUrl}" target="_blank" rel="noopener">Déjanos tu reseña en Google</a>: nos ayuda muchísimo.</span></p>
 </div>
 </section>
 
@@ -593,7 +598,7 @@ ${pageHero({
 
 <section class="sec leave">
 <div class="wrap leave-in reveal">
-<div><span class="eyebrow on-dark">${icon('star')} ¿Ya eres cliente?</span><h2>Tu opinión <em>nos ayuda muchísimo.</em></h2><p>Si te ha gustado nuestro trabajo, dedica un minuto a dejarnos tu reseña en Google. Así más vecinos de ${B.city} pueden conocernos.</p></div>
+<div><span class="eyebrow on-dark">${icon('star')} ¿Ya eres cliente?</span><h2>Tu opinión <em>nos ayuda muchísimo.</em></h2><p>Si te ha gustado nuestro trabajo, dedica un minuto a dejarnos tu reseña en Google: abre nuestra ficha y pulsa «Escribir una reseña». Así más vecinos de ${B.city} pueden conocernos.</p></div>
 <a class="btn btn-light" href="${reviewsUrl}" target="_blank" rel="noopener">${icon('star')}<span>Dejar mi reseña en Google</span></a>
 </div>
 </section>`;

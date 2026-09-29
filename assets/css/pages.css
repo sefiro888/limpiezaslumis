@@ -428,3 +428,44 @@ html,body{overflow-x:clip}
 @media (min-width:641px) and (max-width:1180px){.hero .fc-offer{bottom:-2%;right:-2%}}
 @media (min-width:981px) and (max-width:1180px){.hero .seal{top:48%}}
 @media (min-width:641px) and (max-width:980px){.hero .seal{top:44%;left:10%}}
+
+/* ---------- WhatsApp con su logo y verde oficiales ---------- */
+.i-wa{fill:currentColor}
+.wa-fab{width:64px;height:64px;background:#25d366;color:#fff;border:0;box-shadow:0 10px 28px -6px rgba(37,211,102,.75),0 0 0 4px rgba(255,255,255,.9)}
+.wa-fab::before{border-color:#25d366}
+.wa-fab .i{width:36px;height:36px}
+.wa-fab:hover{background:#1ebe5b;transform:scale(1.08) rotate(-6deg)}
+.wa-fab::after{content:'¿Hablamos?';position:absolute;right:76px;top:50%;translate:0 -50%;white-space:nowrap;background:#fff;color:#075e54;font-size:14px;font-weight:800;padding:8px 14px;border-radius:999px;box-shadow:var(--sh);opacity:0;transform:translateX(8px);transition:opacity .25s,transform .25s var(--ease);pointer-events:none}
+.wa-fab:hover::after{opacity:1;transform:none}
+@media (max-width:980px){
+  .dock a:last-child{background:#25d366;color:#fff;box-shadow:0 8px 18px -8px rgba(37,211,102,.9)}
+  .dock a:last-child .i{color:#fff;width:24px;height:24px}
+  .dock a:last-child:active{background:#1ebe5b}
+}
+
+/* ---------- Instagram y TikTok con sus colores ---------- */
+.social a.ig,.social a.tt{border:0;color:#fff}
+.social a.ig{background:linear-gradient(45deg,#f58529 0%,#dd2a7b 45%,#8134af 75%,#515bd4 100%);box-shadow:0 8px 20px -10px rgba(221,42,123,.8)}
+.social a.tt{background:#010101;box-shadow:0 8px 20px -10px rgba(0,0,0,.7)}
+.social a.tt .i{filter:drop-shadow(1.5px 1.5px 0 #fe2c55) drop-shadow(-1.5px -1.5px 0 #25f4ee)}
+.social a.ig:hover,.social a.tt:hover{color:#fff;filter:brightness(1.08);transform:translateY(-2px)}
+.social-ftr a.ig,.social-mnav a.ig,.social-dark a.ig{background:linear-gradient(45deg,#f58529 0%,#dd2a7b 45%,#8134af 75%,#515bd4 100%)}
+.social-ftr a.tt,.social-mnav a.tt,.social-dark a.tt{background:#010101}
+
+/* Iconos redondos (portada) */
+.social-round{gap:8px}
+.social-round a{width:42px;height:42px;padding:0;justify-content:center;border-radius:50%}
+.social-round a span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.social-round .i{width:20px;height:20px}
+
+/* Portada: valoración + «Síguenos» en una línea discreta */
+.hero-extras{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;animation:rise .9s .45s var(--ease) both}
+.hero-extras .hero-rating{margin:0;animation:none}
+.hero-follow{display:flex;align-items:center;gap:10px}
+.hero-follow>span{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#bcd9e2}
+
+/* Invitación a dejar reseña */
+.rv-invite{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center;margin:30px auto 0;max-width:720px;font-size:15px;color:var(--muted)}
+.rv-invite .i{color:#fbbc04;fill:#fbbc04;width:20px;height:20px}
+.rv-invite a{color:var(--blue);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.reviews>.wrap>.rv-invite{margin:0 auto 34px}

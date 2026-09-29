@@ -28,7 +28,7 @@ Incluye: banner superior en movimiento, cinta animada de servicios, reserva ráp
 ## Pendiente de revisar con Lumis
 
 - Textos de cada servicio (contenido de demostración).
-- `reviewsUrl` en `content.mjs` apunta a una búsqueda en Google Maps: sustituir por el enlace directo a la ficha de Google.
+- `reviewsUrl` en `content.mjs`: ficha de Google de Lumis (https://share.google/y6DHE7UBpLFz16yQ7). Si el cliente consigue el enlace directo de «Escribir reseña» (Google Business Profile → Pedir reseñas), sustituirlo ahí.
 - Las reseñas están copiadas literalmente de Google; no editarlas.
 - Las fotografías son ejemplos ilustrativos generados; sustituir por fotos reales de trabajos.
 - Teléfono corregido a 652 63 09 38 (la versión anterior enlazaba por error al 652 60 93 38).
