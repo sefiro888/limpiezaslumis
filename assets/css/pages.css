@@ -469,3 +469,23 @@ html,body{overflow-x:clip}
 .rv-invite .i{color:#fbbc04;fill:#fbbc04;width:20px;height:20px}
 .rv-invite a{color:var(--blue);font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .reviews>.wrap>.rv-invite{margin:0 auto 34px}
+
+/* Recuadro «¿Te ha gustado nuestro trabajo?» para pedir reseñas */
+.rv-ask{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px 28px;margin:40px auto 0;max-width:980px;padding:26px 30px;border-radius:26px;background:linear-gradient(120deg,#fffaf0 0%,#fff 55%,#f1fbfd 100%);border:1.5px solid #f6dfa0;box-shadow:0 20px 44px -26px rgba(214,160,20,.55);overflow:hidden}
+.rv-ask::before{content:'';position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(251,188,4,.18),transparent 70%);pointer-events:none}
+.rv-ask-stars{display:flex;gap:4px}
+.rv-ask-stars svg{width:30px;height:30px;fill:#e2e6ea;transition:fill .35s,transform .45s var(--ease);transition-delay:calc(var(--n) * 120ms + .2s)}
+.rv-ask.in .rv-ask-stars svg,.rv-ask:not(.reveal) .rv-ask-stars svg{fill:#fbbc04;transform:scale(1.08)}
+.rv-ask-copy h3{font-size:22px;margin-bottom:4px}
+.rv-ask-copy p{margin:0;color:var(--muted);font-size:15px}
+.btn-review{--bg:#fbbc04;--fg:#3b2a00;box-shadow:0 12px 26px -12px rgba(214,160,20,.9)}
+.btn-review .i{fill:currentColor}
+.btn-review:hover{--bg:#f5b000}
+.reviews-svc .rv-ask{margin-top:30px}
+@media (max-width:760px){
+  .rv-ask{grid-template-columns:1fr;text-align:center;justify-items:center;padding:26px 20px;gap:14px}
+  .rv-ask-stars svg{width:28px;height:28px}
+  .rv-ask-copy h3{font-size:20px}
+  .btn-review{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.rv-ask-stars svg{fill:#fbbc04;transition:none}}

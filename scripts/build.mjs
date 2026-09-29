@@ -71,6 +71,9 @@ const reviewsFor = slug => {
 // Enlaces a Instagram y TikTok.
 const socialLinks = (cls = '') => `<div class="social ${cls}"><a class="ig" href="${B.instagram}" target="_blank" rel="noopener" aria-label="Instagram de ${B.name} (${B.instagramHandle})">${icon('insta')}<span>Instagram</span></a><a class="tt" href="${B.tiktok}" target="_blank" rel="noopener" aria-label="TikTok de ${B.name} (${B.tiktokHandle})">${icon('tiktok')}<span>TikTok</span></a></div>`;
 
+// Recuadro para pedir reseñas en Google: se muestra tras las opiniones.
+const reviewAsk = () => `<div class="rv-ask reveal"><div class="rv-ask-stars" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<svg viewBox="0 0 24 24" style="--n:${i}"><path d="${paths.star.match(/d="([^"]+)"/)[1]}"/></svg>`).join('')}</div><div class="rv-ask-copy"><h3>¿Te ha gustado nuestro trabajo?</h3><p>Tu reseña en Google ayuda a que más vecinos de ${B.city} nos conozcan. Solo te lleva un minuto.</p></div><a class="btn btn-review" href="${reviewsUrl}" target="_blank" rel="noopener">${icon('star')}<span>Dejar mi reseña</span></a></div>`;
+
 const btnBook = (label = 'Agendar cita', slug = '', cls = 'btn btn-primary') =>
   `<button type="button" class="${cls}" data-book${slug ? ` data-service="${slug}"` : ''}>${icon('calendar')}<span>${label}</span></button>`;
 
@@ -377,10 +380,10 @@ ${wave('wave-bottom', '#fff')}
 <section class="sec reviews" id="opiniones">
 <div class="wrap">
 <div class="sec-head reveal"><div><span class="eyebrow">${icon('star')} Opiniones reales</span><h2>Lo que dicen <em>nuestros clientes.</em></h2></div><div class="rv-summary">${stars(5)}<p>Reseñas publicadas en Google por clientes de viviendas, clínicas, restaurantes y gimnasios de ${B.city}.</p><a class="link" href="opiniones.html">Ver todas las opiniones ${icon('arrow')}</a></div></div>
-<p class="rv-invite reveal">${icon('star')}<span>¿Ya has confiado en Lumis? <a href="${reviewsUrl}" target="_blank" rel="noopener">Déjanos tu reseña en Google</a>: nos ayuda muchísimo.</span></p>
 <div class="rv-feature reveal">${icon('quote', 'rv-q')}<blockquote>${esc(hl.text)}</blockquote><div class="rv-feature-foot">${stars(hl.rating)}<span><b>${esc(hl.name)}</b> · Cliente en Valdespartera, ${B.city}</span></div></div>
 </div>
 <div class="rv-marquee" aria-label="Reseñas de clientes">${rvRow(rest.slice(0, half))}${rvRow(rest.slice(half), true)}</div>
+<div class="wrap">${reviewAsk()}</div>
 </section>
 
 <section class="sec catalog" id="servicios">
@@ -537,7 +540,7 @@ ${s.compare ? `<section class="sec results" id="antes-despues">
 <div class="wrap">
 <div class="sec-head reveal"><div><span class="eyebrow">${icon('star')} Opiniones reales en Google</span><h2>${ownReviews.length ? `Clientes que ya confiaron <em>en nosotros.</em>` : `Lo que dicen <em>nuestros clientes.</em>`}</h2></div><a class="link" href="opiniones.html">Ver todas las opiniones ${icon('arrow')}</a></div>
 <div class="rv-grid">${reviewsFor(s.slug).map((r, i) => reviewCard(r, 'rv reveal', `--d:${i * 90}ms`)).join('')}</div>
-<p class="rv-invite reveal">${icon('star')}<span>¿Ya has confiado en Lumis? <a href="${reviewsUrl}" target="_blank" rel="noopener">Déjanos tu reseña en Google</a>: nos ayuda muchísimo.</span></p>
+${reviewAsk()}
 </div>
 </section>
 
