@@ -50,3 +50,5 @@ Incluye: banner superior en movimiento, cinta animada de servicios, reserva ráp
 - Eliminados los servicios de tapicerías y sofás.
 - Límite de altura: hasta unos 3 metros (10 pies). Indicado en limpieza de cristales (cabecera, qué incluye, método y preguntas), en la pregunta general y en la lista para presupuesto. Eliminadas las frases que sugerían trabajos en altura.
 - Nuevos servicios: limpieza de fachadas y grafitis (`fachadas.html`, a pie de calle, hasta 3 m) y limpieza de persianas (`persianas.html`). **Fotos provisionales**: usan `comunidades.jpg` y `viviendas.jpg` hasta tener fotos reales.
+- Servicios destacados (orden de la clienta, en `destacados` de content.mjs): comunidades, gimnasios, oficinas, colegios y clínicas dentales. Nuevos servicios: `colegios.html` y `clinicas-dentales.html`.
+- Imágenes provisionales de marca («Imagen provisional») en `fachadas`, `persianas`, `colegios` y `clinicas`: sustituir por fotos reales con el mismo nombre (1536x1024 + versión -sm de 640px) y volver a ejecutar el build y `og-images.py`.

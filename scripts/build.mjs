@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  business as B, groups, services, pillars, generalFaq, reviews, reviewsUrl,
+  business as B, groups, services, destacados, pillars, generalFaq, reviews, reviewsUrl,
   method, quoteChecklist, commitments, tools, serviceModes, loveThemes,
 } from './content.mjs';
 
@@ -13,6 +13,9 @@ const OUT = path.resolve(process.argv[2] || root);
 const V = '7';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
+// Servicios destacados, en el orden elegido por la clienta.
+const featured = destacados.map(k => bySlug[k]);
+const isFeat = s => destacados.includes(s.slug);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const paths = {
@@ -87,7 +90,7 @@ const cur = (current, key) => current === key ? ' aria-current="page"' : '';
 const tickerItems = [
   ['calendar', 'Agenda hoy mismo'],
   ['star', '<b>★★★★★</b> Opiniones reales en Google'],
-  ['spark', 'Cristales · Toldos · Garajes'],
+  ['spark', 'Comunidades · Oficinas · Gimnasios · Colegios · Clínicas'],
   ['check', 'Presupuesto sin compromiso'],
   ['pin', 'Zaragoza y alrededores'],
   ['phone', B.phone],
@@ -170,7 +173,7 @@ function bookingDialog() {
 <div class="book-head"><div><span class="eyebrow">${icon('calendar')} Reserva rápida</span><h2 id="book-title">Agenda tu cita <em>en 1 minuto</em></h2></div><button type="button" class="book-close" data-close aria-label="Cerrar">${icon('close')}</button></div>
 <ol class="book-steps" aria-hidden="true"><li class="on"><b>1</b>Servicio</li><li><b>2</b>Cuándo</li><li><b>3</b>Tus datos</li></ol>
 <fieldset class="book-step" data-step="1"><legend>¿Qué necesitas limpiar?</legend>
-<div class="quick-services">${services.filter(s => s.featured).map(s => `<button type="button" class="qs" data-pick="${s.slug}">${img(s.img, '', { sizes: '120px' })}<span>${s.label}</span></button>`).join('')}</div>
+<div class="quick-services">${featured.map(s => `<button type="button" class="qs" data-pick="${s.slug}">${img(s.img, '', { sizes: '120px' })}<span>${s.label}</span></button>`).join('')}</div>
 <label class="field"><span>O elige entre todos los servicios</span><select name="service" required>${opts}</select></label>
 <p class="book-offer">${icon('check')} Presupuesto <b>gratis y sin compromiso</b>.</p>
 </fieldset>
@@ -261,7 +264,7 @@ const compareBlock = (pair, label) => `<div class="cmp" data-compare style="--po
 </div>`;
 
 const serviceCard = (s, extra = '') => `<a class="card reveal" href="${s.slug}.html" data-cat="${s.category}"${extra}>
-<div class="card-media">${img(s.img, '', { sizes: '(max-width: 760px) 40vw, 24vw' })}<span class="card-cat">${groups.find(g => g.id === s.category).label}</span>${s.featured ? '<span class="card-star">Estrella</span>' : ''}</div>
+<div class="card-media">${img(s.img, '', { sizes: '(max-width: 760px) 40vw, 24vw' })}<span class="card-cat">${groups.find(g => g.id === s.category).label}</span>${isFeat(s) ? '<span class="card-star">Destacado</span>' : ''}</div>
 <div class="card-body"><h3>${s.title}</h3><p>${esc(s.card)}</p><div class="card-foot"><span class="tags">${s.tags.map(t => `<i>${t}</i>`).join('')}</span><span class="card-go">${icon('up')}</span></div></div>
 </a>`;
 
@@ -297,7 +300,6 @@ const sealPath = () => {
 
 // ---------- Portada ----------
 function home() {
-  const featured = services.filter(s => s.featured);
   const pairs = [['cristales', 'Cristales'], ['toldos', 'Toldos'], ['garajes', 'Garajes'], ['terrazas', 'Terrazas'], ['suelos', 'Suelos'], ['interiores', 'Interiores']];
   const hl = reviews.find(x => x.highlight);
   const rest = reviews.filter(r => !r.highlight);
@@ -309,7 +311,7 @@ ${stage(`<section class="hero">
 <div class="hero-copy">
 <span class="pill"><span class="pulse"></span>Limpiezas en ${B.city} · Servicio integral</span>
 <h1 class="hero-title"><span class="line">Deja tus</span> <span class="line">espacios</span> <span class="line"><em>relucientes.</em></span></h1>
-<p class="hero-lead">Nos encargamos de la limpieza de <b>cristales, toldos y garajes</b> —y de todo lo que tu casa, tu comunidad o tu negocio necesite— con productos y técnicas de alta calidad.</p>
+<p class="hero-lead">Limpieza profesional para <b>comunidades, oficinas, gimnasios, colegios y clínicas dentales</b> —y también para tu casa— con productos y técnicas de alta calidad.</p>
 <div class="hero-cta">${btnBook('Agendar hoy mismo')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a></div>
 <a class="hero-rating" href="opiniones.html">${stars(5)}<span><b>Clientes encantados en Google</b><small>Lee sus opiniones ${icon('arrow')}</small></span></a>
 </div>
@@ -322,7 +324,7 @@ ${stage(`<section class="hero">
 <span class="seal-text">Agenda<br>hoy<br>mismo</span>
 </button>
 <a class="float-card fc-offer" href="opiniones.html"><span class="fc-big">★ 5</span><span><b>Opiniones reales</b><small>Clientes encantados en Google</small></span></a>
-<div class="float-card fc-list"><p>Nuestros servicios estrella</p><ul>${featured.map(s => `<li>${icon('check')}${s.title}</li>`).join('')}</ul></div>
+<div class="float-card fc-list"><p>Servicios destacados</p><ul>${featured.map(s => `<li>${icon('check')}${s.label}</li>`).join('')}</ul></div>
 </div>
 </section>
 <a class="scroll-cue" href="#destacados" aria-label="Descubre más"><span></span></a>`)}
@@ -333,14 +335,14 @@ ${strip()}
 <div class="wrap intro-grid">
 <div class="reveal"><span class="eyebrow">${icon('spark')} Hola, somos Lumis</span><h2>Limpieza profesional con <em>trato cercano.</em></h2></div>
 <div class="intro-text reveal"><p class="big">Somos un servicio integral de limpieza en ${B.city}. Cuidamos viviendas, comunidades, negocios y naves con el mismo objetivo: que al entrar se note la diferencia.</p><p>Empezamos siempre escuchándote. Cada espacio tiene sus materiales, sus accesos y sus prioridades, y por eso preparamos cada trabajo a medida. Tú hablas directamente con nosotros y recibes un presupuesto claro y sin compromiso.</p>
-<div class="stats"><div><b data-count>${services.length}</b><span>servicios especializados</span></div><div><b>★ 5</b><span>la valoración que más nos dan en Google</span></div><div><b data-count>3</b><span>especialidades estrella: cristales, toldos y garajes</span></div></div>
+<div class="stats"><div><b data-count>${services.length}</b><span>servicios especializados</span></div><div><b>★ 5</b><span>la valoración que más nos dan en Google</span></div><div><b data-count>${featured.length}</b><span>servicios destacados para empresas, comunidades y centros</span></div></div>
 <a class="link" href="como-trabajamos.html">Conoce cómo trabajamos ${icon('arrow')}</a></div>
 </div>
 </section>
 
 <section class="sec featured" id="destacados">
 <div class="wrap">
-<div class="sec-head reveal"><div><span class="eyebrow">${icon('spark')} Nuestros servicios estrella</span><h2>Cristales, toldos y garajes, <em>nuestra especialidad.</em></h2></div><p>Los tres servicios por los que más nos llamáis. Técnicas específicas, herramientas profesionales y un acabado que se nota a simple vista.</p></div>
+<div class="sec-head reveal"><div><span class="eyebrow">${icon('spark')} Servicios destacados</span><h2>Empresas, comunidades y centros, <em>nuestra especialidad.</em></h2></div><p>Planes de limpieza a medida, fuera de tu horario y con trato directo. Estos son los servicios en los que más nos especializamos.</p></div>
 <div class="feat-grid">${featured.map((s, i) => `<article class="feat reveal" style="--d:${i * 90}ms">
 <a class="feat-media" href="${s.slug}.html" tabindex="-1" aria-hidden="true">${img(s.img, '', { sizes: '(max-width: 760px) 92vw, 32vw' })}<span class="feat-num">0${i + 1}</span></a>
 <div class="feat-body"><h3><a href="${s.slug}.html">${s.title}</a></h3><p>${esc(s.lead)}</p>
@@ -413,8 +415,8 @@ ${stepsBlock(method.slice(0, 4).map(([i, t, d]) => [t, d, i]))}
 </div>
 </section>`;
   return page({
-    title: `${B.name} · Limpieza de cristales, toldos y garajes en ${B.city}`,
-    desc: `${B.name}: servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas. Presupuesto sin compromiso. Agenda hoy mismo.`,
+    title: `${B.name} · Limpieza de comunidades, oficinas, colegios y clínicas en ${B.city}`,
+    desc: `${B.name}: servicio integral de limpieza en ${B.city}. Comunidades, oficinas, gimnasios, colegios y clínicas dentales, además de cristales, toldos, garajes y viviendas. Presupuesto sin compromiso. Agenda hoy mismo.`,
     bodyClass: 'is-home', current: 'index', main,
   });
 }
@@ -441,7 +443,7 @@ function servicePage(s) {
 <nav class="crumbs wrap" aria-label="Ruta"><a href="index.html">Inicio</a>${icon('chevron')}<a href="index.html#servicios">Servicios</a>${icon('chevron')}<span aria-current="page">${s.title}</span></nav>
 <div class="svc-cover-in wrap">
 <div class="svc-cover-copy">
-<span class="eyebrow">${icon(groupIcon[s.category])} ${g.label}${s.featured ? ' · Servicio estrella' : ''}</span>
+<span class="eyebrow">${icon(groupIcon[s.category])} ${g.label}${isFeat(s) ? ' · Servicio destacado' : ''}</span>
 <h1>${s.title}</h1>
 <p class="svc-tagline"><em>${esc(s.line)}</em></p>
 <p class="svc-lead">${esc(s.lead)}</p>

@@ -136,10 +136,13 @@ def home():
     d.text((x - 3, 150), 'Deja tus espacios', font=font(62, 800), fill='white')
     d.text((x, 214), 'relucientes.', font=font(84, italic=True), fill=LIGHT)
     px = x
-    for t in ['Cristales', 'Toldos', 'Garajes']:
-        px = pill(c, px, 330, t, font(22, 700), (255, 255, 255, 38), 'white', padx=20, h=48) + 10
-    google_badge(c, x, 406)
-    d.text((x, 526), f"Agenda hoy mismo · {B['phone']}", font=font(28, 800), fill='white')
+    # Servicios destacados por la clienta (dos filas)
+    for row, items in enumerate([['Comunidades', 'Oficinas', 'Gimnasios'], ['Colegios', 'Clínicas dentales']]):
+        px = x
+        for t in items:
+            px = pill(c, px, 318 + row * 46, t, font(19, 700), (255, 255, 255, 38), 'white', padx=16, h=40) + 8
+    google_badge(c, x, 420)
+    d.text((x, 530), f"Agenda hoy mismo · {B['phone']}", font=font(28, 800), fill='white')
     sparkle(d, 1130, 90, 16, (255, 255, 255, 230)); sparkle(d, 1090, 140, 8, LIGHT); sparkle(d, 440, 560, 10, LIGHT)
     save(c, 'og-home.jpg')
 

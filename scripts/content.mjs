@@ -14,6 +14,9 @@ export const business = {
   city: 'Zaragoza',
 };
 
+// Servicios que la clienta quiere destacar, en este orden (portada, reserva rápida y tarjeta de WhatsApp).
+export const destacados = ['comunidades', 'gimnasios', 'oficinas', 'colegios', 'clinicas-dentales'];
+
 export const groups = [
   { id: 'hogar', label: 'Tu hogar', img: 'viviendas', line: 'Pequeños detalles, grandes sensaciones.' },
   { id: 'exterior', label: 'Exteriores y cristal', img: 'terrazas', line: 'Más luz. Más ganas de disfrutar.' },
@@ -23,11 +26,11 @@ export const groups = [
 
 export const services = [
   {
-    slug: 'cristales', label: 'Cristales', title: 'Limpieza de cristales', img: 'cristales', category: 'exterior', compare: 'cristales', featured: true, video: 'lumis-trabajo',
+    slug: 'cristales', label: 'Cristales', title: 'Limpieza de cristales', img: 'cristales', category: 'exterior', compare: 'cristales', video: 'lumis-trabajo',
     line: 'Que entre toda la luz.',
     card: 'Ventanas, ventanales, cerramientos y mamparas sin marcas, con marcos y guías incluidos.',
     tags: ['Ventanas', 'Cerramientos', 'Escaparates'],
-    lead: 'Cristales transparentes por dentro y por fuera, con marcos, guías y juntas limpios. Es uno de nuestros servicios estrella: el que más se nota nada más abrir la persiana.',
+    lead: 'Cristales transparentes por dentro y por fuera, con marcos, guías y juntas limpios. Es el servicio que más se nota nada más abrir la persiana.',
     facts: ['Interior y exterior', 'Marcos y guías', 'Hasta 3 m de altura'],
     intro: [
       'Un cristal limpio cambia por completo una estancia: entra más luz, los colores se ven como son y las vistas vuelven a ser protagonistas. El polvo urbano, la lluvia, la contaminación y la cal dejan una película que, con el tiempo, apaga cualquier espacio.',
@@ -77,7 +80,7 @@ export const services = [
     related: ['persianas', 'toldos', 'fachadas'],
   },
   {
-    slug: 'toldos', label: 'Toldos', title: 'Limpieza de toldos', img: 'toldos', category: 'exterior', compare: 'toldos', featured: true,
+    slug: 'toldos', label: 'Toldos', title: 'Limpieza de toldos', img: 'toldos', category: 'exterior', compare: 'toldos',
     line: 'Vuelve a mirar hacia fuera.',
     card: 'Lonas, brazos y cofres sin polvo, manchas de humedad ni excrementos de aves.',
     tags: ['Lona', 'Estructura', 'Cofre'],
@@ -85,7 +88,7 @@ export const services = [
     facts: ['Lona y estructura', 'Tratamiento suave', 'Terrazas y locales'],
     intro: [
       'El toldo pasa todo el año a la intemperie: sol, polvo, lluvia, hojas, polen y excrementos de aves. Con el tiempo aparecen manchas oscuras, moho en los pliegues y una capa gris que apaga el color original. Además, la suciedad acumulada acelera el desgaste del tejido.',
-      'La limpieza de toldos es uno de los servicios principales de Lumis. Trabajamos la lona con productos adecuados para tejidos acrílicos y de poliéster, cepillos de cerda suave y un aclarado controlado, sin agresiones que dañen la tela o el tratamiento impermeable.',
+      'Trabajamos la lona con productos adecuados para tejidos acrílicos y de poliéster, cepillos de cerda suave y un aclarado controlado, sin agresiones que dañen la tela o el tratamiento impermeable.',
       'Limpiamos también los brazos articulados, el cofre, el tubo de enrollado y la zona de pared donde se ancla, para que al recoger el toldo no se vuelva a ensuciar. Atendemos toldos de viviendas, áticos, bares, restaurantes y locales en Zaragoza.',
     ],
     includes: [
@@ -130,7 +133,7 @@ export const services = [
     related: ['terrazas', 'cristales', 'limpieza-general'],
   },
   {
-    slug: 'garajes', label: 'Garajes', title: 'Limpieza de garajes', img: 'garajes', category: 'profesional', compare: 'garajes', featured: true,
+    slug: 'garajes', label: 'Garajes', title: 'Limpieza de garajes', img: 'garajes', category: 'profesional', compare: 'garajes',
     line: 'Cuidado desde la entrada.',
     card: 'Plazas, rampas, accesos y trasteros sin polvo, grasa ni manchas de aceite.',
     tags: ['Comunidades', 'Rampas', 'Plazas'],
@@ -138,7 +141,7 @@ export const services = [
     facts: ['Comunidades y particulares', 'Manchas de aceite', 'Maquinaria profesional'],
     intro: [
       'El garaje es la primera y la última impresión de muchos edificios. Polvo que entra con los coches, barro en invierno, manchas de aceite y neumático, telarañas en los techos y papeles en las esquinas: todo se acumula rápido y da sensación de abandono.',
-      'La limpieza de garajes es uno de los servicios principales de Lumis. Trabajamos con barrido, aspirado y fregado adaptado a la superficie —hormigón, pintura epoxi o terrazo— y tratamos las manchas de grasa con productos desengrasantes específicos.',
+      'Trabajamos con barrido, aspirado y fregado adaptado a la superficie —hormigón, pintura epoxi o terrazo— y tratamos las manchas de grasa con productos desengrasantes específicos.',
       'Nos coordinamos con la comunidad o la administración de fincas para avisar a los vecinos y organizar el trabajo por zonas, de modo que los coches se puedan mover con el menor trastorno posible.',
     ],
     includes: [
@@ -236,7 +239,7 @@ export const services = [
     related: ['toldos', 'cristales', 'limpieza-general'],
   },
   {
-    slug: 'fachadas', label: 'Fachadas y grafitis', title: 'Limpieza de fachadas y grafitis', img: 'comunidades', category: 'exterior',
+    slug: 'fachadas', label: 'Fachadas y grafitis', title: 'Limpieza de fachadas y grafitis', img: 'fachadas', category: 'exterior',
     line: 'La cara de tu edificio, como nueva.',
     card: 'Grafitis, pintadas, carteles y suciedad en fachadas, portales y locales, hasta 3 metros de altura.',
     tags: ['Grafitis', 'Locales', 'Portales'],
@@ -342,7 +345,7 @@ export const services = [
     related: ['limpieza-general', 'cristales', 'abrillantado-suelos'],
   },
   {
-    slug: 'persianas', label: 'Persianas', title: 'Limpieza de persianas', img: 'viviendas', category: 'hogar',
+    slug: 'persianas', label: 'Persianas', title: 'Limpieza de persianas', img: 'persianas', category: 'hogar',
     line: 'Luz limpia, lama a lama.',
     card: 'Persianas enrollables, venecianas y mallorquinas limpias por ambas caras, con sus guías.',
     tags: ['Enrollables', 'Venecianas', 'Guías'],
@@ -766,6 +769,112 @@ export const services = [
     related: ['garajes', 'pulido-suelos', 'oficinas'],
   },
   {
+    slug: 'colegios', label: 'Colegios', title: 'Limpieza de colegios', img: 'colegios', category: 'profesional',
+    line: 'Aulas limpias para aprender mejor.',
+    card: 'Aulas, pasillos, comedor, aseos y gimnasio escolar, siempre fuera del horario de clase.',
+    tags: ['Aulas', 'Comedores', 'Aseos'],
+    lead: 'Limpieza diaria o periódica de colegios, escuelas infantiles y academias: aulas, pasillos, comedor, aseos y zonas comunes, siempre fuera del horario de clase.',
+    facts: ['Fuera del horario lectivo', 'Aulas, aseos y comedor', 'Limpieza a fondo en vacaciones'],
+    intro: [
+      'En un colegio pasan cada día decenas o cientos de niños y niñas: tocan mesas, pomos, barandillas y lavabos, comen en el comedor y juegan en el patio. Un centro limpio es más agradable para aprender y transmite tranquilidad a las familias desde la puerta.',
+      'Organizamos la limpieza por zonas y prioridades: aulas, pasillos y escaleras, aseos, comedor, gimnasio escolar, secretaría y sala de profesores. Prestamos especial atención a las superficies que más se tocan y a los aseos, y usamos productos adecuados para espacios con niños, siguiendo sus indicaciones de uso y ventilando al terminar.',
+      'Trabajamos después de las clases o a primera hora, sin interferir con la actividad del centro, y adaptamos el plan al calendario escolar: aprovechamos las vacaciones de verano, Navidad y Semana Santa para hacer la limpieza a fondo.',
+    ],
+    includes: [
+      'Aulas: mesas, sillas, pizarras, estanterías y suelos',
+      'Pasillos, escaleras, barandillas y zonas comunes',
+      'Aseos completos, con reposición de consumibles si se nos facilitan',
+      'Comedor: mesas, sillas y suelos después del servicio',
+      'Gimnasio escolar y vestuarios',
+      'Secretaría, dirección y sala de profesores',
+      'Higienización de pomos, interruptores y superficies de contacto',
+      'Limpieza a fondo en vacaciones: cristales accesibles (hasta 3 m), puertas y rincones',
+    ],
+    ideal: [
+      ['Colegios e institutos', 'Centros públicos, concertados y privados con limpieza diaria.'],
+      ['Escuelas infantiles', 'Espacios con los más pequeños, donde la higiene es prioritaria.'],
+      ['Academias', 'Academias de idiomas, refuerzo, música o formación.'],
+      ['Centros de ocio infantil', 'Ludotecas y espacios de actividades extraescolares.'],
+    ],
+    steps: [
+      ['Visita al centro', 'Recorremos el colegio y marcamos zonas, prioridades y horarios.'],
+      ['Plan por zonas', 'Tareas diarias, semanales y de vacaciones, adaptadas al calendario escolar.'],
+      ['Limpieza sin interferir', 'Trabajamos al terminar las clases o a primera hora.'],
+      ['Seguimiento', 'Revisamos el resultado con la dirección y ajustamos lo que haga falta.'],
+    ],
+    frequency: [
+      ['Diaria', 'Aulas, aseos, comedor y zonas de paso.'],
+      ['Semanal', 'Cristales interiores, gimnasio y zonas de menor uso.'],
+      ['Vacaciones', 'Limpieza a fondo en verano, Navidad y Semana Santa.'],
+    ],
+    tips: [
+      ['Mesas despejadas', 'Pedir al alumnado que deje las mesas recogidas agiliza mucho la limpieza.'],
+      ['Papeleras en cada aula', 'Evitan restos de comida y papeles por el suelo.'],
+      ['Avisa de los eventos', 'Festivales o jornadas de puertas abiertas: reforzamos la limpieza antes y después.'],
+    ],
+    faq: [
+      ['¿Limpiáis fuera del horario de clase?', 'Sí. Trabajamos al terminar las clases o a primera hora de la mañana, sin interferir con la actividad del centro.'],
+      ['¿Qué productos utilizáis?', 'Productos profesionales adecuados para espacios con niños, siguiendo siempre sus indicaciones de uso y ventilando al terminar.'],
+      ['¿Hacéis limpieza a fondo en vacaciones?', 'Sí, es el mejor momento: verano, Navidad y Semana Santa, cuando el centro está vacío.'],
+      ['¿Trabajáis con escuelas infantiles y academias?', 'Sí, adaptamos el plan al tamaño del centro y a su horario.'],
+      ['¿Qué necesito para pedir presupuesto?', 'Metros aproximados, número de aulas y aseos, si hay comedor o gimnasio y el horario del centro. Si hace falta, lo visitamos.'],
+    ],
+    related: ['oficinas', 'desinfeccion-interiores', 'gimnasios'],
+  },
+  {
+    slug: 'clinicas-dentales', label: 'Clínicas dentales', title: 'Limpieza de clínicas dentales', img: 'clinicas', category: 'profesional',
+    line: 'Confianza desde la sala de espera.',
+    card: 'Sala de espera, recepción, gabinetes, aseos y zonas de personal, fuera del horario de consulta.',
+    tags: ['Sala de espera', 'Gabinetes', 'Aseos'],
+    lead: 'Limpieza e higienización de clínicas dentales: sala de espera, recepción, gabinetes, aseos y zonas de personal, fuera del horario de consulta y con un orden de trabajo claro.',
+    facts: ['Fuera del horario de consulta', 'Orden de trabajo por zonas', 'Superficies de contacto'],
+    intro: [
+      'En una clínica dental la limpieza es parte de la confianza del paciente. La sala de espera, el mostrador, los aseos y cada gabinete tienen que transmitir cuidado y orden desde el primer momento.',
+      'Seguimos un orden de trabajo por zonas, de las comunes a las más sensibles, y prestamos especial atención a las superficies que más se tocan: pomos, mostradores, datáfono, sillas de la sala de espera, interruptores y lavabos. Limpiamos suelos, superficies y mobiliario de los gabinetes con productos higienizantes profesionales y respetamos siempre el protocolo propio de la clínica.',
+      'El instrumental, los equipos clínicos y los residuos sanitarios los gestiona el personal de la clínica según sus protocolos; nosotros nos ocupamos del resto del espacio. Trabajamos fuera del horario de consulta para no interferir con los pacientes.',
+    ],
+    includes: [
+      'Sala de espera: suelos, sillas, mesas y revisteros',
+      'Recepción: mostrador, datáfono y zona de atención',
+      'Gabinetes: suelos, superficies, lavabos y mobiliario (no instrumental ni equipos clínicos)',
+      'Aseos de pacientes y de personal',
+      'Vestuario, office y despachos del personal',
+      'Higienización de pomos, interruptores y superficies de contacto',
+      'Cristales interiores, puertas y mamparas',
+      'Vaciado de papeleras de residuos comunes (los sanitarios los gestiona la clínica)',
+    ],
+    ideal: [
+      ['Clínicas dentales', 'Clínicas con uno o varios gabinetes y sala de espera.'],
+      ['Consultas y fisioterapia', 'Consultas médicas, centros de fisioterapia y psicología.'],
+      ['Centros de estética', 'Cabinas, recepción y zonas de espera.'],
+      ['Policlínicas', 'Centros con varias especialidades y mucho paso de pacientes.'],
+    ],
+    steps: [
+      ['Visita y protocolo', 'Conocemos la clínica, sus zonas y el protocolo que ya siguen.'],
+      ['Orden por zonas', 'De las zonas comunes a las más sensibles, para no trasladar suciedad.'],
+      ['Limpieza e higienización', 'Primero limpieza, después higienización de las superficies de contacto.'],
+      ['Seguimiento', 'Revisamos el resultado con la clínica y ajustamos lo que haga falta.'],
+    ],
+    frequency: [
+      ['Diaria', 'Lo habitual: sala de espera, aseos, gabinetes y recepción al cierre.'],
+      ['2-3 veces por semana', 'Clínicas pequeñas o con pocos días de consulta.'],
+      ['Mensual a fondo', 'Cristales, puertas, rincones y zonas de almacenaje.'],
+    ],
+    tips: [
+      ['Superficies despejadas', 'Cuantos menos objetos haya sobre mostradores y encimeras, mejor se higienizan.'],
+      ['Residuos bien separados', 'Tener claras las papeleras de residuos comunes y sanitarios facilita el trabajo de todos.'],
+      ['Ventila la sala de espera', 'Renovar el aire a diario ayuda a mantener un ambiente agradable.'],
+    ],
+    faq: [
+      ['¿Limpiáis los gabinetes?', 'Sí: suelos, superficies, lavabos y mobiliario. El instrumental y los equipos clínicos los limpia y desinfecta el personal sanitario según su protocolo.'],
+      ['¿Gestionáis los residuos sanitarios?', 'No. Los residuos sanitarios los gestiona la clínica con su gestor autorizado; nosotros nos encargamos de los residuos comunes.'],
+      ['¿Trabajáis fuera del horario de consulta?', 'Sí, al cierre o a primera hora, sin coincidir con los pacientes.'],
+      ['¿Qué productos utilizáis?', 'Productos higienizantes de uso profesional adecuados a cada superficie. Si la clínica tiene un protocolo o productos propios, lo seguimos.'],
+      ['¿Qué necesito para pedir presupuesto?', 'Metros aproximados, número de gabinetes y aseos, días de consulta y la frecuencia que te interesa.'],
+    ],
+    related: ['desinfeccion-interiores', 'oficinas', 'cristales'],
+  },
+  {
     slug: 'pulido-suelos', label: 'Pulido de suelos', title: 'Pulido de suelos', img: 'pulido', category: 'superficies', compare: 'suelos',
     line: 'Otra mirada a tus suelos.',
     card: 'Recupera mármol, terrazo y piedra natural: eliminamos arañazos y devolvemos la uniformidad.',
@@ -886,7 +995,7 @@ export const reviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Limpi
 export const reviews = [
   { name: 'Jaster66', rating: 5, tags: ['cristales', 'terrazas'], highlight: true, text: 'Tras 15 años en Valdespartera nadie había sabido limpiar los enormes cristales de mi terraza por ser de difícil acceso en el exterior. Lumis han sido los únicos que me los han dejado impecables, incluída la carpintería de aluminio y con un servicio puntual y cuidadoso. Mis vecinos ya han tomado nota. Gran trabajo y a un precio razonable.' },
   { name: 'Arevageor', rating: 5, tags: ['cristales', 'pisos-viviendas'], text: 'Un servicio impecable. Los cristales quedaron perfectos, brillantes y como nuevos. Me impresionó lo cuidadoso que fue con los suelos y todo el entorno, trabajando con una delicadeza y respeto que pocas veces se ve. Es muy puntual, profesional y muy amable. Da mucha tranquilidad contratar a una persona que se nota que cuida hasta el más mínimo detalle. ¡Muy recomendados!' },
-  { name: 'T-CURA fisioterapia', rating: 5, business: true, tags: ['cristales', 'oficinas'], text: 'Contamos con Limpiezas Lumis para el servicio de limpieza de cristales en nuestra clínica. Luis es un gran profesional: atento, cercano y muy detallista. Muy contentos siempre con el resultado!' },
+  { name: 'T-CURA fisioterapia', rating: 5, business: true, tags: ['clinicas-dentales', 'cristales', 'oficinas'], text: 'Contamos con Limpiezas Lumis para el servicio de limpieza de cristales en nuestra clínica. Luis es un gran profesional: atento, cercano y muy detallista. Muy contentos siempre con el resultado!' },
   { name: 'Felix Chevez', rating: 5, tags: ['toldos', 'cristales', 'terrazas'], text: 'Muy contento con el servicio de limpieza de cristales y toldos, los técnicos fueron muy profesionales y amables. Los cristales quedaron impecables y el toldo luce como nuevo. Definitivamente, los recomendaría y volvería a contar con ellos para futuros trabajos.' },
   { name: 'Jimmy Santeliz', rating: 5, tags: ['limpieza-general', 'oficinas', 'desinfeccion-interiores'], text: 'Excelente servicio. Dejaron mi restaurante impecable, fueron puntuales, profesionales y muy cuidadosos con cada detalle. Sin duda volveré a contratarlos. ¡Totalmente recomendados!' },
   { name: 'Muscle Experience Entrenamiento y salud', rating: 5, business: true, tags: ['gimnasios', 'oficinas', 'cristales'], text: 'Contamos con el de forma regular tanto para limpieza del local como para cristales y estamos muy contentos. Profesionalidad y seriedad en su trabajo.' },
