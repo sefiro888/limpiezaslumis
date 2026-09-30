@@ -14,6 +14,15 @@ export const business = {
   tiktok: 'https://www.tiktok.com/@lumis2848',
   tiktokHandle: '@lumis2848',
   city: 'Zaragoza',
+  // Datos del titular para el aviso legal y la política de privacidad (LSSI y RGPD).
+  owner: 'Luis Hernando Arellano',
+  nif: 'Y9171718E',
+  address: 'Calle Monasterio de Siresa, 34, 50002 Zaragoza',
+  hosting: { name: 'GitHub, Inc.', country: 'Estados Unidos' },
+  legalUpdated: '30 de septiembre de 2026',
+  // Lanzamiento: con launched = true la web usa el dominio propio y se genera el archivo CNAME para GitHub Pages.
+  domain: 'limpiezaslumis.es',
+  launched: false,
 };
 
 // Servicios que la clienta quiere destacar, en este orden (portada, reserva rápida y tarjeta de WhatsApp).

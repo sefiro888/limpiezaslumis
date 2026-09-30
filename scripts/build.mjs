@@ -88,9 +88,11 @@ ${wave('wave-bottom')}
 </div>`;
 
 // Dirección pública de la web (cambiar aquí si se pasa a un dominio propio).
-const SITE = 'https://sefiro888.github.io/limpiezaslumis/';
+const SITE = B.launched ? `https://${B.domain}/` : 'https://sefiro888.github.io/limpiezaslumis/';
 const pageUrl = key => SITE + (key === 'index' ? '' : key + '.html');
-const ogImage = key => `${SITE}assets/images/og/og-${key === 'index' ? 'home' : key}.jpg?v=${V}`;
+// Páginas con tarjeta propia de WhatsApp; el resto (legales, 404) usan la de la portada.
+const OG_KEYS = new Set([...services.map(s => s.slug), 'opiniones', 'como-trabajamos', 'contacto']);
+const ogImage = key => `${SITE}assets/images/og/og-${OG_KEYS.has(key) ? key : 'home'}.jpg?v=${V}`;
 
 const PAGES = [['index', 'Inicio'], ['opiniones', 'Opiniones'], ['como-trabajamos', 'Cómo trabajamos'], ['contacto', 'Contacto']];
 const cur = (current, key) => current === key ? ' aria-current="page"' : '';
@@ -170,7 +172,7 @@ function footer(msg) {
 <a href="mailto:${B.email}">${icon('mail')} ${B.email}</a>
 <p>${icon('pin')} ${B.city} y alrededores</p></div>
 </div>
-<div class="ftr-bottom"><span>© <span data-year>2026</span> ${B.name}. Todos los derechos reservados.</span><span>Las fotografías de la web son ejemplos visuales ilustrativos.</span><a href="#top">Volver arriba ↑</a></div>
+<div class="ftr-bottom"><span>© <span data-year>2026</span> ${B.name}. Todos los derechos reservados.</span><span class="ftr-legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a></span><span>Las fotografías de la web son ejemplos visuales ilustrativos.</span><a href="#top">Volver arriba ↑</a></div>
 </footer>
 <nav class="dock" aria-label="Acciones rápidas"><a href="${tel}">${icon('phone')}<span>Llamar</span></a>${btnBook('Agendar', '', 'dock-main')}<a href="${wa(msg)}" target="_blank" rel="noopener">${icon('wa')}<span>WhatsApp</span></a></nav>
 <a class="wa-fab" href="${wa(msg)}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">${icon('wa')}</a>`;
@@ -211,10 +213,10 @@ const jsonLd = () => `<script type="application/ld+json">${JSON.stringify({
   makesOffer: services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.title } })),
 })}</script>`;
 
-const page = ({ title, desc, bodyClass, current, main, msg }) => `<!doctype html>
+const page = ({ title, desc, bodyClass, current, main, msg, extraHead = '' }) => `<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8">${extraHead}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b5566">
 <title>${esc(title)}</title>
@@ -710,6 +712,135 @@ ${pageHero({
   return page({ title: `Contacto | ${B.name} · ${B.city}`, desc: `Contacta con ${B.name} en ${B.city}: ${B.phone}, WhatsApp, ${B.landline} o ${B.email}. Presupuesto sin compromiso.`, bodyClass: 'is-page', current: 'contacto', main });
 }
 
+// ---------- Páginas legales (LSSI, RGPD y cookies) ----------
+// Textos basados en modelos habituales; conviene que los revise la gestoría o asesoría de Lumis.
+const LEGAL = [['aviso-legal', 'Aviso legal'], ['privacidad', 'Política de privacidad'], ['cookies', 'Política de cookies']];
+const titularBlock = () => `<ul class="legal-data">
+<li><b>Titular:</b> ${B.owner}</li>
+<li><b>Nombre comercial:</b> ${B.name}</li>
+<li><b>NIE:</b> ${B.nif}</li>
+<li><b>Domicilio:</b> ${B.address}</li>
+<li><b>Teléfono:</b> ${B.phone} · ${B.landline}</li>
+<li><b>Email:</b> <a href="mailto:${B.email}">${B.email}</a></li>
+<li><b>Sitio web:</b> <a href="${SITE}">${SITE.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></li>
+</ul>`;
+
+function legalPage(key, title, lead, body) {
+  const nav = LEGAL.map(([k, l]) => `<a href="${k}.html"${cur(key, k)}>${l}</a>`).join('');
+  const main = `
+${stage(`<nav class="crumbs wrap" aria-label="Ruta"><a href="index.html">Inicio</a>${icon('chevron')}<span aria-current="page">${title}</span></nav>
+<section class="legal-hero wrap"><span class="eyebrow">${icon('shield')} Información legal</span><h1>${title}</h1><p class="svc-lead">${lead}</p><p class="legal-date">Última actualización: ${B.legalUpdated}</p></section>`, 'stage-legal')}
+
+<section class="sec legal">
+<div class="wrap legal-grid">
+<aside class="legal-nav" aria-label="Páginas legales"><p>Información legal</p>${nav}<a class="btn btn-soft btn-sm" href="contacto.html">${icon('mail')}<span>Contacto</span></a></aside>
+<article class="legal-doc">
+${body}
+</article>
+</div>
+</section>`;
+  return page({ title: `${title} | ${B.name}`, desc: `${title} de ${B.name}, servicio de limpieza en ${B.city}.`, bodyClass: 'is-page is-legal', current: key, main });
+}
+
+const avisoLegal = () => legalPage('aviso-legal', 'Aviso legal', 'Información sobre el titular de esta web y las condiciones para usarla.', `
+<h2>1. Datos identificativos</h2>
+<p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:</p>
+${titularBlock()}
+
+<h2>2. Objeto</h2>
+<p>Esta web informa sobre los servicios de limpieza que presta ${B.name} en ${B.city} y alrededores, y ofrece medios para contactar y pedir presupuesto. A través de la web no se realizan contrataciones ni pagos: el servicio, su alcance y su precio se acuerdan directamente con el cliente.</p>
+
+<h2>3. Condiciones de uso</h2>
+<p>El acceso a la web es gratuito y no requiere registro. Quien la visita se compromete a hacer un uso adecuado de sus contenidos, conforme a la ley, la buena fe y el orden público, y a no emplearlos para actividades ilícitas o que puedan dañar a ${B.name} o a terceros.</p>
+
+<h2>4. Propiedad intelectual e industrial</h2>
+<p>El diseño de la web, sus textos, el logotipo y la marca ${B.name} pertenecen a su titular o se usan con autorización. Queda prohibida su reproducción, distribución o transformación sin permiso expreso, salvo para uso personal y privado.</p>
+<p>Algunas fotografías son ejemplos visuales ilustrativos y no corresponden a trabajos concretos. Las opiniones de clientes proceden de reseñas públicas de Google y pertenecen a sus autores.</p>
+
+<h2>5. Responsabilidad</h2>
+<p>La información de la web es orientativa. Las características de cada servicio y su precio se concretan en el presupuesto correspondiente. ${B.name} procura que la información sea correcta y esté actualizada, pero no se hace responsable de errores puntuales ni de interrupciones del servicio por causas técnicas ajenas.</p>
+
+<h2>6. Enlaces a otros sitios</h2>
+<p>La web contiene enlaces a servicios de terceros, como WhatsApp, Instagram, TikTok o Google. ${B.name} no controla esos sitios ni se responsabiliza de sus contenidos o de sus políticas de privacidad, que conviene consultar.</p>
+
+<h2>7. Legislación aplicable</h2>
+<p>Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales que correspondan según la normativa aplicable; cuando quien reclame sea un consumidor, serán los de su domicilio.</p>`);
+
+const privacidad = () => legalPage('privacidad', 'Política de privacidad', 'Cómo tratamos tus datos cuando nos contactas y qué derechos tienes.', `
+<h2>1. Responsable del tratamiento</h2>
+${titularBlock()}
+
+<h2>2. Qué datos tratamos</h2>
+<p>Esta web <b>no tiene formularios que envíen o guarden datos</b> en nuestros sistemas. La reserva rápida solo prepara un mensaje en tu propio dispositivo y lo abre en WhatsApp: los datos nos llegan únicamente si tú decides enviarlo.</p>
+<p>Cuando nos contactas por WhatsApp, teléfono o email tratamos los datos que nos facilitas: nombre, teléfono, email, zona o dirección del servicio, detalles del espacio y, si nos las envías, fotografías.</p>
+
+<h2>3. Para qué los usamos</h2>
+<ul>
+<li>Responder a tus consultas y preparar tu presupuesto.</li>
+<li>Organizar y prestar el servicio que contrates.</li>
+<li>Emitir facturas y cumplir nuestras obligaciones legales.</li>
+</ul>
+<p>No usamos tus datos para enviarte publicidad ni para elaborar perfiles.</p>
+
+<h2>4. Base legal</h2>
+<ul>
+<li><b>Tu consentimiento</b>, al contactarnos voluntariamente (art. 6.1.a RGPD).</li>
+<li><b>La aplicación de medidas precontractuales y la ejecución del contrato</b>: presupuesto y prestación del servicio (art. 6.1.b RGPD).</li>
+<li><b>El cumplimiento de obligaciones legales</b>, como las fiscales y contables (art. 6.1.c RGPD).</li>
+</ul>
+
+<h2>5. Cuánto tiempo los conservamos</h2>
+<p>Los datos de consultas que no terminan en contratación se conservan el tiempo necesario para atenderlas. Los de clientes, mientras dure la relación y, después, durante los plazos que exige la ley (por ejemplo, la normativa fiscal y mercantil).</p>
+
+<h2>6. A quién se comunican</h2>
+<p>No cedemos tus datos a terceros salvo obligación legal. Para comunicarnos y para que la web funcione utilizamos proveedores que pueden tratar datos por cuenta propia o en nuestro nombre:</p>
+<ul>
+<li><b>WhatsApp (Meta)</b>, si eliges contactarnos por esa vía.</li>
+<li><b>Google</b>, como proveedor de nuestro correo electrónico.</li>
+<li><b>${B.hosting.name}</b>, proveedor de alojamiento de la web, cuyos servidores registran datos técnicos de las visitas, como la dirección IP, por motivos de seguridad y funcionamiento.</li>
+</ul>
+<p>Algunos de estos proveedores están en ${B.hosting.country}. Las transferencias internacionales se realizan con las garantías previstas en el RGPD, como el Marco de Privacidad de Datos UE-EE. UU. o las cláusulas contractuales tipo de la Comisión Europea.</p>
+
+<h2>7. Tus derechos</h2>
+<p>Puedes ejercer tus derechos de <b>acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad</b> escribiendo a <a href="mailto:${B.email}">${B.email}</a> e indicando qué derecho quieres ejercer. Podemos pedirte que acredites tu identidad.</p>
+<p>Si consideras que no hemos tratado tus datos correctamente, puedes presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Española de Protección de Datos</a>.</p>
+
+<h2>8. Redes sociales</h2>
+<p>Si nos sigues o nos escribes en Instagram o TikTok, esos datos se tratan también según las políticas de privacidad de cada red social.</p>`);
+
+const cookiesPage = () => legalPage('cookies', 'Política de cookies', 'Qué guarda esta web en tu navegador y por qué no necesitas aceptar cookies.', `
+<h2>1. ¿Qué son las cookies?</h2>
+<p>Las cookies son pequeños archivos que algunas webs guardan en tu navegador para recordar información sobre tu visita, por ejemplo para analizar el tráfico o mostrar publicidad.</p>
+
+<h2>2. Cookies que utiliza esta web</h2>
+<p><b>Esta web no utiliza cookies</b>, ni propias ni de terceros, de análisis, publicidad o personalización. Por eso no te mostramos ningún aviso para aceptarlas.</p>
+
+<h2>3. Almacenamiento técnico</h2>
+<p>Para mostrar la animación de transición al pasar de una página a otra, la web guarda de forma temporal un indicador técnico en el almacenamiento de sesión de tu navegador:</p>
+<div class="legal-table"><table>
+<thead><tr><th>Nombre</th><th>Tipo</th><th>Finalidad</th><th>Duración</th></tr></thead>
+<tbody><tr><td><code>fx-nav</code></td><td>Almacenamiento de sesión (propio)</td><td>Mostrar la animación al cambiar de página</td><td>Se borra al cargar la página siguiente o al cerrar la pestaña</td></tr></tbody>
+</table></div>
+<p>No identifica a nadie ni se comparte con terceros. Al ser estrictamente necesario para una función de la propia web, está exento de consentimiento según el artículo 22.2 de la LSSI.</p>
+
+<h2>4. Servicios de terceros</h2>
+<p>Cuando pulsas un enlace a WhatsApp, Instagram, TikTok o Google sales de esta web. Esos servicios pueden usar sus propias cookies según sus políticas, que puedes consultar en cada uno de ellos.</p>
+<p>El proveedor de alojamiento registra datos técnicos de las visitas; puedes ver los detalles en nuestra <a href="privacidad.html">política de privacidad</a>.</p>
+
+<h2>5. Cómo gestionarlas</h2>
+<p>Puedes consultar y borrar las cookies y los datos de sitios web desde la configuración de tu navegador (Chrome, Safari, Firefox o Edge).</p>
+
+<h2>6. Cambios</h2>
+<p>Si en el futuro incorporamos herramientas de estadísticas u otras que usen cookies, actualizaremos esta política y te pediremos el consentimiento antes de activarlas.</p>`);
+
+// ---------- Página 404 ----------
+// Lleva <base> absoluta para que estilos e imágenes carguen desde cualquier ruta inexistente.
+const notFound = () => page({
+  title: `Página no encontrada | ${B.name}`, desc: 'La página que buscas no existe.', bodyClass: 'is-page', current: '404',
+  extraHead: `\n<base href="${SITE}">\n<meta name="robots" content="noindex">`,
+  main: stage(`<section class="legal-hero wrap"><span class="eyebrow">${icon('spark')} Error 404</span><h1>Esta página <em>no existe.</em></h1><p class="svc-lead">Puede que el enlace esté mal escrito o que la página haya cambiado. Te dejamos por dónde seguir:</p><div class="hero-cta"><a class="btn btn-primary" href="index.html">${icon('home')}<span>Ir al inicio</span></a><a class="btn btn-ghost" href="index.html#servicios">${icon('layers')}<span>Ver servicios</span></a></div></section>`, 'stage-legal'),
+});
+
 fs.mkdirSync(OUT, { recursive: true });
 const write = (name, html) => fs.writeFileSync(path.join(OUT, name), html);
 write('index.html', home());
@@ -717,4 +848,16 @@ for (const s of services) write(`${s.slug}.html`, servicePage(s));
 write('opiniones.html', reviewsPage());
 write('como-trabajamos.html', methodPage());
 write('contacto.html', contactPage());
-console.log(`Generadas ${services.length + 4} páginas en ${OUT}`);
+write('aviso-legal.html', avisoLegal());
+write('privacidad.html', privacidad());
+write('cookies.html', cookiesPage());
+write('404.html', notFound());
+// Mapa del sitio y robots para Google
+const pagesForMap = ['index', ...destacados, ...services.map(s => s.slug).filter(s => !destacados.includes(s)), 'opiniones', 'como-trabajamos', 'contacto', 'aviso-legal', 'privacidad', 'cookies'];
+const today = new Date().toISOString().slice(0, 10);
+const priority = k => k === 'index' ? '1.0' : destacados.includes(k) ? '0.9' : ['aviso-legal', 'privacidad', 'cookies'].includes(k) ? '0.2' : '0.7';
+write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pagesForMap.map(k => `  <url><loc>${pageUrl(k)}</loc><lastmod>${today}</lastmod><priority>${priority(k)}</priority></url>`).join('\n')}\n</urlset>\n`);
+write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
+// Dominio propio en GitHub Pages: el archivo CNAME solo existe tras el lanzamiento
+if (B.launched) write('CNAME', B.domain + '\n'); else if (fs.existsSync(path.join(OUT, 'CNAME'))) fs.rmSync(path.join(OUT, 'CNAME'));
+console.log(`Generadas ${services.length + 8} páginas en ${OUT}`);
