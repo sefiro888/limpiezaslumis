@@ -22,7 +22,7 @@ export const business = {
   legalUpdated: '30 de septiembre de 2026',
   // Lanzamiento: con launched = true la web usa el dominio propio y se genera el archivo CNAME para GitHub Pages.
   domain: 'limpiezaslumis.es',
-  launched: false,
+  launched: true,
 };
 
 // Servicios que la clienta quiere destacar, en este orden (portada, reserva rápida y tarjeta de WhatsApp).
