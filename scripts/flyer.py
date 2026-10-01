@@ -265,6 +265,21 @@ if __name__ == '__main__':
         page.save(out / name, 'PDF', resolution=DPI, quality=100, subsampling=0)
         check_qr(page, name)
 
+    # Dos A5 en un A4 horizontal: un solo corte por la mitad da dos A5 idénticos con marco blanco de 5 mm.
+    # (En copistería una copia A5 cuesta como una A4: así se paga la mitad.)
+    sheet = Image.new('RGB', (mm(297), mm(210)), 'white')
+    half = sheet.width // 2
+    m5 = mm(5)
+    fit = trimmed.resize((half - m5 * 2, round(trimmed.height * (half - m5 * 2) / trimmed.width)), Image.LANCZOS)
+    assert fit.height <= sheet.height - m5 * 2
+    for x in (0, half):
+        sheet.paste(fit, (x + m5, (sheet.height - fit.height) // 2))
+    dd = ImageDraw.Draw(sheet)
+    for yy in range(0, sheet.height, mm(4)):            # línea de corte discontinua (solo pasa por el blanco)
+        dd.line([(half, yy), (half, yy + mm(2))], fill=(150, 150, 150), width=2)
+    sheet.save(out / 'lumis-flyer-2xA5-en-A4-un-corte.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
+    check_qr(sheet, '2xA5 en A4')
+
     # Copistería: pliegos con sangrado y marcas de corte
     imposition(f, (320, 450), 2, 2, 'lumis-flyer-a5-x4-sra3-copisteria.pdf')
     imposition(f4, (297, 420), 1, 1, 'lumis-flyer-a4-en-a3-copisteria.pdf')
