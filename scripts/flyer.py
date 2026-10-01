@@ -178,6 +178,33 @@ def flyer(fmt='A5'):
     return c
 
 
+def imposition(flyer_bleed, sheet_mm, cols, rows, name):
+    """Coloca flyers con sangrado en un pliego grande (SRA3, A3) con marcas de corte, como en una copistería."""
+    sheet = Image.new('RGB', (mm(sheet_mm[0]), mm(sheet_mm[1])), 'white')
+    fw, fh = flyer_bleed.size
+    tw, th = fw - BLEED * 2, fh - BLEED * 2           # tamaño final tras el corte
+    # Cada flyer con su sangrado completo, uno junto a otro (doble corte entre flyers), centrados en el pliego
+    total_w, total_h = fw * cols, fh * rows
+    assert total_w <= sheet.width and total_h <= sheet.height, 'No cabe en el pliego'
+    x0, y0 = (sheet.width - total_w) // 2, (sheet.height - total_h) // 2
+    for r in range(rows):
+        for c in range(cols):
+            sheet.paste(flyer_bleed, (x0 + c * fw, y0 + r * fh))
+    d = ImageDraw.Draw(sheet)
+    L, o = mm(4), mm(1)                                 # marcas de 4 mm, separadas 1 mm del sangrado
+    xs = sorted({x0 + c * fw + BLEED + e for c in range(cols) for e in (0, tw)})
+    ys = sorted({y0 + r * fh + BLEED + e for r in range(rows) for e in (0, th)})
+    left, right, top, bottom = x0, x0 + total_w, y0, y0 + total_h
+    for x in xs:
+        d.line([(x, top - o - L), (x, top - o)], fill='black', width=2)
+        d.line([(x, bottom + o), (x, bottom + o + L)], fill='black', width=2)
+    for y in ys:
+        d.line([(left - o - L, y), (left - o, y)], fill='black', width=2)
+        d.line([(right + o, y), (right + o + L, y)], fill='black', width=2)
+    sheet.save(S.OUT / name, 'PDF', resolution=DPI, quality=100, subsampling=0)
+    print(f'{name}: {cols * rows} flyer(s) en pliego {sheet_mm[0]}x{sheet_mm[1]} mm')
+
+
 def check_qr(img, label):
     import zxingcpp
     for scale in (1, .5, .3):
@@ -227,3 +254,7 @@ if __name__ == '__main__':
     home.save(out / 'lumis-flyer-a4-entero-casa.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
     print('Flyer A4 generado:', f4.size, 'px con sangrado')
     check_qr(t4, 'A4')
+
+    # Copistería: pliegos con sangrado y marcas de corte
+    imposition(f, (320, 450), 2, 2, 'lumis-flyer-a5-x4-sra3-copisteria.pdf')
+    imposition(f4, (297, 420), 1, 1, 'lumis-flyer-a4-en-a3-copisteria.pdf')
