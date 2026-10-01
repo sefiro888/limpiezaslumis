@@ -621,7 +621,7 @@ function aboutPage() {
 ${pageHero({
     crumb: 'Quiénes somos', eyebrow: `${icon('user')} Quiénes somos`,
     title: 'Detrás de cada brillo, <em>está Luis.</em>',
-    lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su familia.`,
+    lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su suegra, María Lucrecia.`,
     ctas: `${btnBook('Hablar con Luis')}<a class="btn btn-ghost" href="#historia">${icon('arrow')}<span>Conoce su historia</span></a>`,
     visual: `<div class="about-visual">${phoneVideo({ name: 'lumis-trabajo', alt: 'Luis limpiando cristales en un trabajo real de Limpiezas Lumis', label: 'Trabajo real' })}<div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
   })}
@@ -667,7 +667,7 @@ ${wave('wave-top', 'var(--bg)')}
 <div class="wrap">
 <div class="about-family">
 <div class="reveal"><span class="eyebrow on-dark">${icon('home')} Un equipo en familia</span><h2>Gente de confianza <em>en tu casa.</em></h2>${about.family.map(p => `<p>${esc(p)}</p>`).join('')}</div>
-<div class="family-skills reveal"><p class="family-skills-t">${icon('heart')} Lo que aporta su experiencia</p><ul>${about.familySkills.map(([ic, t, d]) => `<li><span class="ideal-ico">${icon(ic)}</span><span><b>${t}</b>${esc(d)}</span></li>`).join('')}</ul></div>
+<div class="family-skills reveal"><p class="family-skills-t">${icon('heart')} Lo que aporta María Lucrecia</p><ul>${about.familySkills.map(([ic, t, d]) => `<li><span class="ideal-ico">${icon(ic)}</span><span><b>${t}</b>${esc(d)}</span></li>`).join('')}</ul></div>
 </div>
 <div class="ideal-grid about-values">${about.values.map(([ic, t, d], i) => `<article class="ideal-card reveal" style="--d:${i * 70}ms"><span class="ideal-ico">${icon(ic)}</span><h3>${t}</h3><p>${d}</p></article>`).join('')}</div>
 </div>
