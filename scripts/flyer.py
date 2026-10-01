@@ -16,7 +16,7 @@ B = S.B
 DPI = 300
 mm = lambda v: round(v / 25.4 * DPI)
 BLEED = mm(3)
-W, H = mm(148) + BLEED * 2, mm(210) + BLEED * 2       # 1819 x 2551
+W, H = mm(154), mm(216)                                 # A5 + 3 mm de sangrado por lado = 1819 x 2551 px
 CX = W // 2
 SAFE = BLEED + mm(6)                                    # margen interior de seguridad
 
@@ -171,15 +171,26 @@ def flyer():
 if __name__ == '__main__':
     out = S.OUT
     f = flyer().convert('RGB')
-    f.save(out / 'lumis-flyer-a5-imprenta.pdf', 'PDF', resolution=DPI)
+    # Calidad JPEG máxima y sin submuestreo de color: textos y QR nítidos en imprenta
+    f.save(out / 'lumis-flyer-a5-imprenta.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
     trimmed = f.crop((BLEED, BLEED, W - BLEED, H - BLEED))
     trimmed.save(out / 'lumis-flyer-a5.jpg', quality=92, dpi=(DPI, DPI))
-    # A4 horizontal con dos flyers y guía de corte en el centro
+    # A4 horizontal con dos flyers, márgenes de 6 mm (las impresoras de casa no imprimen hasta el borde)
+    # y marcas de corte en las esquinas de cada flyer. Imprimir a «tamaño real / 100 %».
     a4 = Image.new('RGB', (mm(297), mm(210)), 'white')
-    a4.paste(trimmed, (0, 0)); a4.paste(trimmed, (mm(148.5), 0))
+    margin, gap = mm(6), mm(6)
+    fw = (a4.width - margin * 2 - gap) // 2
+    small = trimmed.resize((fw, round(trimmed.height * fw / trimmed.width)), Image.LANCZOS)
+    top = (a4.height - small.height) // 2
     dd = ImageDraw.Draw(a4)
-    for yy in range(0, a4.height, 40): dd.line([(mm(148.5) - 1, yy), (mm(148.5) - 1, yy + 20)], fill=(160, 160, 160), width=3)
-    a4.save(out / 'lumis-flyer-a4-casa.pdf', 'PDF', resolution=DPI)
+    for x in (margin, margin + fw + gap):
+        a4.paste(small, (x, top))
+        x1, y1 = x + small.width, top + small.height
+        L, o = mm(4), mm(1)
+        for cx_, cy_, sx, sy in ((x, top, -1, -1), (x1, top, 1, -1), (x, y1, -1, 1), (x1, y1, 1, 1)):
+            dd.line([(cx_ + sx * o, cy_), (cx_ + sx * (o + L), cy_)], fill=(120, 120, 120), width=2)
+            dd.line([(cx_, cy_ + sy * o), (cx_, cy_ + sy * (o + L))], fill=(120, 120, 120), width=2)
+    a4.save(out / 'lumis-flyer-a4-casa.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
     print('Flyer generado:', f.size, 'px con sangrado')
 
     import zxingcpp
