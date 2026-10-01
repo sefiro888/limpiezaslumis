@@ -17,6 +17,8 @@ export const business = {
   // Radio de trabajo indicado por Lumis: hasta unos 40 minutos de Zaragoza.
   zone: 'Zaragoza y hasta 40 min alrededor',
   zoneMinutes: 40,
+  // Primer aniversario (octubre de 2026): aviso en la cinta superior y sección en Quiénes somos. Poner false para quitar el aviso.
+  anniversary: true,
   // Datos del titular para el aviso legal y la política de privacidad (LSSI y RGPD).
   owner: 'Luis Hernando Arellano',
   nif: 'Y9171718E',
@@ -1092,8 +1094,15 @@ export const about = {
     'Con esa experiencia decidió montar Lumis. Hoy, cuando nos contratas, hablas directamente con quien hace el trabajo: Luis te escucha, ve tu espacio, te da un presupuesto claro y se encarga de que todo quede como debe.',
   ],
   family: [
-    'Luis no trabaja solo: lo hace junto a su suegra, que lleva 17 años en España dedicada a cuidar hogares y personas. Ha trabajado toda la vida de interna, cuidando a personas mayores.',
-    'De ella viene una forma de entrar en casa de otros que se nota: con respeto, discreción y mucho cuidado. Detrás de Lumis hay una familia que sabe lo que significa que alguien te abra la puerta de su casa o de su negocio.',
+    'Luis no trabaja solo: lo hace junto a su suegra, que lleva 17 años en España. Durante todo ese tiempo ha trabajado de interna, cuidando a personas mayores en sus propias casas.',
+    'Ser interna es mucho más que cuidar: es encargarse cada día de que una casa esté limpia, ordenada y en condiciones para alguien que lo necesita. Esa experiencia es la que hoy aporta a Lumis.',
+    'Detrás de Lumis hay una familia que sabe lo que significa que alguien te abra la puerta de su casa o de su negocio.',
+  ],
+  familySkills: [
+    ['home', 'Limpieza del hogar, a fondo y a diario', 'Cocinas, baños, dormitorios y zonas comunes, con la constancia de quien lo ha hecho cada día durante años.'],
+    ['shield', 'Higiene y desinfección', 'Acostumbrada a casas de personas mayores, donde la limpieza también es salud.'],
+    ['check', 'Orden y detalle', 'Cada cosa en su sitio y nada fuera de lugar al terminar.'],
+    ['heart', 'Discreción y confianza', 'Años trabajando dentro de las casas de otras familias, con su total confianza.'],
   ],
   values: [
     ['tool', 'Oficio aprendido desde dentro', 'Años limpiando cristales y oficinas para otras empresas antes de montar la suya.'],
@@ -1102,4 +1111,15 @@ export const about = {
     ['pin', 'Cerca de ti', 'Zaragoza y hasta unos 40 minutos alrededor, para darte siempre un precio justo.'],
   ],
   zone: ['Zaragoza capital y sus barrios', 'Área metropolitana', 'Polígonos y naves', 'Centros comerciales de los alrededores', 'Pueblos a menos de 40 minutos'],
+};
+
+// Texto del primer aniversario, escrito por la familia (01/10/2026).
+export const anniversary = {
+  title: 'Un año dejando cada espacio <em>impecable.</em>',
+  text: [
+    'En octubre de 2025 dimos un salto importante: convertir años de trabajo, aprendizaje y experiencia en cristales y oficinas en nuestra propia empresa de limpieza.',
+    'Este octubre celebramos nuestro primer aniversario. Doce meses de esfuerzo continuo, clientes que han confiado en nosotros desde el primer día y un compromiso intacto con la calidad y la palabra dada.',
+    'Gracias a quienes forman parte de este camino y a cada cliente que nos abre las puertas de su casa, su negocio o su comunidad.',
+  ],
+  cheer: '¡A por muchos años más dejando cada espacio impecable!',
 };

@@ -558,3 +558,30 @@ html,body{overflow-x:clip}
 
 /* Cabecera con «Quiénes somos»: un poco más compacta entre 981 y 1080 px */
 @media (min-width:981px) and (max-width:1080px){.nav>a,.nav-drop{padding:10px 7px}.nav{font-size:13.5px;gap:2px}}
+
+/* Experiencia de la suegra */
+.about-values{grid-template-columns:repeat(4,1fr);margin-top:clamp(36px,5vw,60px)}
+.family-skills{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:30px 28px}
+.family-skills-t{display:flex;align-items:center;gap:8px;margin:0 0 18px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--sky)}
+.family-skills-t .i{width:18px;height:18px}
+.family-skills ul{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.family-skills li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;font-size:15px;line-height:1.6;color:#b9e1e9}
+.family-skills li b{display:block;color:#fff;font-size:16px;margin-bottom:2px}
+.family-skills .ideal-ico{margin:0}
+
+/* Primer aniversario */
+.anniv{padding-top:0}
+.anniv-card{position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,64px);align-items:center;border-radius:36px;padding:clamp(36px,6vw,72px) clamp(24px,6vw,72px);background:linear-gradient(125deg,var(--navy) 0%,#0a6f86 55%,var(--blue) 100%);color:#cff0f7;box-shadow:var(--sh-lg)}
+.anniv-card .cta-bubbles{position:absolute;inset:0;z-index:-1}
+.anniv-badge{position:relative;width:clamp(170px,20vw,230px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;align-content:center;background:radial-gradient(circle,rgba(255,255,255,.16),rgba(255,255,255,.03) 70%);border:1px solid rgba(255,255,255,.2)}
+.anniv-badge .seal-ring text{fill:var(--sky);font-size:11.5px;letter-spacing:2.2px}
+.anniv-num{font-size:clamp(84px,10vw,120px);font-weight:800;line-height:.85;letter-spacing:-.06em;background:linear-gradient(160deg,#fff,var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+.anniv-unit{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:#fff;text-align:center}
+.anniv-copy h2{color:#fff;margin:10px 0 16px}
+.anniv-copy h2 em{color:var(--sky)}
+.anniv-copy p{font-size:17px;line-height:1.75;margin:0 0 12px}
+.anniv-cheer{display:flex;align-items:center;gap:10px;margin-top:20px!important;font-weight:800;color:#fff;font-size:18px!important}
+.anniv-cheer .i{width:22px;height:22px;color:var(--sky);flex:none}
+@media (max-width:1180px){.about-values{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.anniv-card{grid-template-columns:1fr;justify-items:center;text-align:center}.anniv-cheer{justify-content:center}}
+@media (max-width:640px){.about-values{grid-template-columns:1fr}.family-skills{padding:24px 20px}}

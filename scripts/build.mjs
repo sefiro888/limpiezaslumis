@@ -4,14 +4,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  about,
+  about, anniversary,
   business as B, groups, services, destacados, pillars, generalFaq, reviews, reviewsUrl, reviewWriteUrl,
   method, quoteChecklist, commitments, tools, serviceModes, loveThemes,
 } from './content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] || root);
-const V = '8';
+const V = '9';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
 // Servicios destacados, en el orden elegido por la clienta.
@@ -100,6 +100,7 @@ const cur = (current, key) => current === key ? ' aria-current="page"' : '';
 
 // ---------- Piezas comunes ----------
 const tickerItems = [
+  ...(B.anniversary ? [['star', '<b>¡Cumplimos nuestro primer año!</b> Gracias por confiar en Lumis']] : []),
   ['calendar', 'Agenda hoy mismo'],
   ['star', '<b>★★★★★</b> Opiniones reales en Google'],
   ['spark', 'Comunidades · Oficinas · Gimnasios · Colegios · Clínicas'],
@@ -638,8 +639,18 @@ ${wave('wave-bottom')}
 
 <section class="sec" id="historia">
 <div class="wrap">
-<div class="sec-head reveal"><div><span class="eyebrow">${icon('clock')} Su camino</span><h2>De aprender el oficio <em>a tener su empresa.</em></h2></div><p>Cinco años dedicados a la limpieza, contados en cuatro momentos.</p></div>
+<div class="sec-head reveal"><div><span class="eyebrow">${icon('clock')} Su camino</span><h2>De aprender el oficio <em>a tener su empresa.</em></h2></div><p>Cinco años dedicados a la limpieza, contados en cuatro momentos. Y este octubre, <a class="link" href="#aniversario">lo celebramos</a>.</p></div>
 <ol class="timeline" data-progress><span class="tl-line" aria-hidden="true"><i></i></span>${about.timeline.map(([ic, when, t, d]) => `<li class="tl-step reveal"><span class="tl-node">${icon(ic)}</span><div class="tl-card"><span class="tl-n">${when}</span><h3>${t}</h3><p>${esc(d)}</p></div></li>`).join('')}</ol>
+</div>
+</section>
+
+<section class="sec anniv" id="aniversario">
+<div class="wrap">
+<div class="anniv-card reveal">
+<div class="cta-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="anniv-badge" aria-hidden="true"><svg class="seal-ring" viewBox="0 0 200 200"><defs><path id="anniv-ring" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs><text><textPath href="#anniv-ring">PRIMER ANIVERSARIO · OCT 2025 – OCT 2026 · </textPath></text></svg><span class="anniv-num">1</span><span class="anniv-unit">año</span></div>
+<div class="anniv-copy"><span class="eyebrow on-dark">${icon('star')} Primer aniversario</span><h2>${anniversary.title}</h2>${anniversary.text.map(p => `<p>${esc(p)}</p>`).join('')}<p class="anniv-cheer">${icon('spark')} ${esc(anniversary.cheer)}</p></div>
+</div>
 </div>
 </section>
 
@@ -653,8 +664,11 @@ ${wave('wave-bottom')}
 <section class="sec ideal ideal-dark">
 <canvas class="stage-canvas" aria-hidden="true"></canvas>
 ${wave('wave-top', 'var(--bg)')}
-<div class="wrap about-family">
+<div class="wrap">
+<div class="about-family">
 <div class="reveal"><span class="eyebrow on-dark">${icon('home')} Un equipo en familia</span><h2>Gente de confianza <em>en tu casa.</em></h2>${about.family.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+<div class="family-skills reveal"><p class="family-skills-t">${icon('heart')} Lo que aporta su experiencia</p><ul>${about.familySkills.map(([ic, t, d]) => `<li><span class="ideal-ico">${icon(ic)}</span><span><b>${t}</b>${esc(d)}</span></li>`).join('')}</ul></div>
+</div>
 <div class="ideal-grid about-values">${about.values.map(([ic, t, d], i) => `<article class="ideal-card reveal" style="--d:${i * 70}ms"><span class="ideal-ico">${icon(ic)}</span><h3>${t}</h3><p>${d}</p></article>`).join('')}</div>
 </div>
 ${wave('wave-bottom')}
