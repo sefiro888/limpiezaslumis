@@ -16,7 +16,7 @@ B = S.B
 DPI = 300
 mm = lambda v: round(v / 25.4 * DPI)
 BLEED = mm(3)
-W, H = mm(154), mm(216)                                 # A5 + 3 mm de sangrado por lado = 1819 x 2551 px
+W, H = mm(154), mm(216)                                 # se recalculan en flyer() según el formato
 CX = W // 2
 SAFE = BLEED + mm(6)                                    # margen interior de seguridad
 
@@ -90,87 +90,106 @@ def web_icon(size):
 
 
 # ---------- Flyer ----------
-def flyer():
+# El diseño está medido para A5; k escala todas las medidas (A4 = A5 x 1,40). Así cada tamaño se dibuja a su
+# resolución real en vez de ampliar una imagen.
+def flyer(fmt='A5'):
+    global W, H, CX, SAFE
+    trim_w, trim_h = (148, 210) if fmt == 'A5' else (210, 297)
+    W, H = mm(trim_w + 6), mm(trim_h + 6)
+    CX, SAFE = W // 2, BLEED + mm(6)
+    k = (trim_w + 6) / 154
+    u = lambda v: round(v * k)
+    F = lambda size, weight=700, italic=False: S.font(u(size), weight, italic)
+
     c = Image.new('RGBA', (W, H), S.WHITE + (255,))
     # Parte superior oscura
-    top_h = mm(96)
+    top_h = u(mm(96))
     top = S.vgradient(W, top_h, [(0, S.DEEP), (.6, S.PETROL), (1, S.TEAL)])
     S.glow(top, W * .85, top_h * .2, W * .4, S.BRAND, 90)
     S.streaks(top, 5)
-    S.bubbles(top, 14, 5, rmin=12, rmax=60, alpha=70)
+    S.bubbles(top, 14, 5, rmin=u(12), rmax=u(60), alpha=70)
     c.alpha_composite(top, (0, 0))
     # Ola de transición
-    wave = Image.new('RGBA', (W, 200), (0, 0, 0, 0))
-    pts = [(x, 110 + 46 * math.sin(x / W * math.pi * 2 + .6)) for x in range(0, W + 1, 8)]
-    ImageDraw.Draw(wave).polygon([(0, 200)] + pts + [(W, 200)], fill=S.WHITE + (255,))
-    c.alpha_composite(wave, (0, top_h - 150))
+    wave = Image.new('RGBA', (W, u(200)), (0, 0, 0, 0))
+    pts = [(x, u(110) + u(46) * math.sin(x / W * math.pi * 2 + .6)) for x in range(0, W + 1, 8)]
+    ImageDraw.Draw(wave).polygon([(0, u(200))] + pts + [(W, u(200))], fill=S.WHITE + (255,))
+    c.alpha_composite(wave, (0, top_h - u(150)))
     d = ImageDraw.Draw(c)
-    for sx, sy, ss in [(SAFE + 40, 300, 26), (W - SAFE - 40, 240, 34), (W - SAFE - 90, 520, 20), (SAFE + 70, 640, 18)]:
+    for sx, sy, ss in [(SAFE + u(40), u(300), u(26)), (W - SAFE - u(40), u(240), u(34)), (W - SAFE - u(90), u(520), u(20)), (SAFE + u(70), u(640), u(18))]:
         S.sparkle(d, sx, sy, ss, (255, 255, 255, 220))
 
-    y = S.logo_card(c, 'logo-horizontal-hd.png', 520, CX, SAFE + 30, pad=30, radius=40) + 50
+    y = S.logo_card(c, 'logo-horizontal-hd.png', u(520), CX, SAFE + u(30), pad=u(30), radius=u(40)) + u(50)
     d = ImageDraw.Draw(c)
-    S.text_c(d, CX, y, 'LIMPIEZA PROFESIONAL EN ZARAGOZA', S.font(40, 800), S.LIGHT); y += 72
-    S.text_c(d, CX, y, '¿Lo dejamos', S.font(132, 800), S.WHITE); y += 140
-    S.text_c(d, CX, y, 'reluciente?', S.font(148, italic=True), S.LIGHT); y += 196
-    items = [S.LABEL[k] for k in S.DEST] + [f"y {len(S.SERVICES) - len(S.DEST)} servicios más"]
-    S.pills_centered(c, CX, y, items, S.font(36, 700), W - SAFE * 2, gap=16, h=72, bg=(255, 255, 255, 34), fg=S.WHITE)
+    S.text_c(d, CX, y, 'LIMPIEZA PROFESIONAL EN ZARAGOZA', F(40, 800), S.LIGHT); y += u(72)
+    S.text_c(d, CX, y, '¿Lo dejamos', F(132, 800), S.WHITE); y += u(140)
+    S.text_c(d, CX, y, 'reluciente?', F(148, italic=True), S.LIGHT); y += u(196)
+    items = [S.LABEL[kk] for kk in S.DEST] + [f"y {len(S.SERVICES) - len(S.DEST)} servicios más"]
+    S.pills_centered(c, CX, y, items, F(36, 700), W - SAFE * 2, gap=u(16), h=u(72), padx=u(26), bg=(255, 255, 255, 34), fg=S.WHITE)
 
     # Escanea
-    y = top_h + 30
+    y = top_h + u(30)
     d = ImageDraw.Draw(c)
-    S.text_c(d, CX, y, 'Escanea y conócenos', S.font(86, 800), S.PETROL); y += 100
-    S.text_c(d, CX, y, 'Nuestra web, trabajos reales y novedades en redes', S.font(38, 600), S.MUTED); y += 80
+    S.text_c(d, CX, y, 'Escanea y conócenos', F(86, 800), S.PETROL); y += u(100)
+    S.text_c(d, CX, y, 'Nuestra web, trabajos reales y novedades en redes', F(38, 600), S.MUTED); y += u(80)
 
     cards = [('web', 'Nuestra web', B['domain'], web_icon, S.BRAND),
              ('instagram', 'Instagram', B['instagramHandle'], ig_icon, (214, 41, 118)),
              ('tiktok', 'TikTok', B['tiktokHandle'], tiktok_icon, (0, 0, 0))]
-    gap = 44
+    gap = u(44)
     cw = (W - SAFE * 2 - gap * 2) // 3
-    qs = cw - 104
-    ch = 120 + qs + 110
+    qs = cw - u(104)
+    ch = u(120) + qs + u(110)
     for i, (key, title, handle, icon_fn, col) in enumerate(cards):
         x = SAFE + i * (cw + gap)
-        S.shadowed_card(c, (x, y, x + cw, y + ch), 46, shadow=70, blur=30)
+        S.shadowed_card(c, (x, y, x + cw, y + ch), u(46), shadow=70, blur=u(30))
         d = ImageDraw.Draw(c)
-        d.rounded_rectangle((x, y, x + cw, y + ch), 46, outline=col + (255,) if len(col) == 3 else col, width=5)
-        ic = icon_fn(84)
-        tf = S.font(44, 800)
-        tw = 84 + 18 + d.textlength(title, font=tf)
+        d.rounded_rectangle((x, y, x + cw, y + ch), u(46), outline=col + (255,), width=u(5))
+        ic = icon_fn(u(84))
+        tf = F(44, 800)
+        tw = u(84) + u(18) + d.textlength(title, font=tf)
         tx = x + (cw - tw) / 2
-        c.alpha_composite(ic, (round(tx), y + 34))
-        d.text((tx + 102, y + 76), title, font=tf, fill=S.PETROL, anchor='lm')
-        code = qr(LINKS[key], qs, center=icon_fn(200))
-        c.alpha_composite(code, (x + (cw - code.width) // 2, y + 118))
-        hf = S.font(36 if len(handle) < 17 else 32, 800)
-        d.text((x + cw / 2, y + 118 + code.height + 32), handle, font=hf, fill=col if key != 'web' else S.TEAL, anchor='mm')
-    y += ch + 50
+        c.alpha_composite(ic, (round(tx), y + u(34)))
+        d.text((tx + u(102), y + u(76)), title, font=tf, fill=S.PETROL, anchor='lm')
+        code = qr(LINKS[key], qs, center=icon_fn(u(200)))
+        c.alpha_composite(code, (x + (cw - code.width) // 2, y + u(118)))
+        hf = F(36 if len(handle) < 17 else 32, 800)
+        d.text((x + cw / 2, y + u(118) + code.height + u(32)), handle, font=hf, fill=col if key != 'web' else S.TEAL, anchor='mm')
+    y += ch + u(50)
 
     # Pie: reseñas y teléfonos
     d = ImageDraw.Draw(c)
-    sw = 5 * 56
-    sx = CX - (sw + 24 + d.textlength('Opiniones reales en Google', font=S.font(40, 700))) / 2
-    for i in range(5): S.star(d, sx + 26 + i * 56, y + 26, 24, S.GOLD)
-    d.text((sx + sw + 24, y + 26), 'Opiniones reales en Google', font=S.font(40, 700), fill=S.PETROL, anchor='lm')
-    y += 76
+    sw = 5 * u(56)
+    lf = F(40, 700)
+    sx = CX - (sw + u(24) + d.textlength('Opiniones reales en Google', font=lf)) / 2
+    for i in range(5): S.star(d, sx + u(26) + i * u(56), y + u(26), u(24), S.GOLD)
+    d.text((sx + sw + u(24), y + u(26)), 'Opiniones reales en Google', font=lf, fill=S.PETROL, anchor='lm')
+    y += u(76)
     band_top = y
     band = S.vgradient(W, H - band_top, [(0, S.PETROL), (1, S.DEEP)])
-    S.bubbles(band, 8, 9, rmin=10, rmax=40, alpha=60)
+    S.bubbles(band, 8, 9, rmin=u(10), rmax=u(40), alpha=60)
     c.alpha_composite(band, (0, band_top))
     d = ImageDraw.Draw(c)
-    y = band_top + 40
-    S.text_c(d, CX, y, 'PRESUPUESTO SIN COMPROMISO', S.font(38, 800), S.LIGHT); y += 64
-    pf = S.font(92, 800)
-    S.text_c(d, CX, y, B['phone'], pf, S.WHITE); y += 112
-    S.text_c(d, CX, y, f"Llamadas y WhatsApp  ·  Fijo {B['landline']}", S.font(44, 700), (207, 240, 247)); y += 68
-    S.text_c(d, CX, y, f"{B['city']} y hasta 40 minutos alrededor", S.font(38, 600), S.LIGHT)
-    assert y + 50 < H - SAFE, f'El pie se sale del margen de seguridad ({y})'
+    y = band_top + u(40)
+    S.text_c(d, CX, y, 'PRESUPUESTO SIN COMPROMISO', F(38, 800), S.LIGHT); y += u(64)
+    S.text_c(d, CX, y, B['phone'], F(92, 800), S.WHITE); y += u(112)
+    S.text_c(d, CX, y, f"Llamadas y WhatsApp  ·  Fijo {B['landline']}", F(44, 700), (207, 240, 247)); y += u(68)
+    S.text_c(d, CX, y, f"{B['city']} y hasta 40 minutos alrededor", F(38, 600), S.LIGHT)
+    assert y + u(50) < H - SAFE, f'El pie se sale del margen de seguridad ({y})'
     return c
+
+
+def check_qr(img, label):
+    import zxingcpp
+    for scale in (1, .5, .3):
+        small = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
+        found = sorted(r.text for r in zxingcpp.read_barcodes(small))
+        ok = all(u in found for u in LINKS.values())
+        print(f'QR {label} a escala {scale}: {"OK" if ok else "FALLO"}')
 
 
 if __name__ == '__main__':
     out = S.OUT
-    f = flyer().convert('RGB')
+    f = flyer('A5').convert('RGB')
     # Calidad JPEG máxima y sin submuestreo de color: textos y QR nítidos en imprenta
     f.save(out / 'lumis-flyer-a5-imprenta.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
     trimmed = f.crop((BLEED, BLEED, W - BLEED, H - BLEED))
@@ -193,9 +212,18 @@ if __name__ == '__main__':
     a4.save(out / 'lumis-flyer-a4-casa.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
     print('Flyer generado:', f.size, 'px con sangrado')
 
-    import zxingcpp
-    for scale in (1, .5, .3):
-        small = trimmed.resize((round(trimmed.width * scale), round(trimmed.height * scale)), Image.LANCZOS)
-        found = sorted(r.text for r in zxingcpp.read_barcodes(small))
-        ok = all(u in found for u in LINKS.values())
-        print(f'QR a escala {scale}: {"OK" if ok else "FALLO"} {found}')
+    check_qr(trimmed, 'A5')
+
+    # A4 entero (210 x 297 mm): mismo diseño dibujado a tamaño A4, con sangrado para imprenta
+    f4 = flyer('A4').convert('RGB')
+    f4.save(out / 'lumis-flyer-a4-imprenta.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
+    t4 = f4.crop((BLEED, BLEED, f4.width - BLEED, f4.height - BLEED))
+    t4.save(out / 'lumis-flyer-a4.jpg', quality=92, dpi=(DPI, DPI))
+    # Versión A4 para impresora de casa: sin sangrado y con 5 mm de margen blanco
+    home = Image.new('RGB', (mm(210), mm(297)), 'white')
+    m5 = mm(5)
+    fit = t4.resize((home.width - m5 * 2, round(t4.height * (home.width - m5 * 2) / t4.width)), Image.LANCZOS)
+    home.paste(fit, (m5, (home.height - fit.height) // 2))
+    home.save(out / 'lumis-flyer-a4-entero-casa.pdf', 'PDF', resolution=DPI, quality=100, subsampling=0)
+    print('Flyer A4 generado:', f4.size, 'px con sangrado')
+    check_qr(t4, 'A4')

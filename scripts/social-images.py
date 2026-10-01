@@ -156,7 +156,7 @@ def pills_centered(canvas, cx, y, items, f, maxw, gap=14, h=60, **kw):
     d = ImageDraw.Draw(canvas)
     rows, row, roww = [], [], 0
     for t in items:
-        w = d.textlength(t, font=f) + 52
+        w = d.textlength(t, font=f) + kw.get('padx', 26) * 2
         if row and roww + gap + w > maxw: rows.append((row, roww)); row, roww = [], 0
         roww += (gap if row else 0) + w; row.append(t)
     rows.append((row, roww))
