@@ -4,13 +4,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  about,
   business as B, groups, services, destacados, pillars, generalFaq, reviews, reviewsUrl, reviewWriteUrl,
   method, quoteChecklist, commitments, tools, serviceModes, loveThemes,
 } from './content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] || root);
-const V = '7';
+const V = '8';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
 // Servicios destacados, en el orden elegido por la clienta.
@@ -91,10 +92,10 @@ ${wave('wave-bottom')}
 const SITE = B.launched ? `https://${B.domain}/` : 'https://sefiro888.github.io/limpiezaslumis/';
 const pageUrl = key => SITE + (key === 'index' ? '' : key + '.html');
 // Páginas con tarjeta propia de WhatsApp; el resto (legales, 404) usan la de la portada.
-const OG_KEYS = new Set([...services.map(s => s.slug), 'opiniones', 'como-trabajamos', 'contacto']);
+const OG_KEYS = new Set([...services.map(s => s.slug), 'quienes-somos', 'opiniones', 'como-trabajamos', 'contacto']);
 const ogImage = key => `${SITE}assets/images/og/og-${OG_KEYS.has(key) ? key : 'home'}.jpg?v=${V}`;
 
-const PAGES = [['index', 'Inicio'], ['opiniones', 'Opiniones'], ['como-trabajamos', 'Cómo trabajamos'], ['contacto', 'Contacto']];
+const PAGES = [['index', 'Inicio'], ['quienes-somos', 'Quiénes somos'], ['opiniones', 'Opiniones'], ['como-trabajamos', 'Cómo trabajamos'], ['contacto', 'Contacto']];
 const cur = (current, key) => current === key ? ' aria-current="page"' : '';
 
 // ---------- Piezas comunes ----------
@@ -103,7 +104,7 @@ const tickerItems = [
   ['star', '<b>★★★★★</b> Opiniones reales en Google'],
   ['spark', 'Comunidades · Oficinas · Gimnasios · Colegios · Clínicas'],
   ['check', 'Presupuesto sin compromiso'],
-  ['pin', 'Zaragoza y alrededores'],
+  ['pin', B.zone],
   ['phone', B.phone],
 ];
 const tickerRow = () => tickerItems.map(([i, t]) => `<span class="tk-item">${icon(i)}${t}</span>`).join('');
@@ -143,7 +144,7 @@ function mobileNav(current, msg) {
 </details>
 ${PAGES.slice(1).map(([k, l], i) => `<a href="${k}.html" style="--i:${i + 2}"${cur(current, k)}><span>${l}</span>${extras[k] || ''}${icon('arrow')}</a>`).join('\n')}
 </nav>
-<div class="mnav-foot" style="--i:7">
+<div class="mnav-foot" style="--i:8">
 ${btnBook('Agendar cita', bySlug[current] ? current : '', 'btn btn-light btn-block')}
 <div class="mnav-contact"><a href="${tel}">${icon('phone')} Llamar</a><a href="${wa(msg)}" target="_blank" rel="noopener">${icon('wa')} WhatsApp</a></div>
 ${socialLinks('social-mnav')}
@@ -209,7 +210,9 @@ function bookingDialog() {
 
 const jsonLd = () => `<script type="application/ld+json">${JSON.stringify({
   '@context': 'https://schema.org', '@type': 'HousekeepingService', name: B.name, telephone: B.phoneIntl, email: B.email,
-  areaServed: B.city, address: { '@type': 'PostalAddress', addressLocality: B.city, addressCountry: 'ES' }, sameAs: [B.instagram, B.tiktok],
+  url: SITE, founder: { '@type': 'Person', name: B.owner }, foundingDate: '2025-10',
+  areaServed: [{ '@type': 'City', name: B.city }, { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: 41.6488, longitude: -0.8891 }, geoRadius: 45000 }],
+  address: { '@type': 'PostalAddress', streetAddress: 'Calle Monasterio de Siresa, 34, local 19', postalCode: '50002', addressLocality: B.city, addressRegion: 'Zaragoza', addressCountry: 'ES' }, sameAs: [B.instagram, B.tiktok],
   makesOffer: services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.title } })),
 })}</script>`;
 
@@ -493,7 +496,7 @@ ${quote ? `<figure class="mini-rv">${stars(quote.rating)}<blockquote>“${esc(qu
 <div><dt>${icon('user')} Ideal para</dt><dd>${s.ideal.map(x => x[0]).join(', ')}</dd></div>
 <div><dt>${icon('clock')} Frecuencia habitual</dt><dd>${s.frequency.map(x => x[0]).join(' · ')}</dd></div>
 <div><dt>${icon('plan')} Precio</dt><dd>A consultar: lo acordamos contigo según tu espacio, sin compromiso.</dd></div>
-<div><dt>${icon('pin')} Zona</dt><dd>${B.city} y alrededores</dd></div>
+<div><dt>${icon('pin')} Zona</dt><dd>${B.zone}</dd></div>
 </dl>${btnBook('Reservar cita', s.slug, 'btn btn-primary btn-block')}<a class="summary-tel" href="${tel}">o llama al <b>${B.phone}</b></a></aside>
 </div>
 </section>
@@ -610,6 +613,73 @@ ${pageHero({
   return page({ title: `Opiniones de clientes | ${B.name}`, desc: `Opiniones reales en Google de clientes de ${B.name} en ${B.city}: limpieza de cristales, toldos, viviendas, clínicas, restaurantes y gimnasios.`, bodyClass: 'is-page', current: 'opiniones', main });
 }
 
+// ---------- Quiénes somos ----------
+function aboutPage() {
+  const aboutReviews = ['T-CURA fisioterapia', 'Cristina G.', 'Ricardo Hernandez', 'PEDRO CAMPOS'].map(n => reviews.find(r => r.name === n)).filter(Boolean);
+  const main = `
+${pageHero({
+    crumb: 'Quiénes somos', eyebrow: `${icon('user')} Quiénes somos`,
+    title: 'Detrás de cada brillo, <em>está Luis.</em>',
+    lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su familia.`,
+    ctas: `${btnBook('Hablar con Luis')}<a class="btn btn-ghost" href="#historia">${icon('arrow')}<span>Conoce su historia</span></a>`,
+    visual: `<div class="about-visual">${phoneVideo({ name: 'lumis-trabajo', alt: 'Luis limpiando cristales en un trabajo real de Limpiezas Lumis', label: 'Trabajo real' })}<div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
+  })}
+
+<section class="svc-band">
+<canvas class="stage-canvas" aria-hidden="true"></canvas>
+<div class="kpis wrap">
+<div class="kpi reveal"><b>2021</b><span>año en que Luis empieza en la limpieza</span></div>
+<div class="kpi reveal" style="--d:80ms"><b>2025</b><span>año en que nace Limpiezas Lumis</span></div>
+<div class="kpi reveal" style="--d:160ms"><b data-count>${B.zoneMinutes}</b><span>minutos de radio desde Zaragoza</span></div>
+<div class="kpi kpi-hl reveal" style="--d:240ms"><b>★ 5</b><span>la valoración que más nos dan en Google</span></div>
+</div>
+${wave('wave-bottom')}
+</section>
+
+<section class="sec" id="historia">
+<div class="wrap">
+<div class="sec-head reveal"><div><span class="eyebrow">${icon('clock')} Su camino</span><h2>De aprender el oficio <em>a tener su empresa.</em></h2></div><p>Cinco años dedicados a la limpieza, contados en cuatro momentos.</p></div>
+<ol class="timeline" data-progress><span class="tl-line" aria-hidden="true"><i></i></span>${about.timeline.map(([ic, when, t, d]) => `<li class="tl-step reveal"><span class="tl-node">${icon(ic)}</span><div class="tl-card"><span class="tl-n">${when}</span><h3>${t}</h3><p>${esc(d)}</p></div></li>`).join('')}</ol>
+</div>
+</section>
+
+<section class="sec about-story">
+<div class="wrap about-story-grid">
+<div class="about-story-copy reveal"><span class="eyebrow">${icon('heart')} Por qué Lumis</span><h2>Lo que se aprende <em>trabajando.</em></h2>${about.story.map(p => `<p class="lead">${esc(p)}</p>`).join('')}</div>
+<figure class="about-motto reveal">${icon('quote', 'about-q')}<blockquote>Cuidar cada espacio <em>como si fuera el nuestro.</em></blockquote><figcaption>Nuestra forma de trabajar</figcaption></figure>
+</div>
+</section>
+
+<section class="sec ideal ideal-dark">
+<canvas class="stage-canvas" aria-hidden="true"></canvas>
+${wave('wave-top', 'var(--bg)')}
+<div class="wrap about-family">
+<div class="reveal"><span class="eyebrow on-dark">${icon('home')} Un equipo en familia</span><h2>Gente de confianza <em>en tu casa.</em></h2>${about.family.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+<div class="ideal-grid about-values">${about.values.map(([ic, t, d], i) => `<article class="ideal-card reveal" style="--d:${i * 70}ms"><span class="ideal-ico">${icon(ic)}</span><h3>${t}</h3><p>${d}</p></article>`).join('')}</div>
+</div>
+${wave('wave-bottom')}
+</section>
+
+<section class="sec about-zone">
+<div class="wrap about-zone-grid">
+<div class="about-zone-map reveal" aria-hidden="true"><div class="map-card"><div class="map-rings"><i></i><i></i><i></i></div><span class="map-pin">${icon('pin')}</span><p><b>${B.city}</b><small>hasta 40 min alrededor</small></p></div></div>
+<div class="reveal"><span class="eyebrow">${icon('pin')} Dónde trabajamos</span><h2>Zaragoza y hasta <em>40 minutos alrededor.</em></h2>
+<p class="lead">Nos movemos por Zaragoza y por los municipios, polígonos y centros comerciales de los alrededores, hasta unos 40 minutos en coche. Más lejos no vamos: el viaje encarecería el servicio y preferimos darte un precio justo.</p>
+<ul class="about-chips">${about.zone.map(z => `<li>${icon('check')}${z}</li>`).join('')}</ul>
+<div class="hero-cta"><a class="btn btn-primary" href="${wa('Hola Lumis, ¿trabajáis en mi zona? Estoy en ')}" target="_blank" rel="noopener">${icon('wa')}<span>¿Llegáis a mi zona?</span></a></div></div>
+</div>
+</section>
+
+<section class="sec reviews reviews-all about-reviews">
+<div class="wrap">
+<div class="sec-head reveal"><div><span class="eyebrow">${icon('star')} Opiniones en Google</span><h2>Lo que dicen <em>de Luis.</em></h2></div><p>Reseñas reales de clientes, tal y como las escribieron.</p></div>
+<div class="rv-masonry">${aboutReviews.map((r, i) => reviewCard(r, 'rv reveal', `--d:${(i % 3) * 80}ms`)).join('')}</div>
+<p class="about-more reveal"><a class="link" href="opiniones.html">Ver todas las opiniones ${icon('arrow')}</a></p>
+</div>
+</section>`;
+  return page({ title: `Quiénes somos | ${B.name} · La historia de Luis`, desc: `Conoce a ${B.owner}, fundador de ${B.name}: desde 2021 en la limpieza de cristales y oficinas en ${B.city} y con empresa propia desde octubre de 2025. Trabajamos hasta 40 minutos de ${B.city}.`, bodyClass: 'is-page', current: 'quienes-somos', main, msg: 'Hola Luis, he leído vuestra historia en la web y me gustaría pedir un presupuesto.' });
+}
+
 // ---------- Cómo trabajamos ----------
 function methodPage() {
   const main = `
@@ -682,9 +752,9 @@ function contactPage() {
 ${pageHero({
     crumb: 'Contacto', eyebrow: `${icon('wa')} Contacto`,
     title: 'Hablemos de <em>tu espacio.</em>',
-    lead: 'Llámanos, escríbenos por WhatsApp o reserva tu cita en un minuto. Presupuesto sin compromiso en Zaragoza y alrededores.',
-    ctas: `${btnBook('Agendar cita')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a>`,
-    visual: `<div class="contact-phone">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis: pide tu presupuesto sin compromiso', label: 'Pide tu presupuesto' })}<div class="float-card fc-mini contact-zone">${icon('pin')}<span><b>${B.city}</b><small>y alrededores</small></span></div></div>`,
+    lead: 'Llámanos, escríbenos por WhatsApp o reserva tu cita en un minuto. Presupuesto sin compromiso en Zaragoza y hasta 40 minutos alrededor.',
+    ctas: `${btnBook('Agendar cita')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a><a class="btn btn-ghost" href="tel:${B.landlineIntl}">${icon('phone')}<span>Fijo ${B.landline}</span></a>`,
+    visual: `<div class="contact-phone">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis: pide tu presupuesto sin compromiso', label: 'Pide tu presupuesto' })}<div class="float-card fc-mini contact-zone">${icon('pin')}<span><b>${B.city}</b><small>y hasta 40 min alrededor</small></span></div></div>`,
   })}
 
 <section class="sec contact-sec">
@@ -845,6 +915,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const write = (name, html) => fs.writeFileSync(path.join(OUT, name), html);
 write('index.html', home());
 for (const s of services) write(`${s.slug}.html`, servicePage(s));
+write('quienes-somos.html', aboutPage());
 write('opiniones.html', reviewsPage());
 write('como-trabajamos.html', methodPage());
 write('contacto.html', contactPage());
@@ -853,11 +924,11 @@ write('privacidad.html', privacidad());
 write('cookies.html', cookiesPage());
 write('404.html', notFound());
 // Mapa del sitio y robots para Google
-const pagesForMap = ['index', ...destacados, ...services.map(s => s.slug).filter(s => !destacados.includes(s)), 'opiniones', 'como-trabajamos', 'contacto', 'aviso-legal', 'privacidad', 'cookies'];
+const pagesForMap = ['index', ...destacados, ...services.map(s => s.slug).filter(s => !destacados.includes(s)), 'quienes-somos', 'opiniones', 'como-trabajamos', 'contacto', 'aviso-legal', 'privacidad', 'cookies'];
 const today = new Date().toISOString().slice(0, 10);
 const priority = k => k === 'index' ? '1.0' : destacados.includes(k) ? '0.9' : ['aviso-legal', 'privacidad', 'cookies'].includes(k) ? '0.2' : '0.7';
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pagesForMap.map(k => `  <url><loc>${pageUrl(k)}</loc><lastmod>${today}</lastmod><priority>${priority(k)}</priority></url>`).join('\n')}\n</urlset>\n`);
 write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
 // Dominio propio en GitHub Pages: el archivo CNAME solo existe tras el lanzamiento
 if (B.launched) write('CNAME', B.domain + '\n'); else if (fs.existsSync(path.join(OUT, 'CNAME'))) fs.rmSync(path.join(OUT, 'CNAME'));
-console.log(`Generadas ${services.length + 8} páginas en ${OUT}`);
+console.log(`Generadas ${services.length + 9} páginas en ${OUT}`);

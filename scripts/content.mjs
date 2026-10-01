@@ -14,6 +14,9 @@ export const business = {
   tiktok: 'https://www.tiktok.com/@lumis2848',
   tiktokHandle: '@lumis2848',
   city: 'Zaragoza',
+  // Radio de trabajo indicado por Lumis: hasta unos 40 minutos de Zaragoza.
+  zone: 'Zaragoza y hasta 40 min alrededor',
+  zoneMinutes: 40,
   // Datos del titular para el aviso legal y la política de privacidad (LSSI y RGPD).
   owner: 'Luis Hernando Arellano',
   nif: 'Y9171718E',
@@ -722,7 +725,7 @@ export const services = [
       ['¿Qué pasa si un día no se puede limpiar?', 'Lo comunicamos con antelación y recuperamos la visita en otro día acordado.'],
       ['¿Limpiáis también el garaje de la comunidad?', 'Sí, se puede incluir de forma periódica o como limpieza a fondo anual.'],
       ['¿Os encargáis de sacar los cubos?', 'Es un servicio que se puede añadir; lo concretamos con la comunidad.'],
-      ['¿Trabajáis en toda Zaragoza?', 'Trabajamos en Zaragoza y alrededores. Consulta tu zona al pedir presupuesto.'],
+      ['¿Trabajáis en toda Zaragoza?', 'Trabajamos en Zaragoza capital y hasta unos 40 minutos alrededor: área metropolitana, polígonos, centros comerciales y pueblos cercanos. Más lejos no nos desplazamos, porque el viaje encarecería el servicio. Si dudas, pregúntanos por tu zona.'],
     ],
     related: ['garajes', 'fachadas', 'cristales'],
   },
@@ -1068,10 +1071,35 @@ export const loveThemes = [
 ];
 
 export const generalFaq = [
-  ['¿En qué zonas trabajáis?', 'Trabajamos en Zaragoza y alrededores. Si tienes dudas sobre tu zona, escríbenos y te lo confirmamos.'],
+  ['¿En qué zonas trabajáis?', 'Trabajamos en Zaragoza capital y hasta unos 40 minutos alrededor: área metropolitana, polígonos, centros comerciales y pueblos cercanos. Más lejos no nos desplazamos, porque el viaje encarecería el servicio. Si dudas, pregúntanos por tu zona.'],
   ['¿Hasta qué altura trabajáis?', 'Trabajamos hasta unos 3 metros de altura, desde el suelo, una escalera o una terraza. Por encima de esa altura no realizamos el trabajo; si tienes dudas, envíanos una foto y te lo confirmamos.'],
   ['¿Cuánto cuesta el servicio?', 'Todos nuestros precios son a consultar, porque cada espacio es distinto. Nos cuentas qué necesitas, vemos unas fotos o el espacio y acordamos contigo el precio antes de empezar, sin compromiso.'],
   ['¿Puedo agendar para hoy mismo?', 'Puedes pedir tu cita hoy mismo desde la web o por WhatsApp. Te confirmamos el primer hueco disponible.'],
   ['¿Lleváis vuestros productos y herramientas?', 'Sí, llevamos productos y útiles profesionales. Si prefieres que usemos algún producto concreto, dínoslo.'],
   ['¿Trabajáis con empresas y comunidades?', 'Sí: oficinas, gimnasios, naves, garajes y comunidades de vecinos con planes periódicos.'],
 ];
+
+// ---------- Quiénes somos: la historia de Luis (según el audio de la familia, 01/10/2026) ----------
+export const about = {
+  timeline: [
+    ['home', '2021', 'Llega a España', 'Luis llega a España en 2021 y, desde el primer momento, encuentra su sitio en el mundo de la limpieza. Es el trabajo al que dedica todos estos años.'],
+    ['building', '2021 – 2025', 'Aprende el oficio en varias empresas', 'Trabaja para distintas empresas de limpieza, sobre todo en cristales y oficinas. Son años de ventanales, mamparas, escaparates y despachos en los que aprende la técnica, los productos adecuados para cada superficie y a trabajar con cuidado en espacios que no son suyos.'],
+    ['spark', 'Octubre de 2025', 'Nace Limpiezas Lumis', 'Con toda esa experiencia, Luis da el paso y monta su propia empresa. La idea es sencilla: ofrecer el trabajo bien hecho que ha aprendido, con trato directo y sin intermediarios.'],
+    ['star', 'Octubre de 2026', 'Cumplimos nuestro primer año', 'Un año después, Lumis cuida viviendas, comunidades, clínicas, gimnasios, restaurantes y oficinas de Zaragoza y alrededores. Y sus clientes lo cuentan en Google.'],
+  ],
+  story: [
+    'Durante años, Luis vio la limpieza profesional desde dentro: lo que de verdad valora un cliente, lo que se nota cuando alguien trabaja con prisa y lo que marca la diferencia cuando se trabaja con cariño.',
+    'Con esa experiencia decidió montar Lumis. Hoy, cuando nos contratas, hablas directamente con quien hace el trabajo: Luis te escucha, ve tu espacio, te da un presupuesto claro y se encarga de que todo quede como debe.',
+  ],
+  family: [
+    'Luis no trabaja solo: lo hace junto a su suegra, que lleva 17 años en España dedicada a cuidar hogares y personas. Ha trabajado toda la vida de interna, cuidando a personas mayores.',
+    'De ella viene una forma de entrar en casa de otros que se nota: con respeto, discreción y mucho cuidado. Detrás de Lumis hay una familia que sabe lo que significa que alguien te abra la puerta de su casa o de su negocio.',
+  ],
+  values: [
+    ['tool', 'Oficio aprendido desde dentro', 'Años limpiando cristales y oficinas para otras empresas antes de montar la suya.'],
+    ['user', 'Trato directo', 'Hablas con Luis desde el primer mensaje hasta la revisión final del trabajo.'],
+    ['heart', 'Confianza en casa', 'Un equipo familiar acostumbrado a cuidar los espacios de otras personas.'],
+    ['pin', 'Cerca de ti', 'Zaragoza y hasta unos 40 minutos alrededor, para darte siempre un precio justo.'],
+  ],
+  zone: ['Zaragoza capital y sus barrios', 'Área metropolitana', 'Polígonos y naves', 'Centros comerciales de los alrededores', 'Pueblos a menos de 40 minutos'],
+};

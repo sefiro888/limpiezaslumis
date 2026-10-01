@@ -177,6 +177,7 @@ def photo_card(name, photo, eyebrow, title, tagline, extra=None, stars=False):
 home()
 for s in SERVICES:
     photo_card(s['slug'], s['img'], f"{B['city']} · Limpiezas Lumis", s['title'], s['line'], ' · '.join(s['facts']))
+photo_card('quienes-somos', 'cristales', 'Quiénes somos', 'La historia de Luis', 'Del oficio a su propia empresa.', 'En la limpieza desde 2021 · Lumis desde octubre de 2025')
 photo_card('opiniones', 'cristales', 'Opiniones reales en Google', 'Lo que dicen nuestros clientes', 'Puntuales, cuidadosos y detallistas.', 'Viviendas, clínicas, restaurantes y gimnasios', stars=True)
 photo_card('como-trabajamos', 'general', 'Nuestro método', 'Así trabajamos en Lumis', 'Claro, puntual y sin sorpresas.', 'Presupuesto sin compromiso · Revisión final contigo')
 photo_card('contacto', 'terrazas', f"Contacto · {B['city']}", 'Hablemos de tu espacio', 'Llámanos o escríbenos por WhatsApp.', f"{B['phone']} · {B['landline']} · {B['email']}")
