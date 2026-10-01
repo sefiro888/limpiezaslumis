@@ -255,6 +255,16 @@ if __name__ == '__main__':
     print('Flyer A4 generado:', f4.size, 'px con sangrado')
     check_qr(t4, 'A4')
 
+    # Versiones directas: página exacta A4 / A5 con marco blanco de 5 mm. Se imprimen tal cual en cualquier
+    # impresora o copistería, sin cortar nada.
+    for img, (pw, ph), name in ((t4, (210, 297), 'lumis-flyer-A4-directo.pdf'), (trimmed, (148, 210), 'lumis-flyer-A5-directo.pdf')):
+        page = Image.new('RGB', (mm(pw), mm(ph)), 'white')
+        m5 = mm(5)
+        fit = img.resize((page.width - m5 * 2, round(img.height * (page.width - m5 * 2) / img.width)), Image.LANCZOS)
+        page.paste(fit, (m5, (page.height - fit.height) // 2))
+        page.save(out / name, 'PDF', resolution=DPI, quality=100, subsampling=0)
+        check_qr(page, name)
+
     # Copistería: pliegos con sangrado y marcas de corte
     imposition(f, (320, 450), 2, 2, 'lumis-flyer-a5-x4-sra3-copisteria.pdf')
     imposition(f4, (297, 420), 1, 1, 'lumis-flyer-a4-en-a3-copisteria.pdf')
