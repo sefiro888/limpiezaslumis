@@ -621,7 +621,7 @@ function aboutPage() {
 ${pageHero({
     crumb: 'Quiénes somos', eyebrow: `${icon('user')} Quiénes somos`,
     title: 'Detrás de cada brillo, <em>está Luis.</em>',
-    lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su suegra, María Lucrecia.`,
+    lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su mujer, María Lucrecia.`,
     ctas: `${btnBook('Hablar con Luis')}<a class="btn btn-ghost" href="#historia">${icon('arrow')}<span>Conoce su historia</span></a>`,
     visual: `<div class="about-visual"><figure class="about-portrait"><img src="assets/images/luis.jpg" srcset="assets/images/luis-sm.jpg 640w, assets/images/luis.jpg 1120w" sizes="(max-width: 760px) 84vw, 34vw" alt="Luis Hernando Arellano, fundador de Limpiezas Lumis, en su oficina de Zaragoza" width="1120" height="1400" loading="eager" fetchpriority="high"><figcaption><b>Luis Hernando Arellano</b><small>Fundador de Limpiezas Lumis</small></figcaption></figure><div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
   })}

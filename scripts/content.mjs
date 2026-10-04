@@ -1094,7 +1094,7 @@ export const about = {
     'Con esa experiencia decidió montar Lumis. Hoy, cuando nos contratas, hablas directamente con quien hace el trabajo: Luis te escucha, ve tu espacio, te da un presupuesto claro y se encarga de que todo quede como debe.',
   ],
   family: [
-    'Luis no trabaja solo: lo hace junto a su suegra, María Lucrecia, que lleva 17 años en España. Durante todo ese tiempo ha trabajado de interna, cuidando a personas mayores en sus propias casas.',
+    'Luis no trabaja solo: lo hace junto a su mujer, María Lucrecia, que lleva 17 años en España. Durante todo ese tiempo ha trabajado de interna, cuidando a personas mayores en sus propias casas.',
     'Ser interna es mucho más que cuidar: es encargarse cada día de que una casa esté limpia, ordenada y en condiciones para alguien que lo necesita. Esa experiencia es la que María Lucrecia aporta hoy a Lumis.',
     'Detrás de Lumis hay una familia que sabe lo que significa que alguien te abra la puerta de su casa o de su negocio.',
   ],
