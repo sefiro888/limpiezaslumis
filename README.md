@@ -54,3 +54,10 @@ Incluye: banner superior en movimiento, cinta animada de servicios, reserva ráp
 - Fotos de fachadas, persianas, colegios y clínicas (principal + sala de espera en `clinicas-sala`) generadas por el cliente; comparadores antes/después en fachadas (grafiti) y persianas, también como pestañas en la portada.
 - Redes: Instagram (@lumis.arellano25) y TikTok (@lumis2848) en pie, menú móvil, sección «Lumis en acción», contacto y datos para Google. Datos en `business` de content.mjs.
 - Precios: todos «a consultar» (sin «gratis» ni «0 €» hasta que el cliente confirme si el presupuesto es gratuito).
+
+## SEO (bloque A, 04/10/2026)
+
+- Titulares con palabra clave: portada «Empresa de limpieza en Zaragoza» y cada servicio «… en Zaragoza».
+- Datos estructurados (JSON-LD) en todas las páginas: empresa, migas de pan y, en servicios, ficha del servicio y preguntas frecuentes (`jsonLd()` en build.mjs).
+- Nueva página `zonas.html` (barrios, municipios a menos de 40 min, polígonos y centros comerciales). Datos en `zonas` de content.mjs.
+- Imágenes en WebP (`assets/images/*.webp`); los JPG se conservan solo para generar las tarjetas de WhatsApp. Para añadir una foto nueva: guardar el JPG y crear su `.webp` (y `-sm.webp` de 640 px).

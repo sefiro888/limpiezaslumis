@@ -1123,3 +1123,26 @@ export const anniversary = {
   ],
   cheer: '¡A por muchos años más dejando cada espacio impecable!',
 };
+
+// ---------- Zonas de trabajo (Lumis: hasta unos 40 minutos en coche desde Zaragoza) ----------
+export const zonas = {
+  barrios: ['Centro', 'Casco Histórico', 'Delicias', 'Universidad', 'San José', 'Las Fuentes', 'La Almozara', 'Oliver', 'Valdefierro',
+    'Torrero', 'La Paz', 'Actur', 'Rey Fernando', 'El Rabal', 'Arrabal', 'Casablanca', 'Santa Isabel', 'Miralbueno',
+    'Valdespartera', 'Rosales del Canal', 'Arcosur', 'Montecanal', 'Parque Goya', 'Romareda'],
+  municipios: [
+    ['Oeste', 'A-68 y N-232', ['Utebo', 'Casetas', 'Monzalbarba', 'Sobradiel', 'Pinseque', 'La Joyosa', 'Torres de Berrellén', 'Alagón', 'Figueruelas', 'Pedrola']],
+    ['Sur', 'A-23 dirección Teruel', ['Cuarte de Huerva', 'Cadrete', 'María de Huerva', 'Botorrita', 'Mozota', 'Muel']],
+    ['Suroeste', 'A-2 dirección Madrid', ['La Muela', 'Garrapinillos', 'Épila']],
+    ['Norte', 'A-23 dirección Huesca y valle del Gállego', ['Villanueva de Gállego', 'Zuera', 'San Mateo de Gállego', 'Montañana', 'Peñaflor de Gállego']],
+    ['Este', 'A-2 dirección Barcelona y ribera del Ebro', ['La Puebla de Alfindén', 'Pastriz', 'Alfajarín', 'Villamayor de Gállego', 'El Burgo de Ebro', 'Fuentes de Ebro']],
+  ],
+  poligonos: ['PLA-ZA', 'Malpica', 'Cogullada', 'El Portazgo', 'Empresarium', 'Centrovía (La Muela)'],
+  centros: ['Puerto Venecia', 'Grancasa', 'Augusta', 'Aragonia', 'Plaza Imperial (Utebo)', 'Utrillas Plaza'],
+  faq: [
+    ['¿Hasta dónde os desplazáis?', 'Hasta unos 40 minutos en coche desde Zaragoza. Dentro de ese radio trabajamos en barrios, municipios, polígonos y centros comerciales.'],
+    ['Mi pueblo no aparece en la lista, ¿llegáis?', 'Seguramente sí: la lista es orientativa. Si estás a menos de unos 40 minutos de Zaragoza, escríbenos y te lo confirmamos enseguida.'],
+    ['¿Trabajáis en polígonos y centros comerciales?', 'Sí. Limpiamos oficinas, naves, locales y comercios en polígonos industriales y centros comerciales de Zaragoza y alrededores.'],
+    ['¿Por qué no vais más allá de 40 minutos?', 'Porque el desplazamiento encarecería el servicio. Preferimos centrarnos en Zaragoza y su entorno para darte un precio justo y llegar siempre puntuales.'],
+    ['¿Están todos los servicios disponibles en todas las zonas?', 'Sí, los servicios son los mismos en toda la zona. Para trabajos grandes, como naves o fachadas, lo confirmamos al ver el espacio.'],
+  ],
+};

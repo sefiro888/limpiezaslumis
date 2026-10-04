@@ -104,8 +104,8 @@
     let loaded = 0;
     const done = () => { if (++loaded === 2) cmp.classList.remove('loading'); };
     after.onload = before.onload = done;
-    after.src = `assets/images/${pair}-despues.jpg`; after.alt = `${label}: después (ejemplo ilustrativo)`;
-    before.src = `assets/images/${pair}-antes.jpg`; before.alt = `${label}: antes (ejemplo ilustrativo)`;
+    after.src = `assets/images/${pair}-despues.webp`; after.alt = `${label}: después (ejemplo ilustrativo)`;
+    before.src = `assets/images/${pair}-antes.webp`; before.alt = `${label}: antes (ejemplo ilustrativo)`;
     $('input', cmp).setAttribute('aria-label', `Comparar antes y después: ${label}`);
     setTimeout(() => cmp.classList.remove('loading'), 1500);
   }));
