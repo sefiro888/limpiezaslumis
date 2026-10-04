@@ -11,7 +11,7 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] || root);
-const V = '9';
+const V = '10';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
 // Servicios destacados, en el orden elegido por la clienta.
@@ -623,7 +623,7 @@ ${pageHero({
     title: 'Detrás de cada brillo, <em>está Luis.</em>',
     lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su suegra, María Lucrecia.`,
     ctas: `${btnBook('Hablar con Luis')}<a class="btn btn-ghost" href="#historia">${icon('arrow')}<span>Conoce su historia</span></a>`,
-    visual: `<div class="about-visual">${phoneVideo({ name: 'lumis-trabajo', alt: 'Luis limpiando cristales en un trabajo real de Limpiezas Lumis', label: 'Trabajo real' })}<div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
+    visual: `<div class="about-visual"><figure class="about-portrait"><img src="assets/images/luis.jpg" srcset="assets/images/luis-sm.jpg 640w, assets/images/luis.jpg 1120w" sizes="(max-width: 760px) 84vw, 34vw" alt="Luis Hernando Arellano, fundador de Limpiezas Lumis, en su oficina de Zaragoza" width="1120" height="1400" loading="eager" fetchpriority="high"><figcaption><b>Luis Hernando Arellano</b><small>Fundador de Limpiezas Lumis</small></figcaption></figure><div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
   })}
 
 <section class="svc-band">
@@ -656,8 +656,9 @@ ${wave('wave-bottom')}
 
 <section class="sec about-story">
 <div class="wrap about-story-grid">
-<div class="about-story-copy reveal"><span class="eyebrow">${icon('heart')} Por qué Lumis</span><h2>Lo que se aprende <em>trabajando.</em></h2>${about.story.map(p => `<p class="lead">${esc(p)}</p>`).join('')}</div>
-<figure class="about-motto reveal">${icon('quote', 'about-q')}<blockquote>Cuidar cada espacio <em>como si fuera el nuestro.</em></blockquote><figcaption>Nuestra forma de trabajar</figcaption></figure>
+<div class="about-story-copy reveal"><span class="eyebrow">${icon('heart')} Por qué Lumis</span><h2>Lo que se aprende <em>trabajando.</em></h2>${about.story.map(p => `<p class="lead">${esc(p)}</p>`).join('')}
+<figure class="about-motto">${icon('quote', 'about-q')}<blockquote>Cuidar cada espacio <em>como si fuera el nuestro.</em></blockquote><figcaption>Nuestra forma de trabajar</figcaption></figure></div>
+<div class="about-story-video reveal">${phoneVideo({ name: 'lumis-trabajo', alt: 'Luis limpiando cristales en un trabajo real de Limpiezas Lumis', label: 'Luis, trabajando' })}</div>
 </div>
 </section>
 
