@@ -11,7 +11,7 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] || root);
-const V = '11';
+const V = '12';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
 // Servicios destacados, en el orden elegido por la clienta.
@@ -59,7 +59,7 @@ const groupIcon = { hogar: 'home', exterior: 'sun', profesional: 'building', sup
 const wa = (msg = 'Hola Lumis, he visto vuestra web y me gustaría pedir un presupuesto sin compromiso.') => `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(msg)}`;
 const tel = `tel:${B.phoneIntl}`;
 const img = (name, alt, { cls = '', eager = false, sizes = '(max-width: 760px) 92vw, 45vw' } = {}) =>
-  `<img${cls ? ` class="${cls}"` : ''} src="assets/images/${name}.webp" srcset="assets/images/${name}-sm.webp 640w, assets/images/${name}.webp 1536w" sizes="${sizes}" alt="${esc(alt)}" width="1536" height="1024" loading="${eager ? 'eager' : 'lazy'}" decoding="async"${eager ? ' fetchpriority="high"' : ''}>`;
+  `<img${cls ? ` class="${cls}"` : ''} src="assets/images/${name}.webp" srcset="assets/images/${name}-sm.webp 640w, assets/images/${name}-md.webp 1024w, assets/images/${name}.webp 1536w" sizes="${sizes}" alt="${esc(alt)}" width="1536" height="1024" loading="${eager ? 'eager' : 'lazy'}" decoding="async"${eager ? ' fetchpriority="high"' : ''}>`;
 
 const stars = n => `<span class="stars" role="img" aria-label="${n} de 5 estrellas">${[1, 2, 3, 4, 5].map(i => `<svg viewBox="0 0 24 24" class="${i <= n ? 'on' : ''}" aria-hidden="true"><path d="${paths.star.match(/d="([^"]+)"/)[1]}"/></svg>`).join('')}</span>`;
 const reviewCard = (r, cls = 'rv', style = '') => `<figure class="${cls}"${style ? ` style="${style}"` : ''} data-kind="${r.business ? 'empresa' : 'particular'}"><div class="rv-top">${stars(r.rating)}<span class="rv-src">Google</span></div><blockquote>${esc(r.text)}</blockquote><figcaption><span class="rv-av" aria-hidden="true">${esc(r.name.trim()[0].toUpperCase())}</span><span><b>${esc(r.name)}</b><small>${r.business ? 'Empresa cliente' : 'Cliente'} · ${B.city}</small></span></figcaption></figure>`;
@@ -116,7 +116,7 @@ function header(current) {
   const isSvc = !!bySlug[current];
   return `<header class="hdr" data-header>
 <div class="hdr-in">
-<a class="logo" href="index.html" aria-label="${B.name}, inicio"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="${B.name}"></a>
+<a class="logo" href="index.html" aria-label="${B.name}, inicio"><img src="assets/images/logo-horizontal.webp" width="508" height="160" alt="${B.name}" fetchpriority="high"></a>
 <nav class="nav" aria-label="Principal">
 <a href="index.html"${cur(current, 'index')}>Inicio</a>
 <div class="has-mega"><button type="button" class="nav-drop${isSvc ? ' is-cur' : ''}" aria-expanded="false" aria-controls="mega">Servicios ${icon('chevron')}</button>
@@ -137,7 +137,7 @@ function mobileNav(current, msg) {
   const extras = { opiniones: '<b class="mn-stars">★ 5</b>' };
   return `<div class="mnav" id="mnav" aria-label="Menú" aria-hidden="true" inert>
 <div class="mnav-bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-<div class="mnav-top"><a class="mnav-logo" href="index.html"><img src="assets/images/logo-horizontal.png" width="508" height="160" alt="${B.name}"></a><button type="button" class="mnav-close" aria-label="Cerrar menú">${icon('close')}</button></div>
+<div class="mnav-top"><a class="mnav-logo" href="index.html"><img src="assets/images/logo-horizontal.webp" width="508" height="160" alt="${B.name}" loading="lazy"></a><button type="button" class="mnav-close" aria-label="Cerrar menú">${icon('close')}</button></div>
 <nav class="mnav-links" aria-label="Menú móvil">
 <a href="index.html" style="--i:0"${cur(current, 'index')}><span>Inicio</span>${icon('arrow')}</a>
 <details class="mnav-svc" style="--i:1"${bySlug[current] ? ' open' : ''}><summary><span>Servicios <small>${services.length}</small></span>${icon('chevron')}</summary>
@@ -164,7 +164,7 @@ function footer(msg) {
 </div></section>
 <footer class="ftr">
 <div class="ftr-grid">
-<div class="ftr-brand"><img src="assets/images/logo-lumis.png" width="480" height="561" alt="${B.name}" loading="lazy"><p>Servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas con productos y técnicas de alta calidad.</p>${socialLinks('social-ftr')}</div>
+<div class="ftr-brand"><img src="assets/images/logo-lumis.webp" width="380" height="444" alt="${B.name}" loading="lazy"><p>Servicio integral de limpieza en ${B.city}. Cristales, toldos, garajes, viviendas, comunidades y empresas con productos y técnicas de alta calidad.</p>${socialLinks('social-ftr')}</div>
 <div class="ftr-col ftr-svc"><h3>Servicios</h3><ul>${services.map(s => `<li><a href="${s.slug}.html">${s.label}</a></li>`).join('')}</ul></div>
 <div class="ftr-col"><h3>Lumis</h3><ul>${PAGES.map(([k, l]) => `<li><a href="${k}.html">${l}</a></li>`).join('')}<li><a href="zonas.html">Zonas de trabajo</a></li></ul></div>
 <div class="ftr-col ftr-contact"><h3>Contacto</h3>
@@ -268,14 +268,13 @@ const page = ({ title, desc, bodyClass, current, main, msg, extraHead = '' }) =>
 <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" id="css-lumis" href="assets/css/lumis.css?v=${V}">
-<link rel="stylesheet" id="css-pages" href="assets/css/pages.css?v=${V}">
-<link rel="stylesheet" id="css-fx" href="assets/css/fx.css?v=${V}">
+<link rel="preload" href="assets/images/logo-horizontal.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/site.css?v=${V}">
 <script>try{if(sessionStorage.getItem('fx-nav')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx-enter');sessionStorage.removeItem('fx-nav')}catch(e){}</script>
 ${jsonLd(current)}
 </head>
 <body class="${bodyClass}" id="top"${bySlug[current] ? ` data-service="${current}"` : ''}>
-<div class="fx-veil" aria-hidden="true"><img src="assets/images/logo-lumis.png" width="480" height="561" alt=""></div>
+<div class="fx-veil" aria-hidden="true"><img src="assets/images/logo-lumis.webp" width="380" height="444" alt="" decoding="async"></div>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 ${announce()}
 ${header(current)}
@@ -308,7 +307,7 @@ const serviceCard = (s, extra = '') => `<a class="card reveal" href="${s.slug}.h
 
 // Vídeo vertical dentro de un marco de móvil. Solo se carga y reproduce cuando está en pantalla.
 const phoneVideo = ({ name, label, alt, cls = '' }) => `<figure class="phone ${cls}" data-video>
-<video muted loop playsinline preload="none" poster="assets/video/${name}.jpg" aria-label="${esc(alt)}"><source src="assets/video/${name}.mp4" type="video/mp4"></video>
+<video muted loop playsinline preload="none" poster="assets/video/${name}.webp" aria-label="${esc(alt)}"><source src="assets/video/${name}.mp4" type="video/mp4"></video>
 <button type="button" class="phone-toggle" aria-label="Pausar vídeo" aria-pressed="false"><span class="ico-pause" aria-hidden="true"></span></button>
 ${label ? `<figcaption class="phone-tag"><i></i>${label}</figcaption>` : ''}
 </figure>`;
@@ -645,7 +644,7 @@ ${pageHero({
     title: 'Detrás de cada brillo, <em>está Luis.</em>',
     lead: `Limpiezas Lumis es la empresa de ${B.owner}. Desde 2021 se dedica a la limpieza: primero para otras empresas, limpiando cristales y oficinas, y desde octubre de 2025 con la suya propia, junto a su mujer, María Lucrecia.`,
     ctas: `${btnBook('Hablar con Luis')}<a class="btn btn-ghost" href="#historia">${icon('arrow')}<span>Conoce su historia</span></a>`,
-    visual: `<div class="about-visual"><figure class="about-portrait"><img src="assets/images/luis.webp" srcset="assets/images/luis-sm.webp 640w, assets/images/luis.webp 1120w" sizes="(max-width: 760px) 84vw, 34vw" alt="Luis Hernando Arellano, fundador de Limpiezas Lumis, en su oficina de Zaragoza" width="1120" height="1400" loading="eager" fetchpriority="high"><figcaption><b>Luis Hernando Arellano</b><small>Fundador de Limpiezas Lumis</small></figcaption></figure><div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
+    visual: `<div class="about-visual"><figure class="about-portrait"><img src="assets/images/luis.webp" srcset="assets/images/luis-sm.webp 640w, assets/images/luis-md.webp 1024w, assets/images/luis.webp 1120w" sizes="(max-width: 760px) 84vw, 34vw" alt="Luis Hernando Arellano, fundador de Limpiezas Lumis, en su oficina de Zaragoza" width="1120" height="1400" loading="eager" fetchpriority="high"><figcaption><b>Luis Hernando Arellano</b><small>Fundador de Limpiezas Lumis</small></figcaption></figure><div class="float-card fc-mini about-since">${icon('calendar')}<span><b>Desde 2021</b><small>en el oficio</small></span></div><div class="float-card fc-mini about-born">${icon('spark')}<span><b>Octubre 2025</b><small>nace Lumis</small></span></div></div>`,
   })}
 
 <section class="svc-band">
@@ -1001,6 +1000,13 @@ const notFound = () => page({
 });
 
 fs.mkdirSync(OUT, { recursive: true });
+// Las tres hojas de estilo se publican unidas y comprimidas en site.css: una sola descarga que bloquea el renderizado.
+// Se editan siempre lumis.css, pages.css y fx.css; site.css se regenera en cada build.
+{
+  const css = ['lumis', 'pages', 'fx'].map(n => fs.readFileSync(path.join(OUT, `assets/css/${n}.css`), 'utf8')).join('\n')
+    .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}').trim();
+  fs.writeFileSync(path.join(OUT, 'assets/css/site.css'), css + '\n');
+}
 const write = (name, html) => fs.writeFileSync(path.join(OUT, name), html);
 write('index.html', home());
 for (const s of services) write(`${s.slug}.html`, servicePage(s));
