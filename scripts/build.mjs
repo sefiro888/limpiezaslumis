@@ -319,9 +319,9 @@ const strip = () => {
 };
 
 // Cabecera de páginas interiores.
-const pageHero = ({ crumb, eyebrow, title, lead, ctas, visual, cls = '' }) => stage(`<nav class="crumbs wrap" aria-label="Ruta"><a href="index.html">Inicio</a>${icon('chevron')}<span aria-current="page">${crumb}</span></nav>
+const pageHero = ({ crumb, eyebrow, title, lead, ctas, visual, cls = '', free = false }) => stage(`<nav class="crumbs wrap" aria-label="Ruta"><a href="index.html">Inicio</a>${icon('chevron')}<span aria-current="page">${crumb}</span></nav>
 <section class="page-hero wrap ${cls}">
-<div class="page-hero-copy"><span class="eyebrow">${eyebrow}</span><h1 class="hero-title">${title}</h1><p class="svc-lead">${lead}</p>${ctas ? `<div class="hero-cta">${ctas}</div>` : ''}</div>
+<div class="page-hero-copy"><span class="eyebrow">${eyebrow}</span><h1 class="hero-title">${title}</h1><p class="svc-lead">${lead}</p>${free ? `<p class="free-visit">${icon('check')}<span><b>Visita y presupuesto gratis</b> en ${B.city} y hasta 40 min</span></p>` : ''}${ctas ? `<div class="hero-cta">${ctas}</div>` : ''}</div>
 <div class="page-hero-visual">${visual}</div>
 </section>`, 'stage-page');
 
@@ -723,7 +723,7 @@ function zonasPage() {
   const chips = list => `<ul class="about-chips zone-chips">${list.map(z => `<li>${icon('pin')}${esc(z)}</li>`).join('')}</ul>`;
   const main = `
 ${pageHero({
-    crumb: 'Zonas de trabajo', eyebrow: `${icon('pin')} Dónde trabajamos`,
+    free: true, crumb: 'Zonas de trabajo', eyebrow: `${icon('pin')} Dónde trabajamos`,
     title: 'Limpieza en Zaragoza <em>y alrededores.</em>',
     lead: `Trabajamos en todos los barrios de ${B.city} y en los municipios, polígonos y centros comerciales que están a unos 40 minutos en coche. La visita y el presupuesto son gratis.`,
     ctas: `${btnBook('Pedir presupuesto')}<a class="btn btn-ghost" href="${wa('Hola Lumis, ¿trabajáis en mi zona? Estoy en ')}" target="_blank" rel="noopener">${icon('wa')}<span>¿Llegáis a mi zona?</span></a>`,
@@ -774,7 +774,7 @@ ${wave('wave-bottom')}
 function methodPage() {
   const main = `
 ${pageHero({
-    crumb: 'Cómo trabajamos', eyebrow: `${icon('clock')} Nuestro método`,
+    free: true, crumb: 'Cómo trabajamos', eyebrow: `${icon('clock')} Nuestro método`,
     title: 'Así trabajamos <em>en Lumis.</em>',
     lead: 'Un proceso claro de principio a fin: te escuchamos, te damos un presupuesto sin sorpresas y cuidamos tu espacio como si fuera nuestro.',
     ctas: `${btnBook('Empezar ahora')}<a class="btn btn-ghost" href="#metodo">${icon('arrow')}<span>Ver el proceso</span></a>`,
@@ -840,7 +840,7 @@ function contactPage() {
   ];
   const main = `
 ${pageHero({
-    crumb: 'Contacto', eyebrow: `${icon('wa')} Contacto`,
+    free: true, crumb: 'Contacto', eyebrow: `${icon('wa')} Contacto`,
     title: 'Hablemos de <em>tu espacio.</em>',
     lead: 'Llámanos, escríbenos por WhatsApp o reserva tu cita en un minuto. Vamos a verlo y te damos presupuesto gratis en Zaragoza y hasta 40 minutos alrededor.',
     ctas: `${btnBook('Agendar cita')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a><a class="btn btn-ghost" href="tel:${B.landlineIntl}">${icon('phone')}<span>Fijo ${B.landline}</span></a>`,
