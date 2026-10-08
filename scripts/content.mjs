@@ -250,7 +250,7 @@ export const services = [
       ['¿Quitáis el verdín?', 'Sí, lo tratamos con productos específicos y cepillado. En zonas muy húmedas conviene repetir el mantenimiento.'],
       ['¿Limpiáis también el toldo y el cerramiento?', 'Sí, se pueden combinar en la misma visita. Indícalo al pedir cita y lo incluimos en el presupuesto.'],
       ['¿Necesito tener toma de agua?', 'Es muy recomendable disponer de un grifo en la terraza o cerca. Si no la hay, lo organizamos contigo.'],
-      ['¿Cuánto cuesta?', 'El precio es a consultar: depende de los metros, del estado y de los extras. Con unas fotos lo hablamos y acordamos el precio contigo, sin compromiso.'],
+      ['¿Cuánto cuesta?', 'El precio depende de los metros, del estado y de los extras. Vamos a verlo gratis (o lo valoramos con unas fotos) y acordamos el precio contigo, sin compromiso.'],
     ],
     related: ['toldos', 'cristales', 'limpieza-general'],
   },
@@ -515,7 +515,7 @@ export const services = [
       ['¿Retiráis escombros de obra?', 'Retiramos la suciedad y restos de limpieza. Escombros y materiales de obra deben retirarse antes.'],
       ['¿Limpiáis el interior de los electrodomésticos?', 'Sí: horno, microondas, campana y nevera se incluyen en la limpieza integral.'],
       ['¿Se puede hacer con muebles?', 'Sí, limpiamos alrededor, encima y debajo de los muebles que se pueden mover con seguridad.'],
-      ['¿Hacéis presupuesto cerrado?', 'Sí. Con los metros, el estado y algunas fotos te damos un presupuesto sin compromiso.'],
+      ['¿Hacéis presupuesto cerrado?', 'Sí. Vamos a verlo gratis o lo valoramos con los metros y unas fotos, y te damos un presupuesto cerrado y sin compromiso.'],
     ],
     related: ['pisos-viviendas', 'desinfeccion-interiores', 'limpieza-general'],
   },
@@ -1031,7 +1031,7 @@ export const reviews = [
 // ---------- Páginas: Cómo trabajamos, Opiniones y Contacto ----------
 export const method = [
   ['calendar', 'Nos contactas', 'Reserva desde la web en un minuto, escríbenos por WhatsApp o llámanos. Nos cuentas qué quieres limpiar, dónde está y cuándo te vendría bien.'],
-  ['camera', 'Vemos tu espacio', 'Con unas fotos y las medidas aproximadas entendemos el estado, los materiales y los accesos. Si hace falta, lo vemos en persona antes de presupuestar.'],
+  ['camera', 'Vemos tu espacio', 'Nos desplazamos sin coste a ver tu espacio, en Zaragoza y hasta 40 minutos alrededor, para entender el estado, los materiales y los accesos. Si lo prefieres, también podemos valorarlo con unas fotos.'],
   ['plan', 'Presupuesto claro', 'Te enviamos una propuesta con lo que incluye el servicio, cómo lo haremos y el precio. Sin compromiso y sin letra pequeña: tú decides.'],
   ['spark', 'El día de la limpieza', 'Llegamos a la hora acordada, protegemos lo que hay alrededor y trabajamos con productos y herramientas adecuados a cada superficie.'],
   ['check', 'Revisión y seguimiento', 'Repasamos el resultado contigo antes de irnos. Si quieres, programamos las siguientes limpiezas para que tu espacio esté siempre a punto.'],
@@ -1075,7 +1075,8 @@ export const loveThemes = [
 export const generalFaq = [
   ['¿En qué zonas trabajáis?', 'Trabajamos en Zaragoza capital y hasta unos 40 minutos alrededor: área metropolitana, polígonos, centros comerciales y pueblos cercanos. Más lejos no nos desplazamos, porque el viaje encarecería el servicio. Si dudas, pregúntanos por tu zona.'],
   ['¿Hasta qué altura trabajáis?', 'Trabajamos hasta unos 3 metros de altura, desde el suelo, una escalera o una terraza. Por encima de esa altura no realizamos el trabajo; si tienes dudas, envíanos una foto y te lo confirmamos.'],
-  ['¿Cuánto cuesta el servicio?', 'Todos nuestros precios son a consultar, porque cada espacio es distinto. Nos cuentas qué necesitas, vemos unas fotos o el espacio y acordamos contigo el precio antes de empezar, sin compromiso.'],
+  ['¿El presupuesto es gratis?', 'Sí. Si estás en Zaragoza o a menos de unos 40 minutos, vamos a ver el espacio sin coste y te damos un presupuesto gratis y sin compromiso. Si lo prefieres, también puedes enviarnos fotos por WhatsApp.'],
+  ['¿Cuánto cuesta el servicio?', 'El precio depende de cada espacio: metros, estado y extras. Por eso vamos a verlo gratis y acordamos contigo el precio antes de empezar, sin compromiso.'],
   ['¿Puedo agendar para hoy mismo?', 'Puedes pedir tu cita hoy mismo desde la web o por WhatsApp. Te confirmamos el primer hueco disponible.'],
   ['¿Lleváis vuestros productos y herramientas?', 'Sí, llevamos productos y útiles profesionales. Si prefieres que usemos algún producto concreto, dínoslo.'],
   ['¿Trabajáis con empresas y comunidades?', 'Sí: oficinas, gimnasios, naves, garajes y comunidades de vecinos con planes periódicos.'],
@@ -1140,6 +1141,7 @@ export const zonas = {
   centros: ['Puerto Venecia', 'Grancasa', 'Augusta', 'Aragonia', 'Plaza Imperial (Utebo)', 'Utrillas Plaza'],
   faq: [
     ['¿Hasta dónde os desplazáis?', 'Hasta unos 40 minutos en coche desde Zaragoza. Dentro de ese radio trabajamos en barrios, municipios, polígonos y centros comerciales.'],
+    ['¿La visita para el presupuesto es gratis?', 'Sí. En toda la zona, Zaragoza y hasta unos 40 minutos alrededor, vamos a ver el espacio sin coste y te damos el presupuesto gratis y sin compromiso.'],
     ['Mi pueblo no aparece en la lista, ¿llegáis?', 'Seguramente sí: la lista es orientativa. Si estás a menos de unos 40 minutos de Zaragoza, escríbenos y te lo confirmamos enseguida.'],
     ['¿Trabajáis en polígonos y centros comerciales?', 'Sí. Limpiamos oficinas, naves, locales y comercios en polígonos industriales y centros comerciales de Zaragoza y alrededores.'],
     ['¿Por qué no vais más allá de 40 minutos?', 'Porque el desplazamiento encarecería el servicio. Preferimos centrarnos en Zaragoza y su entorno para darte un precio justo y llegar siempre puntuales.'],

@@ -624,3 +624,9 @@ html,body{overflow-x:clip}
 .svc-meta dd a,.ftr-contact p a{color:inherit;text-decoration:underline;text-decoration-color:rgba(18,178,210,.5);text-underline-offset:3px}
 @media (max-width:980px){.zone-groups,.zone-svc{grid-template-columns:1fr 1fr}.zone-biz{grid-template-columns:1fr}}
 @media (max-width:640px){.zone-groups,.zone-svc{grid-template-columns:1fr}}
+
+/* Aviso de visita y presupuesto gratis bajo los titulares */
+.free-visit{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;padding:9px 16px 9px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#e6f8fc;font-size:15px;line-height:1.35}
+.free-visit .i{width:26px;height:26px;padding:5px;border-radius:50%;background:#22c55e;color:#fff;flex:none}
+.free-visit b{color:#fff}
+@media (max-width:640px){.free-visit{font-size:14px;border-radius:18px}}

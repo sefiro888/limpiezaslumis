@@ -11,7 +11,7 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] || root);
-const V = '12';
+const V = '13';
 
 const bySlug = Object.fromEntries(services.map(s => [s.slug, s]));
 // Servicios destacados, en el orden elegido por la clienta.
@@ -104,7 +104,7 @@ const tickerItems = [
   ['calendar', 'Agenda hoy mismo'],
   ['star', '<b>★★★★★</b> Opiniones reales en Google'],
   ['spark', 'Comunidades · Oficinas · Gimnasios · Colegios · Clínicas'],
-  ['check', 'Presupuesto sin compromiso'],
+  ['check', 'Visita y presupuesto <b>gratis</b>'],
   ['pin', B.zone],
   ['phone', B.phone],
 ];
@@ -120,7 +120,7 @@ function header(current) {
 <nav class="nav" aria-label="Principal">
 <a href="index.html"${cur(current, 'index')}>Inicio</a>
 <div class="has-mega"><button type="button" class="nav-drop${isSvc ? ' is-cur' : ''}" aria-expanded="false" aria-controls="mega">Servicios ${icon('chevron')}</button>
-<div class="mega" id="mega"><div class="mega-grid">${mega}</div><div class="mega-foot"><span>${icon('check')} Precios a consultar, <b>sin compromiso</b></span><a href="index.html#servicios">Ver los ${services.length} servicios ${icon('arrow')}</a></div></div></div>
+<div class="mega" id="mega"><div class="mega-grid">${mega}</div><div class="mega-foot"><span>${icon('check')} Visita y presupuesto <b>gratis</b>, sin compromiso</span><a href="index.html#servicios">Ver los ${services.length} servicios ${icon('arrow')}</a></div></div></div>
 ${PAGES.slice(1).map(([k, l]) => `<a href="${k}.html"${cur(current, k)}>${l}</a>`).join('\n')}
 </nav>
 <div class="hdr-actions">
@@ -159,7 +159,7 @@ function footer(msg) {
 <div class="cta-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <span class="eyebrow on-dark">${icon('spark')} Agenda hoy mismo</span>
 <h2>¿Lo dejamos <em>reluciente?</em></h2>
-<p>Cuéntanos qué necesitas y te respondemos con un presupuesto sin compromiso. Reservar tu cita lleva menos de un minuto.</p>
+<p>Cuéntanos qué necesitas: vamos a verlo y te damos presupuesto gratis y sin compromiso. Reservar tu cita lleva menos de un minuto.</p>
 <div class="cta-actions">${btnBook('Agendar mi cita', '', 'btn btn-light')}<a class="btn btn-outline-light" href="${tel}">${icon('phone')}<span>Llamar al ${B.phone}</span></a></div>
 </div></section>
 <footer class="ftr">
@@ -189,7 +189,7 @@ function bookingDialog() {
 <fieldset class="book-step" data-step="1"><legend>¿Qué necesitas limpiar?</legend>
 <div class="quick-services">${featured.map(s => `<button type="button" class="qs" data-pick="${s.slug}">${img(s.img, '', { sizes: '120px' })}<span>${s.label}</span></button>`).join('')}</div>
 <label class="field"><span>O elige entre todos los servicios</span><select name="service" required>${opts}</select></label>
-<p class="book-offer">${icon('check')} Precio a consultar: lo hablamos contigo <b>sin compromiso</b>.</p>
+<p class="book-offer">${icon('check')} <b>Visita y presupuesto gratis</b> en Zaragoza y hasta 40 min, sin compromiso.</p>
 </fieldset>
 <fieldset class="book-step" data-step="2" hidden><legend>¿Cuándo te viene bien?</legend>
 <div class="chips" role="group" aria-label="Fecha rápida"><button type="button" class="chip" data-when="hoy">Hoy mismo</button><button type="button" class="chip" data-when="manana">Mañana</button><button type="button" class="chip" data-when="semana">Esta semana</button><button type="button" class="chip" data-when="flexible">Sin prisa</button></div>
@@ -346,10 +346,11 @@ function home() {
   const main = `
 ${stage(`<section class="hero">
 <div class="hero-copy">
-<span class="pill"><span class="pulse"></span>Servicio integral · Presupuesto sin compromiso</span>
+<span class="pill"><span class="pulse"></span>Servicio integral · Zaragoza y alrededores</span>
 <h1 class="hero-title"><small class="hero-kicker">Empresa de limpieza en ${B.city}</small><span class="line">Deja tus</span> <span class="line">espacios</span> <span class="line"><em>relucientes.</em></span></h1>
 <p class="hero-lead">Limpieza profesional para <b>comunidades, oficinas, gimnasios, colegios y clínicas dentales</b> —y también para tu casa— con productos y técnicas de alta calidad.</p>
 <div class="hero-cta">${btnBook('Agendar hoy mismo')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a></div>
+<p class="free-visit">${icon('check')}<span><b>Visita y presupuesto gratis</b> en ${B.city} y hasta 40 min</span></p>
 <div class="hero-extras"><a class="hero-rating" href="opiniones.html">${stars(5)}<span><b>Clientes encantados en Google</b><small>Lee sus opiniones ${icon('arrow')}</small></span></a>
 <div class="hero-follow"><span>Síguenos</span>${socialLinks('social-round')}</div></div>
 </div>
@@ -456,7 +457,7 @@ ${stepsBlock(method.slice(0, 4).map(([i, t, d]) => [t, d, i]))}
 </section>`;
   return page({
     title: `${B.name} · Limpieza de comunidades, oficinas, colegios y clínicas en ${B.city}`,
-    desc: `${B.name}: servicio integral de limpieza en ${B.city}. Comunidades, oficinas, gimnasios, colegios y clínicas dentales, además de cristales, toldos, garajes y viviendas. Presupuesto sin compromiso. Agenda hoy mismo.`,
+    desc: `Empresa de limpieza en ${B.city}: vamos a verlo y te damos presupuesto gratis (Zaragoza y hasta 40 min). Comunidades, oficinas, gimnasios, colegios, clínicas, cristales y viviendas.`,
     bodyClass: 'is-home', current: 'index', main,
   });
 }
@@ -488,6 +489,7 @@ function servicePage(s) {
 <p class="svc-tagline"><em>${esc(s.line)}</em></p>
 <p class="svc-lead">${esc(s.lead)}</p>
 <ul class="facts">${s.facts.map(f => `<li>${icon('check')}${esc(f)}</li>`).join('')}</ul>
+<p class="free-visit">${icon('check')}<span><b>Visita y presupuesto gratis</b> en ${B.city} y hasta 40 min</span></p>
 <div class="hero-cta">${btnBook('Agendar esta limpieza', s.slug)}<a class="btn btn-ghost" href="${wa(msg)}" target="_blank" rel="noopener">${icon('wa')}<span>Presupuesto por WhatsApp</span></a></div>
 ${s.review ? `<p class="svc-review">${icon('clock')} Servicio sujeto a disponibilidad. Escríbenos con fotos y te confirmamos.</p>` : ''}
 </div>
@@ -501,7 +503,7 @@ ${s.review ? `<p class="svc-review">${icon('clock')} Servicio sujeto a disponibi
 <div class="kpis wrap">
 <div class="kpi reveal"><b data-count>${s.includes.length}</b><span>puntos incluidos en el servicio</span></div>
 <div class="kpi reveal" style="--d:80ms"><b data-count>${s.steps.length}</b><span>pasos de un método probado</span></div>
-<div class="kpi reveal" style="--d:160ms"><b>A medida</b><span>precio a consultar, sin compromiso</span></div>
+<div class="kpi reveal" style="--d:160ms"><b>Gratis</b><span>visita y presupuesto, sin compromiso</span></div>
 <div class="kpi kpi-hl reveal" style="--d:240ms"><b>★ 5</b><span>la valoración que más nos dan en Google</span></div>
 </div>
 ${wave('wave-bottom')}
@@ -517,7 +519,7 @@ ${quote ? `<figure class="mini-rv">${stars(quote.rating)}<blockquote>“${esc(qu
 <aside class="summary reveal"><h3>En resumen</h3><dl>
 <div><dt>${icon('user')} Ideal para</dt><dd>${s.ideal.map(x => x[0]).join(', ')}</dd></div>
 <div><dt>${icon('clock')} Frecuencia habitual</dt><dd>${s.frequency.map(x => x[0]).join(' · ')}</dd></div>
-<div><dt>${icon('plan')} Precio</dt><dd>A consultar: lo acordamos contigo según tu espacio, sin compromiso.</dd></div>
+<div><dt>${icon('plan')} Precio</dt><dd>A consultar. Vamos a verlo y te damos presupuesto gratis y sin compromiso.</dd></div>
 <div><dt>${icon('pin')} Zona</dt><dd><a href="zonas.html">${B.zone}</a></dd></div>
 </dl>${btnBook('Reservar cita', s.slug, 'btn btn-primary btn-block')}<a class="summary-tel" href="${tel}">o llama al <b>${B.phone}</b></a></aside>
 </div>
@@ -585,8 +587,8 @@ ${reviewAsk()}
 </div>
 </section>`;
   return page({
-    title: `${s.title} en ${B.city} | ${B.name}`,
-    desc: `${s.title} en ${B.city} con ${B.name}. ${s.lead} Presupuesto sin compromiso.`,
+    title: `${s.title} en ${B.city} · Presupuesto gratis | ${B.name}`,
+    desc: `${s.title} en ${B.city}: vamos a verlo y te damos presupuesto gratis y sin compromiso (Zaragoza y hasta 40 min). ${s.lead}`,
     bodyClass: 'is-service', current: s.slug, main, msg,
   });
 }
@@ -723,7 +725,7 @@ function zonasPage() {
 ${pageHero({
     crumb: 'Zonas de trabajo', eyebrow: `${icon('pin')} Dónde trabajamos`,
     title: 'Limpieza en Zaragoza <em>y alrededores.</em>',
-    lead: `Trabajamos en todos los barrios de ${B.city} y en los municipios, polígonos y centros comerciales que están a unos 40 minutos en coche. Presupuesto sin compromiso.`,
+    lead: `Trabajamos en todos los barrios de ${B.city} y en los municipios, polígonos y centros comerciales que están a unos 40 minutos en coche. La visita y el presupuesto son gratis.`,
     ctas: `${btnBook('Pedir presupuesto')}<a class="btn btn-ghost" href="${wa('Hola Lumis, ¿trabajáis en mi zona? Estoy en ')}" target="_blank" rel="noopener">${icon('wa')}<span>¿Llegáis a mi zona?</span></a>`,
     visual: `<div class="map-card" aria-hidden="true"><div class="map-rings"><i></i><i></i><i></i></div><span class="map-pin">${icon('pin')}</span><p><b>${B.city}</b><small>y hasta 40 min alrededor</small></p></div>`,
   })}
@@ -791,7 +793,7 @@ ${pageHero({
 <div class="includes-copy reveal"><span class="eyebrow">${icon('camera')} Para tu presupuesto</span><h2>Lo que nos ayuda <em>a darte precio.</em></h2><p class="lead">Con esta información podemos darte un presupuesto ajustado sin necesidad de visita en la mayoría de los casos.</p>
 <ul class="checklist">${quoteChecklist.map((t, i) => `<li style="--d:${i * 50}ms"><span class="cl-n">${String(i + 1).padStart(2, '0')}</span><span>${esc(t)}</span>${icon('check')}</li>`).join('')}</ul>
 <div class="hero-cta">${btnBook('Enviar mi consulta')}</div></div>
-<figure class="includes-media reveal">${img('interiores', 'Interior luminoso y limpio (ejemplo ilustrativo)', { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Precio a consultar, sin compromiso</figcaption></figure>
+<figure class="includes-media reveal">${img('interiores', 'Interior luminoso y limpio (ejemplo ilustrativo)', { sizes: '(max-width: 760px) 92vw, 40vw' })}<figcaption>${icon('shield')} Visita y presupuesto gratis</figcaption></figure>
 </div>
 </section>
 
@@ -825,7 +827,7 @@ ${wave('wave-bottom')}
 <div class="reveal">${faqList(generalFaq)}</div>
 </div>
 </section>`;
-  return page({ title: `Cómo trabajamos | ${B.name}`, desc: `Así trabaja ${B.name} en ${B.city}: presupuesto claro y sin compromiso, puntualidad, productos adecuados y revisión final contigo.`, bodyClass: 'is-page', current: 'como-trabajamos', main });
+  return page({ title: `Cómo trabajamos | ${B.name}`, desc: `Así trabaja ${B.name} en ${B.city}: visita y presupuesto gratis y sin compromiso, puntualidad, productos adecuados y revisión final contigo.`, bodyClass: 'is-page', current: 'como-trabajamos', main });
 }
 
 // ---------- Contacto ----------
@@ -840,7 +842,7 @@ function contactPage() {
 ${pageHero({
     crumb: 'Contacto', eyebrow: `${icon('wa')} Contacto`,
     title: 'Hablemos de <em>tu espacio.</em>',
-    lead: 'Llámanos, escríbenos por WhatsApp o reserva tu cita en un minuto. Presupuesto sin compromiso en Zaragoza y hasta 40 minutos alrededor.',
+    lead: 'Llámanos, escríbenos por WhatsApp o reserva tu cita en un minuto. Vamos a verlo y te damos presupuesto gratis en Zaragoza y hasta 40 minutos alrededor.',
     ctas: `${btnBook('Agendar cita')}<a class="btn btn-ghost" href="${tel}">${icon('phone')}<span>${B.phone}</span></a><a class="btn btn-ghost" href="tel:${B.landlineIntl}">${icon('phone')}<span>Fijo ${B.landline}</span></a>`,
     visual: `<div class="contact-phone">${phoneVideo({ name: 'lumis-anuncio', alt: 'Anuncio de Limpiezas Lumis: pide tu presupuesto sin compromiso', label: 'Pide tu presupuesto' })}<div class="float-card fc-mini contact-zone">${icon('pin')}<span><b>${B.city}</b><small>y hasta 40 min alrededor</small></span></div></div>`,
   })}
@@ -867,7 +869,7 @@ ${pageHero({
 <div class="reveal">${faqList(generalFaq)}</div>
 </div>
 </section>`;
-  return page({ title: `Contacto | ${B.name} · ${B.city}`, desc: `Contacta con ${B.name} en ${B.city}: ${B.phone}, WhatsApp, ${B.landline} o ${B.email}. Presupuesto sin compromiso.`, bodyClass: 'is-page', current: 'contacto', main });
+  return page({ title: `Contacto | ${B.name} · ${B.city}`, desc: `Contacta con ${B.name} en ${B.city}: ${B.phone}, WhatsApp, ${B.landline} o ${B.email}. Visita y presupuesto gratis en Zaragoza y hasta 40 min.`, bodyClass: 'is-page', current: 'contacto', main });
 }
 
 // ---------- Páginas legales (LSSI, RGPD y cookies) ----------
